@@ -1,0 +1,18 @@
+---
+# defaults file for kafka_setup_provisioning
+
+# extras directory
+kafka_extras_directories: []
+
+# topics
+kafka_src_local_topics_dir: ""
+kafka_dest_topics_dir: ""
+
+# connectors
+kafka_src_local_connectors_dir: ""
+kafka_dest_local_connectors_dir: ""
+
+# plugins
+kafka_src_plugin_directory: ""
+kafka_dest_plugin_directory: ""
+copy_plugins: false

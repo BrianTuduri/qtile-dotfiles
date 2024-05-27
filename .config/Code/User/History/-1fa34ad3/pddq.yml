@@ -1,0 +1,10 @@
+---
+# defaults file for kafka_run_connect
+kafka_bin_directory: "/kafka/kafka/bin"
+bootstrap_servers: "localhost:9092"
+
+kafka_connect_mode: "standalone" # Puede ser "standalone" o "distributed"
+kafka_config_directory: "/kafka/etc/kafka"
+kafka_connect_properties_file: "connect.properties" # Nombre genérico del archivo properties principal
+kafka_connect_config_files: [] # Lista de archivos properties de los conectores
+kafka_environment: "DEV" # Ejemplo de ambiente, puede ser QA, PROD, etc.

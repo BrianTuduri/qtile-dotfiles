@@ -1,0 +1,177 @@
+#!/usr/bin/env groovy
+// Configuración Global
+def tag
+def currentVersionNode
+
+def CONFIG = [
+    REGISTRY: "registry.gitlab.geocom.com.uy:5005",
+    DOCKER_IP_CREDENTIAL: 'docker_node_geocom',
+    DOCKER_SERVER_CREDENTIAL: 'docker_slave_credential',
+    REGISTRY_CREDENTIAL: 'jenkins_registry_user',
+    PROJECT_GROUP: "uy-com-geocom-farmashop",
+    PROJECT_NAME: "order-tracker-FrontEnd",
+    GIT_CREDENTIAL_ID: "15940393-32ad-416e-ad80-b8ea71536641",
+    NEXUS_URL: "nexus.geocom.com.uy",
+    NEXUS_REPOSITORY: "Ghiggia",
+    NEXUS_CREDENTIAL_ID: "nexus-deploy",
+    LABEL: "node-nvm",
+    NPM_DEFAULT_VERSION: "10.15.0", // se instala previamente en la imagen
+    NGINX_DEFAULT_IMAGE_VERSION: "node:21.7.1-slim",
+    GIT_URL_DEVOPS: "git@gitlab.geocom.com.uy:uy-com-geocom-scm/devops/oms/order-tracker-devops.git"
+]
+CONFIG["GIT_URL"] = "git@gitlab.geocom.com.uy:${CONFIG["PROJECT_GROUP"]}/${CONFIG["PROJECT_NAME"]}.git"
+
+pipeline {
+    agent { label "${CONFIG["LABEL"]}" }
+
+    environment {
+        PROJECT_DIR = "${CONFIG["PROJECT_NAME"]}"
+        APP_ZIP = "${CONFIG["PROJECT_NAME"]}.zip"
+        REGISTRY_NAMESPACE = "${CONFIG["REGISTRY"]}/${CONFIG["PROJECT_GROUP"]}/${CONFIG["PROJECT_NAME"]}"
+        NVM_DIR="/root/.nvm"
+        INIT_NVM= ". /root/.nvm/nvm.sh"
+        INSTALL_NVM= "nvm install ${params.nodeVersion} && nvm use ${params.nodeVersion}"
+        GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
+    }
+    parameters {
+        string(name: 'nodeVersion', defaultValue: '10.15.0', description: 'NodeJS version to use')
+        string(name: 'nginxImage', defaultValue: 'alpine', description: 'Nginx docker image to be used for the deploy')
+        choice(name: 'releaseType', choices: ['patch', 'minor', 'major', 'regenerate_version'], description: 'Select the release type')
+        // show logs
+        booleanParam(name: 'show_nvm_logs', defaultValue: false, description: 'Toggle this value')
+        booleanParam(name: 'show_npm_logs', defaultValue: false, description: 'Toggle this value')
+        booleanParam(name: 'show_npm_install_logs', defaultValue: false, description: 'Toggle this value')
+        booleanParam(name: 'show_npm_build_logs', defaultValue: false, description: 'Toggle this value')
+    }
+    stages {
+        stage('Preparation . . .') {
+            steps {
+                script {
+                    def isRegenerate = params.releaseType == 'regenerate_version'
+                    checkout([
+                        $class                              : 'GitSCM',
+                        branches                            : [[name: isRegenerate ? params.tag : "*/${params.branch}"]],
+                        doGenerateSubmoduleConfigurations   : false,
+                        userRemoteConfigs: [[credentialsId  : CONFIG["GIT_CREDENTIAL_ID"], url: CONFIG["GIT_URL"]]],
+                        extensions                       : [
+                            [$class: 'RelativeTargetDirectory', relativeTargetDir: "repository"],
+                            [$class: 'LocalBranch', localBranch: isRegenerate ? params.tag : "${params.branch}"]
+                        ]
+                    ])
+                    checkout([
+                        $class                              : 'GitSCM',
+                        branches                            : [[name: isRegenerate ? params.tag : "*/master"]],
+                        doGenerateSubmoduleConfigurations   : false,
+                        userRemoteConfigs: [[credentialsId  : CONFIG["GIT_CREDENTIAL_ID"], url: CONFIG["GIT_URL_DEVOPS"]]],
+                        extensions                       : [
+                            [$class: 'RelativeTargetDirectory', relativeTargetDir: "scm_tools"],
+                            [$class: 'LocalBranch', localBranch: isRegenerate ? params.tag : "master"]
+                        ]
+                    ])
+                    sh 'git config --global user.email "scm2@geocom.com.uy"; git config --global user.name "jenkins"'
+                    if (CONFIG["NPM_DEFAULT_VERSION"] == params.nodeVersion) {
+                        sh "${INIT_NVM} && nvm use ${params.nodeVersion} && npm -v"
+                    } else { sh "${INIT_NVM} && ${INSTALL_NVM} && npm -v" }
+
+                    currentVersionNode = sh(script: "${INIT_NVM} npm -v", returnStdout: true).trim()
+                    echo "====================================="
+                    echo "=  NPM version: ${currentVersionNode}  ="
+                    echo "====================================="
+                }
+            }
+        }
+
+        stage('Installation & Compilation . . .') {
+            steps {
+                script {
+                    dir('repository') {
+                        sh script: """
+                        ${INIT_NVM} && npm config set registry https://nexus.geocom.com.uy/repository/NPM_Proxy/ \\
+                        && rm -rf ./node_modules package-lock.json .cache dist \\
+                        && nvm use ${params.nodeVersion} ${params.show_nvm_logs ? '' : '> /dev/null 2>&1'} \\
+                        && npm install --registry https://nexus.geocom.com.uy/repository/NPM_Proxy/ ${params.show_npm_install_logs ? '' : '> /dev/null 2>&1'} \\
+                        && npm run build ${params.show_npm_build_logs ? '' : '> /dev/null 2>&1'}
+                        """
+                    }
+                }
+            }
+        }
+
+        stage("Release"){
+            steps {
+                script {
+                    dir('repository') {
+                        sh """
+                            if test ! -d dist; then
+                                echo "Package was not builded"
+                                exit 1
+                            fi
+                        """
+                        sshagent(['cy5ymCych3DLs29tpAnCC2qF0ze5RdPT']) {
+                            sh "${INIT_NVM} && ./node_modules/release-it/bin/release-it.js "+params.releaseType+" --ci"
+                        }
+                    }
+                }
+            }
+        }
+
+        stage("Building version . . ."){
+            steps {
+                script {
+                    dir('repository') {
+                        def release_version = readJSON(file: "./package.json").version ?: "0.0.0"
+                        println "Version: ${release_version}"
+                        sh "sed -i 's/modify/${release_version}/g' src/environments/environment.ts"
+                        sh "${INIT_NVM} && npm run build"
+                        sh "zip -r ${APP_ZIP} dist/"
+                    }
+                }              
+            }
+        }
+
+        stage("Upload Nexus . . .") {
+            steps {
+                script {
+                    dir('repository') {
+                        tag = sh(script: 'git describe --tags $(git rev-list --tags --max-count=1)', returnStdout: true).trim()
+                        nexusArtifactUploader(artifacts: [[artifactId: CONFIG["PROJECT_NAME"], classifier: '', file: APP_ZIP, type: '.zip']], credentialsId: CONFIG["NEXUS_CREDENTIAL_ID"], groupId: CONFIG["PROJECT_NAME"], nexusUrl: CONFIG["NEXUS_URL"], nexusVersion: 'nexus3', protocol: 'https', repository: CONFIG["NEXUS_REPOSITORY"], version: tag)
+                    }
+                }
+            }
+        }
+        
+        stage('Genarate Dockerfile . . .') {
+            steps {
+                script {
+                    dir("scm_tools/backend/tools") {
+                        def nginxImage = params.nginxImage ?: CONFIG["NGINX_DEFAULT_IMAGE_VERSION"]
+                        //sh "./generateDockerfile.sh ${nginxImage}"
+                    }
+                    sh "rm -rf repository/Dockerfile && cp scm_tools/backend/tools/Dockerfile repository"
+                }
+            }
+        }
+
+        stage("Docker Image | Building & Publishing . . .") {
+            steps {
+                script {
+                    dir('repository'){
+                        docker.withTool('docker') {
+                            withCredentials([usernameColonPassword(credentialsId: CONFIG["DOCKER_IP_CREDENTIAL"], variable: 'IP_PORT')]) {
+                                println IP_PORT
+                                withCredentials([dockerCert(credentialsId: CONFIG["DOCKER_SERVER_CREDENTIAL"], variable: 'DOCKER_CERT')]) {
+                                    docker.withServer(IP_PORT, 'docker_slave_credential') {
+                                        docker.withRegistry("https://${CONFIG["REGISTRY"]}", CONFIG["REGISTRY_CREDENTIAL"]) {
+                                            tag = sh(script: 'git describe --tags $(git rev-list --tags --max-count=1)', returnStdout: true).trim()
+                                            docker.build("${REGISTRY_NAMESPACE}:${tag}".toLowerCase(), ".").push()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

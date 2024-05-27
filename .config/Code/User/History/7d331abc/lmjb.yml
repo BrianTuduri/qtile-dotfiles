@@ -1,0 +1,35 @@
+docker:
+  image: "nexus.geocom.com.uy/scm-docker-images/openjdk:mvn2.2.1-jdk8"
+  workdir: "/project"
+  # toDO: AGREGAR 2 BOOLEANOS DE FORCE PARA PISAR LA LISTA DE VOLUMES
+  volumes:
+    - "/slave/m2/:/root/.m2/"
+    - "/slave/.tmp_builds/tmp/:/project"
+  args:
+    - "--add-host 'gitlab.geocom.com.uy:172.24.18.194'"
+
+jenkins:
+  credentials:
+    # docker
+    docker_ip_credential: 'docker_slave_ip_port'
+    docker_server_credential: 'Docker_Certs'
+    # nexus
+    nexus_ip_credential: 'nexus_slave_ip_port'
+    # gitlab
+    git_credential_id: "15940393-32ad-416e-ad80-b8ea71536641"
+  files:
+    maven:
+      config_file_id: "mvn_local_docker_release"
+      target_location: "/home/jenkins/.m2/settings.xml"
+    gradle:
+      config_file_id: "65be0b0c-afab-4f50-aad4-dcfa4ac63915"
+      target_location: "/home/jenkins/.m2/gradle.properties"
+
+nexus:
+  credentials:
+    repository: "Ghiggia-60-dias"
+    group_id: "uy.com.geocom.alkosto"
+    credential_id: "nexus-deploy"
+
+git:
+  - LABEL: "jdk21"

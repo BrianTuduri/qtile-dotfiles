@@ -1,0 +1,60 @@
+{
+   "checksum": "fb42a675c6e7ea4c80903e37a481055e",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "0",
+            "date_last_used": "0",
+            "guid": "694831ef-4f4a-4e72-8eef-7ce09acbdc79",
+            "id": "5",
+            "name": "Debian.org",
+            "type": "url",
+            "url": "http://www.debian.org/"
+         }, {
+            "date_added": "0",
+            "date_last_used": "0",
+            "guid": "755fd643-ea34-4daa-bb04-236ecf32f0ed",
+            "id": "6",
+            "name": "Latest News",
+            "type": "url",
+            "url": "http://www.debian.org/News/"
+         }, {
+            "date_added": "0",
+            "date_last_used": "0",
+            "guid": "76ed4765-7654-4c0c-9f36-dbeb3d792306",
+            "id": "7",
+            "name": "Help",
+            "type": "url",
+            "url": "http://www.debian.org/support"
+         } ],
+         "date_added": "13360285940236813",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Bookmarks bar",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13360285940236818",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Other bookmarks",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13360285940236821",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Mobile bookmarks",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}

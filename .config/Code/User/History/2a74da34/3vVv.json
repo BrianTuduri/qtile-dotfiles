@@ -1,0 +1,20 @@
+{
+  "name": "sale-tickets-source-qa",
+  "config": {
+    "connector.class": "com.mongodb.kafka.connect.MongoSourceConnector",
+    "tasks.max": "2",
+    "database": "geopos3-ticket",
+    "collection": "saleTickets",
+    "errors.tolerance": "all",
+    "connection.uri": "mongodb://userApp:Xpr.QA.PassRoot@srv-qa-sp-xpress-uych-mongo1:27017,srv-qa-sp-xpress-uych-mongo2:27017,srv-qa-sp-xpress-uych-mongo3:27017/admin?authSource=admin",
+    "topic.prefix": "QA-mongo",
+    "copy.existing": "True",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "False",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "False",
+    "flush.size": "100",
+    "rotate.interval.ms": "1000",
+    "publish.full.document.only": "True"
+  }
+}

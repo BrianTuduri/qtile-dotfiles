@@ -1,0 +1,38 @@
+logging:
+  level:
+    root: debug
+    com.provectus: debug
+    org.springframework.security: debug
+kafka:
+  clusters:
+    - name: "express-qa"
+      bootstrapServers: "172.24.26.158:9092"
+
+# rbac:
+#   roles:
+#     - name: "admin"
+#       clusters:
+#         - cluster1
+#       subjects:
+#         - provider: ldap
+#           type: group
+#           value: "xxxxx"   ==> one of my ldap group
+#       permissions:
+#         - resource: applicationconfig
+#           actions: all
+#         - resource: clusterconfig
+#           actions: all
+#         - resource: topic
+#           value: ".*"
+#           actions: all
+#         - resource: consumer
+#           value: ".*"
+#           actions: all
+#         - resource: schema
+#           value: ".*"
+#           actions: all
+#         - resource: connect
+#           value: ".*"
+#           actions: all
+#         - resource: ksql
+#           actions: all

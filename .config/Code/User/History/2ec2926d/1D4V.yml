@@ -1,0 +1,42 @@
+---
+- name: Leer contenido del archivo YAML
+  ansible.builtin.slurp:
+    src: "{{ file.path }}"
+  register: file_content
+
+- name: File content
+  debug:
+    msg: "File content is: {{ file.path }}"
+
+- name: Convertir contenido a YAML
+  set_fact:
+    connector_config_yml: "{{ file_content['content'] | b64decode | from_yaml }}"
+
+- name: Transformar configuración de YAML a JSON para la API
+  set_fact:
+    connector_config: "{{ connector_config_yml.connector | to_nice_json }}"
+
+- name: Connector config output
+  debug:
+    msg: "Connector config is: {{ connector_config }}"
+  when: connector_debug
+
+- name: Publicar configuración del connector a Kafka Connect
+  uri:
+    url: "{{ kafka_connect_api_url }}"
+    method: POST
+    body: "{{ connector_config }}"
+    body_format: json
+    status_code: [201, 200, 409]
+    return_content: yes
+  register: response
+  ignore_errors: true
+  
+- name: Connector existente
+  debug: 
+    msg: "Connector {{ response.json.message | regex_replace('Connector ', '') | regex_replace(' already exists', '') }} already exists."
+  when: response.status == 409
+
+# - name: Respuesta de la API
+#   debug:
+#     var: response.json

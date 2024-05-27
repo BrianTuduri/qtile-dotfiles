@@ -1,0 +1,231 @@
+def compileJsp(jsps) {
+    jsps.each { jsp ->
+        sh 'pwd'
+        sh "./compileOneJSP.sh '${jsp}'"
+    }
+}
+
+def generateWorkBlock(index, jsps) {
+    return { ->
+        stage("block${index}") { ->
+            compileJsp(jsps)
+        }
+    }
+}
+def Version
+def pom
+def javaVersion
+def artifactId
+def groupId
+def artifactUrl
+def gitUrl = "git@gitlab.geocom.com.uy:uy.com.geocom.geopos2-pharmacy/geopos2-yoda.git"
+
+pipeline {
+    agent { label 'jdk8' }
+    options {
+        ansiColor('xterm')
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '15')
+        quietPeriod(10)
+    }
+    stages{
+        stage('Clonando tag indicado') {
+            steps{
+                checkout([$class: 'GitSCM', branches: [[name: 'refs/tags/$version']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', depth: 1, noTags: false, reference: '', shallow: true]], gitTool: 'GIT Runner', submoduleCfg: [], userRemoteConfigs: [[credentialsId: '15940393-32ad-416e-ad80-b8ea71536641', url: "${gitUrl}"]]])
+                configFileProvider([configFile(fileId: 'e0d2738d-ba8f-4f35-83b9-1e279355fcbe', targetLocation: "${env.HOME}/.m2/settings.xml", variable: 'MVN_SETTINGS')]) {}
+            }
+        }
+
+        stage('Validando y creando archivos SQL') {
+            steps{
+                script{
+                    def folder = new File("${WORKSPACE}/customization/${cliente}/geopos/current/")
+
+                    sh "ls ${WORKSPACE}/customization/${cliente}/geopos/current/"
+                    sh "rm -rf ${WORKSPACE}/configuration/serverInstance/liquibase/versions/central/custom"
+                    sh "rm -rf ${WORKSPACE}/configuration/serverInstance/liquibase/versions/local/custom"
+                    sh "rm -rf ${WORKSPACE}/configuration/pos/liquibase/versions/pos/custom"
+
+                    def files = getAllFiles(createFilePath("${WORKSPACE}/customization/${cliente}/geopos/current/"))
+
+                    for (file in files) {
+                        if (!file.equals("images")) {
+                            sh "cp -rf ${WORKSPACE}/customization/${cliente}/geopos/current/${file} ."
+                        }
+                    }
+
+
+                    sh "ls ${WORKSPACE}/images"
+
+                    sh "cp -rf ${WORKSPACE}/customization/${cliente}/geopos/current/images ${WORKSPACE}/files"
+
+                    sh "ls ${WORKSPACE}/files"
+
+                    sh "cp -rf ${WORKSPACE}/customization/${cliente}/geopos/current/images/* ${WORKSPACE}/images"
+
+                    sh "ls ${WORKSPACE}/images"
+                }
+            }
+        }
+
+        stage('Ejecutando assembly del cliente') {
+
+            steps{
+                script{
+                    withMaven(maven: 'Maven 2') {
+                        sh 'mvn -P$cliente,customization package'
+                    }
+                    sh "ls -la target/"
+                }
+            }
+        }
+        stage('Read pom') {
+            steps {
+                script {
+                    pom = readMavenPom file: 'pom.xml'
+                    pomVersion = pom.getVersion()
+                    artifactId = "geopos2${cliente}"
+                    groupId = pom.groupId.replace('.', '/')
+                    artifactUrl = "https://nexus.geocom.com.uy/repository/customized-packages/repository/Customized.Packages/${groupId}/${artifactId}/${pomVersion}/${artifactId}-${pomVersion}.zip"
+                }
+            }
+        }
+        stage('Compilando jsp') {
+            steps{
+                script{
+                    javaVersion = pom.getProperties().getProperty('java.version')
+                    println(javaVersion)
+                    if (javaVersion == "1.8") {
+                        jdkcompile = "${tool 'JDK_1.8'}"
+                    } else if (javaVersion == "1.6") {
+                        jdkcompile = "${tool 'JDK_1.6_29'}"
+                    } else {
+                        println "ERROR: Versión de Java no soportada."
+                    }
+                    dir("${WORKSPACE}/target") {
+                        withEnv(["PATH+MVN=${jdkcompile}/bin"]) {
+                            sh 'java -version'
+                            sh "unzip geopos2${cliente}-${pomVersion}.zip"
+                            sh "rm -rf geopos2${cliente}-${pomVersion}.zip"
+                            dir("geopos2${cliente}-${pomVersion}") {
+                                fileOperations([folderCreateOperation('configuration/jsp/classes')])
+                                def jspsFiles = findFiles(glob: 'configuration/jsp/page/uy/com/geocom/geopos/report/*.jsp')
+                                def jsps = []
+                                jspsFiles.each { f -> jsps.add(f.name.replace('.jsp', '')) }
+                                echo "${jsps}"
+                                def blocks = jsps.collate(jsps.size().intdiv(4), true)
+
+                                def parallelBlocks = [failFast: true]
+
+                                for (index = 0; index < blocks.size(); index++) {
+                                    parallelBlocks.put("block${index}", generateWorkBlock(index, blocks[index]))
+                                }
+                                parallel parallelBlocks
+
+
+                            }
+                            zip zipFile: "geopos2${cliente}-${pomVersion}.zip", glob: "geopos2${cliente}-${pomVersion}/**"
+                        }
+                    }
+                }
+            }
+        }
+        stage('Publicando zip en Nexus') {
+            steps{
+                nexusArtifactUploader artifacts: [[artifactId: "geopos2$cliente", classifier: '', file: "target/geopos2$cliente-${pomVersion}.zip", type: 'zip']], credentialsId: 'nexus-deploy', groupId: 'uy.com.geocom.geopos2-yoda', nexusUrl: 'nexus.geocom.com.uy/repository/customized-packages/', nexusVersion: 'nexus3', protocol: 'https', repository: 'Customized.Packages', version: pomVersion
+            }
+        }
+    }
+    post {
+        success { 
+            script {
+                if (veracodeTest) {
+                    build job: 'devops/scm-infra/scan-veracode-geo',
+                        parameters: [
+                            string(name: 'applicationName', value: 'GEOPos'), // requerido
+                            booleanParam(name: 'canFailJob', value: false),
+                            booleanParam(name: 'createProfile', value: true),
+                            string(name: 'criticality', value: 'VeryHigh'),
+                            string(name: 'deleteIncompleteScanLevel', value: '0'),
+                            string(name: 'fileNamePattern', value: "${artifactId}-${pomVersion}.zip"), // requerido
+                            string(name: 'replacementPattern', value: ''),
+                            string(name: 'sandboxName', value: 'GEOPos_Yoda'),
+                            string(name: 'scanExcludesPattern', value: ''),
+                            string(name: 'scanIncludesPattern', value: ''), 
+                            string(name: 'scanName', value: "Scan - Build: [NUMBER] / ${artifactId}-${pomVersion}"),  // requerido
+                            string(name: 'teams', value: 'Default Team'),
+                            booleanParam(name: 'unstableBuild', value: false), 
+                            booleanParam(name: 'waitForScan', value: false),
+                            string(name: 'timeout', value: '60'),
+                            string(name: 'uploadIncludesPattern', value: "${artifactId}-${pomVersion}.zip"), // requerido
+                            string(name: 'artifactUrl', value: artifactUrl), // requerido,
+                            string(name: 'gitUrl', value: gitUrl),
+                            string(name: 'gitBranch', value: "refs/tags/$version")
+                        ], wait:false
+                } else { println "No se ejecutan los test de veracode"}
+            }
+        }
+    }
+}
+
+build job: 'devops/scm-infra/veracode/scan-veracode-geo', parameters: [
+    string(name: 'applicationName', value: 'GEOPos'),
+    booleanParam(name: 'createProfile', value: false),
+    string(name: 'criticality', value: 'VeryHigh'),
+    string(name: 'deleteIncompleteScanLevel', value: '0'),
+    string(name: 'fileNamePattern', value: ''),
+    string(name: 'replacementPattern', value: ''),
+    string(name: 'sandboxName', value: ''),
+    string(name: 'scanExcludesPattern', value: ''),
+    string(name: 'scanIncludesPattern', value: ''),
+    string(name: 'scanName', value: ''),
+    string(name: 'teams', value: 'Default Team'),
+    booleanParam(name: 'unstableBuild', value: false),
+    booleanParam(name: 'waitForScan', value: false),
+    string(name: 'timeout', value: '1200'),
+    string(name: 'uploadIncludesPattern', value: ''),
+    string(name: 'uploadExcludesPattern', value: '**/*.war'),
+    string(name: 'artifactUrl', value: artifactUrl) // requerido
+    string(name: 'gitUrl', value: ''),
+    string(name: 'gitBranch', value: ''),
+    extendedChoice(name: 'isMavenProject', value: '')
+]
+
+build job: 'devops/scm-infra/scan-veracode-geo', parameters: [
+    string(name: 'applicationName', value: 'GEOPos'), // requerido
+    booleanParam(name: 'canFailJob', value: true),
+    booleanParam(name: 'createProfile', value: false),
+    string(name: 'criticality', value: 'VeryHigh'),
+    string(name: 'deleteIncompleteScanLevel', value: '0'),
+    string(name: 'fileNamePattern', value: ""),
+    string(name: 'replacementPattern', value: ''),
+    string(name: 'sandboxName', value: 'test-scm'),
+    string(name: 'scanExcludesPattern', value: ''),
+    string(name: 'scanIncludesPattern', value: ''), 
+    string(name: 'scanName', value: ''),
+    string(name: 'teams', value: 'Default Team'),
+    booleanParam(name: 'unstableBuild', value: false), 
+    booleanParam(name: 'waitForScan', value: false),
+    string(name: 'timeout', value: ''),
+    string(name: 'uploadIncludesPattern', value: ""),
+    string(name: 'artifactUrl', value: artifactUrl) // requerido
+    //string(name: 'gitUrl', value: gitUrl),
+    //string(name: 'gitBranch', value: "refs/tags/$version")
+], wait:false
+
+@NonCPS
+def getAllFiles(rootPath) {
+    def list = []
+    for (subPath in rootPath.list()) {
+        list << subPath.getName()
+    }
+    return list
+}
+
+def createFilePath(def path) {
+    if (env['NODE_NAME'].equals("master")) {
+        File localPath = new File(path)
+        return new hudson.FilePath(localPath);
+    } else {
+        return new hudson.FilePath(Jenkins.getInstance().getComputer(env['NODE_NAME']).getChannel(), path);
+    }
+}

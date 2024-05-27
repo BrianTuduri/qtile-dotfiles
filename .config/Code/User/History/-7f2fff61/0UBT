@@ -1,0 +1,3 @@
+[submodule "Environments"]
+	path = Environments
+	url = git@gitlab.geocom.com.uy:uy-com-geocom-scm/oxxo-environments-configuration.git

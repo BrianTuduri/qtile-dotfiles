@@ -1,0 +1,7 @@
+---
+# defaults file for kafka_create_connector
+kafka_bin_directory: "/path/to/kafka/bin"
+bootstrap_servers: "localhost:9092"
+kafka_connect_api_url: "localhost:8083"
+kafka_connectors_dir: "/path/to/connectors/"
+connector_debug: false

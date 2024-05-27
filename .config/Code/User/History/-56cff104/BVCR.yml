@@ -1,0 +1,45 @@
+---
+# tasks file for kafka_add_topic
+- name: "Buscar archivos de configuración de topics"
+  find:
+    paths: "{{ topic_files_path }}"
+    patterns: "*.yml"
+  register: topic_files
+
+- name: "Debug topics config"
+  debug:
+    msg: "Topics files es {{ topic_files }}"
+
+- name: "Consolidar configuraciones de topics"
+  become: yes
+  set_fact:
+    topics_config: "{{ topics_config | default([]) + [lookup('file', item.path) | from_yaml] }}"
+  loop: "{{ topic_files.files }}"
+  loop_control:
+    loop_var: item
+
+- name: "Debug topics config"
+  debug:
+    msg: "Topics config {{ item }}"
+
+- name: "Crear Kafka Topics"
+  command:
+    argv:
+      - sh
+      - "{{ kafka_bin_directory }}/kafka-topics.sh"
+      - --bootstrap-server
+      - "{{ bootstrap_servers }}"
+      - --topic
+      - "{{ item.topic.name }}"
+      - --create
+      - --partitions
+      - "{{ item.topic.partitions }}"
+      - --replication-factor
+      - "{{ item.topic.replicas }}"
+      - --config
+      - "retention.ms={{ item.topic.config['retention.ms'] }}"
+  loop: "{{ topics_config }}"
+  loop_control:
+    loop_var: item
+  ignore_errors: true
+  failed_when: false

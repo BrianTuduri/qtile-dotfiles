@@ -1,0 +1,16 @@
+connector:
+  name: mongo-express-source-arg
+  config:
+    connector.class: com.mongodb.kafka.connect.MongoSourceConnector
+    tasks.max: '10'
+    errors.tolerance: all
+    connection.uri: mongodb://userApp:Xpr.ARGQA.PassRoot@srv-qa-sp-xpress-arg-mongo1:27017,srv-qa-sp-xpress-arg-mongo2:27017,srv-qa-sp-xpress-arg-mongo3:27017/admin?authSource=admin
+    topics: mongo-source-topic
+    pipeline: '[{"$match": {"ns.coll": {"$regex": "^(compositeBarcodeConfig|kioskoItems|kioskoCategories|baseArticles|measureUnits|kioskoPriceLists|storesStock|supplier|expressPromotion|tax|bank|taxRule|currencies|currencyQuotation|issuerPlanData|paymentModes|quotations|financialSurcharge|user|permission|role|entryResources|configuration|terminalFeature|fileResource|offlineConfiguration|chain|store|client|clientsGroup|clientNationality|companyParams|clientOfflineConfiguration|terminal_status|cashierAmountCategories|dgiFoliosRange|sitefNotification)$"}}}]}'
+    flush.size: '100'
+    rotate.interval.ms: '1000'
+    topic.namespace.map: '{"*": "QA-mongo-changes"}'
+    change.stream.full.document: updateLookup
+    output.format.key: schema
+    output.schema.key: '{"type": "record","name": "keySchema","fields" : [ { "name":
+      "documentKey", "type": "string" } ]}'

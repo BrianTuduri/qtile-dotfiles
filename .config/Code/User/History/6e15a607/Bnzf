@@ -1,0 +1,70 @@
+def pom 
+def pomVersion
+def BRANCH = "master"
+def checkoutFolder = "repo"
+def REPO_PATH
+def PROJECT_VOLUME
+def CONFIG = [
+    DOCKER_IP_CREDENTIAL: 'docker_slave_ip_port',
+    DOCKER_SERVER_CREDENTIAL: 'Docker_Certs',
+    NEXUS_REPOSITORY: "Ghiggia-60-dias",
+    NEXUS_GROUP_ID: "uy.com.geocom.alkosto",
+    NEXUS_CREDENTIAL_ID: "nexus-deploy",
+    GIT_CREDENTIAL_ID: "15940393-32ad-416e-ad80-b8ea71536641",
+    LABEL: "jdk21",
+]
+
+pipeline {
+    agent { label "${CONFIG["LABEL"]}" }
+    options {
+        ansiColor('xterm')
+        buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '15'))
+        quietPeriod(10)
+    }
+    environment {
+        DOCKER_IMAGE = "nexus.geocom.com.uy/scm-docker-images/openjdk:mvn2.2.1-jdk8"
+        MVN_VOLUME = "/slave/m2/:/root/.m2/"
+    }
+    stages {
+        stage('Ejecucion Maven') {
+            steps {
+                script {
+                    withDockerEnvironment(CONFIG) {
+                        def containerId = runDockerContainer(DOCKER_IMAGE, "-u 0 -v ${MVN_VOLUME} -e 'MY_VAR=my_value'")
+                        echo "Contenedor iniciado: ${containerId}"
+                        shDocker(containerId, "mvn --version && ls -la ./")
+                        shDocker(containerId, "whoami")
+                        shDocker(containerId, "ls -la /root/.m2")
+
+                        stopAndRemoveDockerContainer(containerId)
+                    }
+                }
+            }
+        }
+    }
+}
+
+def withDockerEnvironment(config, Closure body) {
+    withCredentials([usernameColonPassword(credentialsId: config["DOCKER_IP_CREDENTIAL"], variable: 'IP_PORT'),
+                    dockerCert(credentialsId: config["DOCKER_SERVER_CREDENTIAL"], variable: 'DOCKER_CERT')]) {
+        docker.withTool('docker') {
+            docker.withServer(IP_PORT, 'Docker_Certs') {
+                body.call()
+            }
+        }
+    }
+}
+
+def shDocker(String containerId, String command) {
+    sh "docker exec ${containerId} sh -c '${command}'"
+}
+
+def runDockerContainer(String dockerImage, String runArguments = '') {
+    String dockerRunCommand = "docker run -d ${runArguments} ${dockerImage} tail -f /dev/null"
+    return sh(script: dockerRunCommand, returnStdout: true).trim()
+}
+
+def stopAndRemoveDockerContainer(String containerId) {
+    sh "docker stop ${containerId}"
+    sh "docker rm ${containerId}"
+}

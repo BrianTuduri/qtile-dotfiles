@@ -1,0 +1,46 @@
+2024-05-27 01:30:58.012 [info] Deleted uninstalled extension from disk rangav.vscode-thunder-client /home/brian/.vscode/extensions/rangav.vscode-thunder-client-2.24.1
+2024-05-27 01:31:05.496 [info] Getting Manifest... rangav.vscode-thunder-client
+2024-05-27 01:31:05.499 [info] Getting Manifest... supermaven.supermaven
+2024-05-27 01:31:05.503 [info] Getting Manifest... zjffun.snippetsmanager
+2024-05-27 01:31:05.711 [info] Installing extension: rangav.vscode-thunder-client
+2024-05-27 01:31:05.802 [info] Installing extension: supermaven.supermaven
+2024-05-27 01:31:06.480 [info] Installing extension: zjffun.snippetsmanager
+2024-05-27 01:31:11.198 [info] Extension signature verification result for supermaven.supermaven: Success. Duration: 3505ms.
+2024-05-27 01:31:11.224 [info] Extension signature verification result for rangav.vscode-thunder-client: Success. Duration: 3494ms.
+2024-05-27 01:31:11.310 [info] Extracted extension to file:///home/brian/.vscode/extensions/supermaven.supermaven-0.1.51: supermaven.supermaven
+2024-05-27 01:31:11.322 [info] Renamed to /home/brian/.vscode/extensions/supermaven.supermaven-0.1.51
+2024-05-27 01:31:11.328 [info] Extracting extension completed. supermaven.supermaven
+2024-05-27 01:31:11.370 [info] Extension installed successfully: supermaven.supermaven
+2024-05-27 01:31:11.388 [info] Marked extension as uninstalled supermaven.supermaven-0.1.50
+2024-05-27 01:31:11.449 [error] [uncaught exception in sharedProcess]: Error: ENOENT: no such file or directory, stat '/home/brian/.vscode/extensions/extensions.json.vsctmp': EntryNotFound (FileSystemError): Error: ENOENT: no such file or directory, stat '/home/brian/.vscode/extensions/extensions.json.vsctmp'
+    at a.create (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:53:30019)
+    at b (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:53:30130)
+    at t.hb (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:36600)
+    at t.stat (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:29040)
+    at async $.stat (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:16186)
+    at async J.sb (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:104:109501)
+2024-05-27 01:31:11.679 [info] Extracted extension to file:///home/brian/.vscode/extensions/rangav.vscode-thunder-client-2.24.7: rangav.vscode-thunder-client
+2024-05-27 01:31:11.692 [info] Renamed to /home/brian/.vscode/extensions/rangav.vscode-thunder-client-2.24.7
+2024-05-27 01:31:11.696 [info] Extracting extension completed. rangav.vscode-thunder-client
+2024-05-27 01:31:11.733 [info] Extension installed successfully: rangav.vscode-thunder-client
+2024-05-27 01:31:11.748 [info] Marked extension as uninstalled rangav.vscode-thunder-client-2.24.2
+2024-05-27 01:31:11.800 [error] [uncaught exception in sharedProcess]: Error: ENOENT: no such file or directory, stat '/home/brian/.vscode/extensions/extensions.json.vsctmp': EntryNotFound (FileSystemError): Error: ENOENT: no such file or directory, stat '/home/brian/.vscode/extensions/extensions.json.vsctmp'
+    at a.create (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:53:30019)
+    at b (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:53:30130)
+    at t.hb (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:36600)
+    at t.stat (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:29040)
+    at async $.stat (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:16186)
+    at async J.sb (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:104:109501)
+2024-05-27 01:31:14.266 [info] Extension signature verification result for zjffun.snippetsmanager: Success. Duration: 2338ms.
+2024-05-27 01:31:16.306 [info] Extracted extension to file:///home/brian/.vscode/extensions/zjffun.snippetsmanager-0.3.6: zjffun.snippetsmanager
+2024-05-27 01:31:16.312 [info] Renamed to /home/brian/.vscode/extensions/zjffun.snippetsmanager-0.3.6
+2024-05-27 01:31:16.314 [info] Extracting extension completed. zjffun.snippetsmanager
+2024-05-27 01:31:16.330 [info] Extension installed successfully: zjffun.snippetsmanager
+2024-05-27 01:31:16.337 [info] Marked extension as uninstalled zjffun.snippetsmanager-0.3.4
+2024-05-27 01:31:16.402 [error] [uncaught exception in sharedProcess]: Error: ENOENT: no such file or directory, stat '/home/brian/.vscode/extensions/extensions.json.vsctmp': EntryNotFound (FileSystemError): Error: ENOENT: no such file or directory, stat '/home/brian/.vscode/extensions/extensions.json.vsctmp'
+    at a.create (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:53:30019)
+    at b (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:53:30130)
+    at t.hb (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:36600)
+    at t.stat (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:29040)
+    at async $.stat (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:58:16186)
+    at async J.sb (/usr/share/code/resources/app/out/vs/code/node/sharedProcess/sharedProcessMain.js:104:109501)

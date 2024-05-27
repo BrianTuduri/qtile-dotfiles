@@ -1,0 +1,20 @@
+# Start
+order-tracker-backend:
+  restart: always
+  image: registry.gitlab.geocom.com.uy:5005/uy-com-geocom-farmashop/order-tracker-backend:400.1.24
+  #extra_hosts:
+  #  - "oms-farmacenter-qa.geocom.com.uy:172.24.54.74"  
+  ports:
+    - "8002:8080"
+  environment:
+    TZ: "${TZ}"
+    MONGO_URL:
+    INDICATORS_CRON:
+    CONCENTRATOR_USER:
+    CONCENTRATOR_PASSWORD:
+    CONCENTRATOR_URL:
+  #volumes:
+  #  - /home/geocom/oms/geoscm.jks:/root/geoscm.jks
+  # depends_on:
+  #   - oms-boot-admin-service # !toDO: Cambiar
+# End

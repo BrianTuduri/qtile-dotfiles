@@ -1,0 +1,15 @@
+---
+- name: Encontrar y listar archivos .yml para Topics y Connectors
+  hosts: kafka
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Buscar archivos .yml de Connectors
+      find:
+        paths: "Environments/{{ ambiente }}/Kafka/Connectors"
+        patterns: "*.yml"
+      register: connectors_files
+
+    - name: Crear lista de nombres de archivos de Connectors
+      set_fact:
+        connector_list: "{{ connectors_files.files | map(attribute='path') | list }}"

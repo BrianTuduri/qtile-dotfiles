@@ -1,0 +1,14 @@
+name: 
+config:
+  tasksMax: 10
+  class: com.mongodb.kafka.connect.MongoSourceConnector
+  errors.tolerance: all
+  connection.uri: mongodb://myUserAdmin:abc123@192.168.240.165:27020,192.168.240.166:27020/geopos3-offline?authSource=admin&serverSelectionTimeoutMS=60000
+  topics: mongo-source-topic
+  pipeline: '[{"$match": {"ns.coll": {"$regex": /^(compositeBarcodeConfig|kioskoItems|kioskoCategories|baseArticles|measureUnits|kioskoPriceLists|storesStock|supplier|expressPromotion|tax|bank|taxRule|currencies|currencyQuotation|issuerPlanData|paymentModes|quotations|financialSurcharge|user|permission|role|entryResources|configuration|terminalFeature|fileResource|offlineConfiguration|chain|store|client|clientsGroup|clientNationality|companyParams|clientOfflineConfiguration|terminal_status|cashierAmountCategories|dgiFoliosRange|sitefNotification)$/}}}]'
+  flush.size: 100
+  rotate.interval.ms: 1000
+  topic.namespace.map: '{"*": "QA-mongo-changes"}'
+  change.stream.full.document: "updateLookup"
+  output.format.key: "schema"
+  output.schema.key: '{"type": "record","name": "keySchema","fields" : [ { "name": "documentKey", "type": "string" } ]}'

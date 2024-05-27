@@ -1,0 +1,7 @@
+2024-05-24 15:29:21.121 [info] update#setState idle
+2024-05-24 15:29:51.125 [info] update#setState checking for updates
+2024-05-24 15:29:51.362 [info] update#setState idle
+2024-05-24 16:29:51.546 [info] update#setState checking for updates
+2024-05-24 16:29:52.118 [info] update#setState idle
+2024-05-24 16:32:22.404 [info] Extension host with pid 72827 exited with code: 0, signal: unknown.
+2024-05-24 16:32:23.410 [error] Extension host with pid 72827 still exists, forcefully killing it...

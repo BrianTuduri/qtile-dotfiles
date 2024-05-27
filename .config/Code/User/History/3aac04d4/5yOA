@@ -1,0 +1,146 @@
+#!/usr/bin/env groovy
+// Configuración Global
+def tag
+def currentVersionNode
+def CONFIG = [
+    REGISTRY: "registry.gitlab.geocom.com.uy:5005",
+    DOCKER_IP_CREDENTIAL: 'docker_node_geocom',
+    DOCKER_SERVER_CREDENTIAL: 'docker_cert',
+    REGISTRY_CREDENTIAL: 'jenkins_registry_user',
+    PROJECT_GROUP: "uy-com-geocom-farmashop",
+    PROJECT_NAME: "order-tracker-BackEnd",
+    GIT_CREDENTIAL_ID: "15940393-32ad-416e-ad80-b8ea71536641",
+    NEXUS_URL: "nexus.geocom.com.uy",
+    NEXUS_REPOSITORY: "Ghiggia",
+    NEXUS_CREDENTIAL_ID: "nexus-deploy",
+    LABEL: "node-nvm",
+    NPM_DEFAULT_VERSION: "21.7.1" // se instala previamente en la imagen
+]
+CONFIG["GIT_URL"] = "git@gitlab.geocom.com.uy:${CONFIG["PROJECT_GROUP"]}/${CONFIG["PROJECT_NAME"]}.git"
+
+pipeline {
+    agent { label "${CONFIG["LABEL"]}" }
+
+    environment {
+        PROJECT_DIR = "${CONFIG["PROJECT_NAME"]}"
+        APP_ZIP = "${CONFIG["PROJECT_NAME"]}.zip"
+        REGISTRY_NAMESPACE = "${CONFIG["REGISTRY"]}/${CONFIG["PROJECT_GROUP"]}/${CONFIG["PROJECT_NAME"]}"
+        NVM_DIR="/root/.nvm"
+        INIT_NVM= ". /root/.nvm/nvm.sh"
+        INSTALL_NVM= "nvm install ${params.nodeVersion} && nvm use ${params.nodeVersion}"
+        GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
+    }
+    parameters {
+        string(name: 'nodeVersion', defaultValue: '21.7.1', description: 'NodeJS version to use')
+        choice(name: 'releaseType', choices: ['patch', 'minor', 'major', 'regenerate_version'], description: 'Select the release type')
+    }
+    stages {
+        stage('Preparation . . .') {
+            steps {
+                script {
+                    def isRegenerate = params.releaseType == 'regenerate_version'
+                    checkout([
+                        $class                              : 'GitSCM',
+                        branches                            : [[name: isRegenerate ? params.tag : "*/${params.branch}"]],
+                        doGenerateSubmoduleConfigurations   : false,
+                        userRemoteConfigs: [[credentialsId  : CONFIG["GIT_CREDENTIAL_ID"], url: CONFIG["GIT_URL"]]],
+                        extensions                       : [
+                            [$class: 'RelativeTargetDirectory', relativeTargetDir: "repository"],
+                            [$class: 'LocalBranch', localBranch: isRegenerate ? params.tag : "${params.branch}"]
+                        ]
+                    ])
+                    sh 'git config --global user.email "scm2@geocom.com.uy"; git config --global user.name "jenkins"'
+                    if (CONFIG["NPM_DEFAULT_VERSION"] == params.nodeVersion) {
+                        sh "${INIT_NVM} && nvm use ${params.nodeVersion} && npm -v"
+                    } else { sh "${INIT_NVM} && ${INSTALL_NVM} && npm -v" }
+
+                    currentVersionNode = sh(script: "${INIT_NVM} npm -v", returnStdout: true).trim()
+                    echo "====================================="
+                    echo "=  NPM version: ${currentVersionNode}  ="
+                    echo "====================================="
+                }
+            }
+        }
+
+        stage('Installation & Compilation . . .') {
+            steps {
+                script {
+                    dir('repository') {
+                        sh """
+                            ${INIT_NVM} && npm config set registry https://nexus.geocom.com.uy/repository/NPM_Proxy/ \
+                            && rm -rf ./node_modules package-lock.json .cache \
+                            && npm install && ls -la \
+                            && zip -r ${APP_ZIP} .
+                        """
+                    }
+                }
+            }
+        }
+
+        stage("Release"){
+            steps {
+                script {
+                    dir('repository') {
+                        sh """
+                            if test ! -f "${APP_ZIP}"; then
+                                echo "Package was not builded"
+                                exit 1
+                            fi
+                        """
+                        sh """
+                        ls -la node_modules && \
+                        ls -la node_modules/release-it && \
+                        ls -la node_modules/release-it/bin
+                        """
+                        sshagent(['15940393-32ad-416e-ad80-b8ea71536641']) {
+                            sh "${INIT_NVM} && ./node_modules/release-it/bin/release-it.js "+params.releaseType+" --ci"
+                        }
+                    }
+                }
+            }
+        }
+
+        stage("Publication and Cleaning . . .") {
+            steps {
+                script {
+                    dir('repository') {
+                        tag = sh(script: 'git describe --tags $(git rev-list --tags --max-count=1)', returnStdout: true).trim()
+                        nexusArtifactUploader(artifacts: [[artifactId: CONFIG["PROJECT_NAME"], classifier: '', file: APP_ZIP, type: '.zip']], credentialsId: CONFIG["NEXUS_CREDENTIAL_ID"], groupId: CONFIG["PROJECT_NAME"], nexusUrl: CONFIG["NEXUS_URL"], nexusVersion: 'nexus3', protocol: 'https', repository: CONFIG["NEXUS_REPOSITORY"], version: tag)
+                        cleanImage("${REGISTRY_NAMESPACE}:${tag}")
+                    }
+                }
+            }
+        }
+
+        stage("Docker Image | Building & Publishing . . .") {
+            steps {
+                script {
+                    docker.withTool('docker') {
+                        withCredentials([usernameColonPassword(credentialsId: CONFIG["DOCKER_IP_CREDENTIAL"], variable: 'IP_PORT')]) {
+                            withCredentials([dockerCert(credentialsId: CONFIG["DOCKER_SERVER_CREDENTIAL"], variable: 'DOCKER_CERT')]) {
+                                docker.withServer(IP_PORT, DOCKER_CERT) {
+                                    docker.withRegistry("https://${CONFIG["REGISTRY"]}", CONFIG["REGISTRY_CREDENTIAL"]) {
+                                        tag = sh(script: 'git describe --tags $(git rev-list --tags --max-count=1)', returnStdout: true).trim()
+                                        cleanImage("${REGISTRY_NAMESPACE}:${tag}")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    sh "git push && git push --tags"
+                }
+            }
+        }
+    }
+}
+
+def cleanImage(imageName) {
+    try {
+        docker.build(imageName, ".").push()
+    } finally {
+        def ret = sh returnStatus: true, script: "docker rmi ${imageName}"
+        if (ret != 0) {
+            echo("Error al borrar la imagen ${imageName}")
+        }
+    }
+}

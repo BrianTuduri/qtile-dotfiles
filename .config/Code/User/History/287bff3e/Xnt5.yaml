@@ -1,0 +1,230 @@
+---
+- name: Set primary node flag based on the first host in the 'kafka' group
+  ansible.builtin.set_fact:
+    is_primary_node: "{{ inventory_hostname == groups['kafka'][0] }}"
+   
+- name: primary node
+  ansible.builtin.debug:
+    var: is_primary_node
+
+- name: Kafka | Gather required facts
+  ansible.builtin.setup:
+    filter: ansible_default_ipv4
+
+- name: Kafka | Create group
+  ansible.builtin.group:
+    name: "{{ kafka_group }}"
+    state: present
+
+- name: Kafka | Create user
+  ansible.builtin.user:
+    name: "{{ kafka_user }}"
+    group: "{{ kafka_group }}"
+    shell: /sbin/nologin
+    create_home: false
+
+- name: Kafka | Create work directories
+  ansible.builtin.file:
+    state: directory
+    path: "{{ item }}"
+    owner: "{{ kafka_user }}"
+    group: "{{ kafka_group }}"
+    mode: "0750"
+  loop:
+    - "{{ kafka_config_directory }}"
+    - "{{ kafka_data_directory }}"
+    - "{{ kafka_log_directory }}"
+
+- name: Kafka | Create extra files
+  ansible.builtin.copy:
+    content: "{{ item.value }}"
+    dest: "{{ kafka_config_directory }}/{{ item.key }}"
+    mode: "0644"
+    owner: "{{ kafka_user }}"
+    group: "{{ kafka_group }}"
+  with_dict: "{{ kafka_extra_files }}"
+
+- name: Kafka | Check kafka archive
+  ansible.builtin.stat:
+    path: "/kafka/kafka_{{ kafka_scala_version }}-{{ kafka_version }}/"
+  register: _kafka_archive
+
+- name: Kafka | Download kafka archive
+  ansible.builtin.get_url:
+    url: "{{ kafka_download_url }}"
+    dest: "/kafka/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz"
+    mode: "0644"
+    owner: "{{ kafka_user }}"
+    group: "{{ kafka_group }}"
+  when: not _kafka_archive.stat.exists
+
+- name: Kafka | Extract kafka archive
+  ansible.builtin.unarchive:
+    src: "/kafka/kafka_{{ kafka_scala_version }}-{{ kafka_version }}.tgz"
+    dest: "/kafka/"
+    remote_src: true
+  when: not _kafka_archive.stat.exists
+
+- name: Kafka | Create a symbolic link to kafka bin directory
+  ansible.builtin.file:
+    src: /kafka/kafka_{{ kafka_scala_version }}-{{ kafka_version }}/
+    dest: /kafka/kafka
+    owner: "{{ kafka_user }}"
+    group: "{{ kafka_group }}"
+    state: link
+  notify: Restart kafka
+
+- name: Kafka | Execution permissions for the kafka binary folder
+  ansible.builtin.file:
+    path: "{{ kafka_bin_directory }}"
+    state: directory
+    mode: '0754'
+    owner: "{{ kafka_user }}"
+    group: "{{ kafka_group }}"
+    recurse: yes
+  when: not _kafka_archive.stat.exists
+
+- name: Kafka | Create default log4j properties config
+  ansible.builtin.copy:
+    src: log4j.properties
+    dest: "{{ kafka_config_directory }}/log4j.properties"
+    owner: "{{ kafka_user }}"
+    group: "{{ kafka_group }}"
+    mode: "0644"
+  when: not kafka_log4j_properties
+  notify: Restart kafka
+
+- name: Kafka | Create log4j properties config
+  ansible.builtin.copy:
+    content: "{{ kafka_log4j_properties }}"
+    dest: "{{ kafka_data_directory }}/log4j.properties"
+    owner: "{{ kafka_user }}"
+    group: "{{ kafka_group }}"
+    mode: "0644"
+  when: kafka_log4j_properties
+  notify: Restart kafka
+
+- name: Kafka | Create jaas configuration if SASL is enabled
+  ansible.builtin.template:
+    src: jaas.conf.j2
+    dest: "{{ kafka_config_directory }}/jaas.conf"
+    owner: "{{ kafka_user }}"
+    group: "{{ kafka_group }}"
+    mode: "0640"
+  when: kafka_sasl_enabled
+  notify: Restart kafka
+
+- name: Kafka | Create server properties config
+  ansible.builtin.template:
+    src: server.properties.j2
+    dest: "{{ kafka_config_directory }}/server.properties"
+    owner: "{{ kafka_user }}"
+    group: "{{ kafka_group }}"
+    mode: "0644"
+  notify: Restart kafka
+
+- name: Kafka | Create mirror maker config
+  ansible.builtin.template:
+    src: connect-mirror-maker.properties.j2
+    dest: "{{ kafka_config_directory }}/connect-mirror-maker.properties"
+    owner: "{{ kafka_user }}"
+    group: "{{ kafka_group }}"
+    mode: "0640"
+  notify: Restart kafka-mirror-maker
+  when: kafka_mirror_maker_enabled
+
+## cluster uuid
+
+- name: Kafka | Check Cluster UUID on primary node
+  ansible.builtin.stat:
+    path: "{{ kafka_config_directory }}/cluster_uuid"
+  register: _cluster_uuid
+  when: is_primary_node
+
+- name: Kafka | Read Cluster UUID from file on primary node
+  ansible.builtin.slurp:
+    src: "{{ kafka_config_directory }}/cluster_uuid"
+  register: _existing_cluster_uuid
+  when:
+    - is_primary_node
+    - _cluster_uuid.stat.exists
+
+- name: Kafka | Set Cluster UUID from existing file on primary node
+  ansible.builtin.set_fact:
+    kafka_cluster_uuid: "{{ (_existing_cluster_uuid['content'] | b64decode).strip() }}"
+  when:
+    - is_primary_node
+    - _cluster_uuid.stat.exists
+
+- name: Kafka | Generate Cluster UUID on primary node
+  ansible.builtin.shell:
+    cmd: /kafka/kafka/bin/kafka-storage.sh random-uuid
+  run_once: true
+  register: __cluster_uuid
+  when:
+    - is_primary_node
+    - not _cluster_uuid.stat.exists
+
+- name: Kafka | Set Cluster UUID from generated on primary node
+  ansible.builtin.set_fact:
+    kafka_cluster_uuid: "{{ __cluster_uuid.stdout }}"
+  when:
+    - is_primary_node
+    - __cluster_uuid is defined
+    - __cluster_uuid.stdout is defined
+    - not _cluster_uuid.stat.exists
+
+# los nodos deben esperar hasta que el nodo principal haya de procesar el uuid
+- name: Wait for primary node to set kafka_cluster_uuid
+  pause:
+    seconds: 5
+  when: not is_primary_node
+
+- name: Kafka | Ensure all nodes have the Cluster UUID
+  set_fact:
+    kafka_cluster_uuid: "{{ hostvars[groups['kafka'][0]]['kafka_cluster_uuid'] }}"
+  when: not is_primary_node
+
+- name: Kafka | Format log directories
+  ansible.builtin.shell:
+    cmd: >
+      /kafka/kafka/bin/kafka-storage.sh format
+      -t {{ kafka_cluster_uuid }} --ignore-formatted -c {{ kafka_config_directory }}/server.properties
+  when: kafka_cluster_uuid is defined
+  notify: Restart kafka
+
+## ## ## ##
+
+- name: Kafka | Create systemd service
+  ansible.builtin.template:
+    src: kafka.service.j2
+    dest: /etc/systemd/system/kafka.service
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart kafka
+
+- name: Kafka | Create mirror maker systemd service
+  ansible.builtin.template:
+    src: kafka-mirror-maker.service.j2
+    dest: /etc/systemd/system/kafka-mirror-maker.service
+    owner: root
+    group: root
+    mode: "0640"
+  notify: Restart kafka-mirror-maker
+  when: kafka_mirror_maker_enabled
+
+- name: Kafka | Start service
+  ansible.builtin.systemd:
+    name: kafka
+    daemon_reload: true
+    enabled: true
+    state: started
+
+- name: Kafka | Start mirror maker systemd service
+  ansible.builtin.systemd:
+    name: kafka-mirror-maker
+    daemon_reload: true
+    enabled: true
+    state: started
+  when: kafka_mirror_maker_enabled

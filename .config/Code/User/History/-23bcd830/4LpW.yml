@@ -1,0 +1,19 @@
+
+
+group_id: connect-cluster
+
+key_converter: org.apache.kafka.connect.json.JsonConverter
+value_converter: org.apache.kafka.connect.json.JsonConverter
+  
+key_converter_schemas_enable: true
+value_converter_schemas_enable: true
+
+offset_storage_topic: connect-offsets
+offset_storage_replication_factor: 1
+offset_flush_interval_ms: 10000
+
+config_storage_topic: connect-configs
+config_storage_replication_factor: 1
+
+status_storage_topic: connect-status
+status_storage_replication_factor: 1

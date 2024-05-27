@@ -1,0 +1,98 @@
+# Ansible Playbook to deploy Vault Agent automatically on servers
+
+---
+- name: Deploy Vault Agent
+  hosts: all
+  become: yes
+  vars:
+    vault_addr: "https://vault.geocom.com.uy"
+    vault_token: "hvs.XvjJ4w92UZiqGUEUFYsBizo5"
+  tasks:
+    - name: Get home user path
+      command: echo $HOME
+      register: user_home
+
+    - name: Set var vault_agent_dir
+      set_fact:
+        vault_agent_dir: "{{ user_home.stdout }}/vault-agent"
+
+    - name: Show war vault_agent_dir
+      debug:
+        msg: "vault_agent_dir es {{ vault_agent_dir }}"
+
+    - name: Install required packages
+      apt:
+        name:
+          - docker.io
+          - jq
+        state: present
+        update_cache: yes
+
+    - name: Start Docker service
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Create Vault Agent directory
+      file:
+        path: "{{ vault_agent_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Write geoswitch-vault-agent.hcl configuration file
+      copy:
+        dest: "{{ vault_agent_dir }}/vault-agent-config.hcl"
+        content: |
+          
+
+    - name: Enable AppRole authentication
+      command: "vault auth enable approle"
+      environment:
+        VAULT_ADDR: "{{ vault_addr }}"
+        VAULT_TOKEN: "{{ vault_token }}"
+
+    - name: Create AppRole role
+      command: "vault write auth/approle/role/geoswitch token_policies=alkosto-policy-qa"
+      environment:
+        VAULT_ADDR: "{{ vault_addr }}"
+        VAULT_TOKEN: "{{ vault_token }}"
+
+    - name: Read Role ID
+      command: "vault read -format=json auth/approle/role/geoswitch/role-id | jq -r '.data.role_id' > {{ vault_agent_dir }}/geoswitch-role_id"
+      environment:
+        VAULT_ADDR: "{{ vault_addr }}"
+        VAULT_TOKEN: "{{ vault_token }}"
+      args:
+        creates: "{{ vault_agent_dir }}/geoswitch-role_id"
+
+    - name: Write Secret ID
+      command: "vault write -format=json -f auth/approle/role/geoswitch/secret-id | jq -r '.data.secret_id' > {{ vault_agent_dir }}/geoswitch-secret_id"
+      environment:
+        VAULT_ADDR: "{{ vault_addr }}"
+        VAULT_TOKEN: "{{ vault_token }}"
+      args:
+        creates: "{{ vault_agent_dir }}/geoswitch-secret_id"
+
+    - name: Deploy Docker Compose for Vault Agent
+      copy:
+        dest: "{{ vault_agent_dir }}/docker-compose.yml"
+        content: |
+          version: '3.7'
+          services:
+            vault-agent-demo:
+              image: hashicorp/vault-enterprise:latest
+              restart: always
+              ports:
+                - "18200:8200"
+              volumes:
+                - "{{ vault_agent_dir }}:/vault-agent:rw"
+              environment:
+                VAULT_ADDR: "{{ vault_addr }}"
+              container_name: vault-agent-demo
+              entrypoint: "vault agent -log-level debug -config=/vault-agent/geoswitch-vault-agent.hcl"
+
+    - name: Start Vault Agent with Docker Compose
+      command: docker-compose up -d
+      args:
+        chdir: "{{ vault_agent_dir }}"

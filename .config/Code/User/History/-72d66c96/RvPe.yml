@@ -1,0 +1,15 @@
+---
+
+- name: Deploy keepalived
+  ansible.builtin.import_playbook: ../install_keepalived/keepalived.yml
+  tags: keepalived
+
+- name: Install kafka
+  hosts: kafka
+  become: true
+  gather_facts: true
+  roles:
+    - geocom.geoscm.kafka
+  tags:
+    - kafka
+    - java

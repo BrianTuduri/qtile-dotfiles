@@ -1,0 +1,79 @@
+{
+  "redhat.telemetry.enabled": true,
+  "explorer.confirmDelete": false,
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.indentSize": 2,
+    "editor.detectIndentation": true
+  },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "terraform.experimentalFeatures.prefillRequiredFields": true,
+  "terraform.languageServer.terraform.path": "/usr/bin/terraform",
+  //"terraform.languageServer.terraform.timeout": "30",
+  //"terraform.languageServer.terraform.logFilePath": "C:/some/folder/path/log-{{varname}}.log"
+  "explorer.confirmDragAndDrop": false, // por defecto de extension
+  "indentRainbow.tabmixColor": "rgba(128,32,96,0.1)", // por defecto de extension
+  "indentRainbow.errorColor": "rgba(128,32,32,0.1)", // por defecto de extension
+  "indentRainbow.indicatorStyle": "light", // por defecto de extension
+  "indentRainbow.lightIndicatorStyleLineWidth": 2, // por defecto de extension
+  "editor.minimap.enabled": false, // desactivar minimapa
+  "editor.scrollbar.vertical": "hidden", // ocultar scrollbar
+  "editor.overviewRulerBorder": false, // desactivar borde izquierdo que contiene marcadores, scrollbar, etc.
+  "editor.hideCursorInOverviewRuler": true, // desactivar marcador del cursor en el codigo
+  "editor.guides.indentation": false, // desactivar identacion de vs
+  "indenticator.width": 0.1, // ancho de la extension indenticator
+  "indenticator.color.dark": "rgba(255,255,255,0.1)",
+  "editor.glyphMargin": false,
+  "better-comments.multilineComments": true,
+  "hediet.vscode-drawio.resizeImages": null,
+  "editor.cursorBlinking": "expand",
+  "editor.suggest.preview": true,
+  "workbench.colorTheme": "Ayu Dark Bordered",
+  "cSpell.dictionaryDefinitions": [],
+  "cSpell.language": "en,es,es-ES",
+  "cSpell.languageSettings": [],
+  "workbench.iconTheme": "material-icon-theme",
+  "tabnine.experimentalAutoImports": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.autoClosingBrackets": "always",
+  "editor.comments.ignoreEmptyLines": false,
+  "files.defaultLanguage": "es-ES",
+  "editor.tabCompletion": "on",
+  "javascript.suggest.completeFunctionCalls": true,
+  "typescript.suggest.completeFunctionCalls": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.editor.empty.hint": "hidden",
+  "editor.fontFamily": "'Monospace', 'Droid Sans Mono', 'monospace', monospace",
+  "workbench.startupEditor": "none",
+  "[nginx]": {
+    "editor.defaultFormatter": "raynigon.nginx-formatter"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.largeFileOptimizations": false,
+  "editor.snippetSuggestions": "inline",
+  "extensions.ignoreRecommendations": true,
+  "window.zoomLevel": 1.5,
+  "debug.console.collapseIdenticalLines": false,
+  "debug.console.historySuggestions": false,
+  "debug.console.wordWrap": false,
+  "remote.forwardOnOpen": false,
+  "debug.internalConsoleOptions": "neverOpen"
+}

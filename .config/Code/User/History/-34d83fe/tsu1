@@ -1,0 +1,23 @@
+# Usar la imagen base de Jenkins Agent con JDK 21
+FROM jenkins/agent:jdk21
+
+USER root
+
+# Instalar Docker y dependencias para modo sin privilegios
+RUN apt-get update && \
+    apt-get install -y ca-certificates curl gnupg lsb-release uidmap && \
+    curl -fsSL https://get.docker.com -o get-docker.sh && \
+    sh get-docker.sh && \
+    rm -rf /var/lib/apt/lists/* && \
+    curl -fsSL https://get.docker.com/rootless -o get-docker-rootless.sh
+
+# Instalar Docker en modo sin privilegios
+# Esto necesita ser ejecutado en tiempo de ejecución, no en tiempo de construcción, así que se deja como comentario
+# RUN sh get-docker-rootless.sh
+
+USER jenkins
+
+ENV PATH=/home/jenkins/bin:$PATH \
+    DOCKER_HOST=unix:///home/jenkins/.docker/run/docker.sock
+
+WORKDIR /home/jenkins

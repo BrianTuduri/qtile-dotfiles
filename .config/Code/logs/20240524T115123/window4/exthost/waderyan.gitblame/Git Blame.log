@@ -1,0 +1,4 @@
+2024-05-24 13:33:49.965 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:33:49.965 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:33:49.965 [info] git blame -C --incremental -- /home/brian/repos-geocom/kafka-deploy-gama/ansible/group_vars/kafka.yml
+2024-05-24 13:33:49.965 [info] Blamed "/home/brian/repos-geocom/kafka-deploy-gama/ansible/group_vars/kafka.yml"

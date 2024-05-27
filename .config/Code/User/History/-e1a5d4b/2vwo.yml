@@ -1,0 +1,10 @@
+kafka_hosts_group: kafka
+kafka_user: kafka
+kafka_group: kafka
+kafka_config_directory: /kafka/etc/kafka
+kafka_data_directory: /kafka/var/lib/kafka
+kafka_log_directory: /kafka/var/log/kafka
+kafka_bin_directory: /kafka/kafka/bin
+kafka_plugin_directory: "{{ kafka_data_directory }}/plugins"
+kafka_password: "geocom"
+kafka_opts: ""

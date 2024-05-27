@@ -1,0 +1,53 @@
+2024-05-24 11:49:35.044 [info] 2024-05-24T14:49:34.881Z extension INFO  Activating extension... [
+  {
+    id: 'mongodb.mongodb-vscode',
+    version: '1.6.0',
+    mode: 'Production',
+    kind: 'UI',
+    extensionPath: '/home/brian/.vscode/extensions/mongodb.mongodb-vscode-1.6.0',
+    logPath: '/home/brian/.config/Code/logs/20240524T114930/window1/exthost/mongodb.mongodb-vscode',
+    workspaceStoragePath: '/home/brian/.config/Code/User/workspaceStorage/b56665561c7c6af89f36f8156cb98907/mongodb.mongodb-vscode',
+    globalStoragePath: '/home/brian/.config/Code/User/globalStorage/mongodb.mongodb-vscode',
+    defaultConnectionSavingLocation: 'Global',
+    buildInfo: {
+      nodeVersion: 'v18.18.2',
+      runtimePlatform: 'linux',
+      runtimeArch: 'x64'
+    }
+  }
+]
+
+2024-05-24 11:49:35.044 [info] 2024-05-24T14:49:34.884Z telemetry INFO  SegmentKey was found [ { type: 'string' } ]
+
+2024-05-24 11:49:35.044 [info] 2024-05-24T14:49:34.888Z language server controller INFO  Creating MongoDB Language Server... [
+  {
+    extensionPath: '/home/brian/.vscode/extensions/mongodb.mongodb-vscode-1.6.0',
+    languageServer: {
+      id: 'mongodbLanguageServer',
+      name: 'MongoDB Language Server',
+      path: '/home/brian/.vscode/extensions/mongodb.mongodb-vscode-1.6.0/dist/languageServer.js',
+      documentSelector: '[{"pattern":"**/*.mongodb.js"},{"pattern":"**/*.mongodb"}]'
+    }
+  }
+]
+
+2024-05-24 11:49:35.044 [info] 2024-05-24T14:49:34.905Z telemetry INFO  Segment analytics activated [ { anonymousId: '7b3fcc91-20b6-4d29-b164-5294cecbd4cb' } ]
+
+2024-05-24 11:49:35.044 [info] 2024-05-24T14:49:34.905Z language server controller INFO  Starting the language server... []
+
+2024-05-24 11:49:35.878 [info] 2024-05-24T14:49:35.878Z language server controller INFO  MongoDBService initialized. Sending default settings... {"extensionPath":"/home/brian/.vscode/extensions/mongodb.mongodb-vscode-1.6.0","connectionId":null,"hasConnectionString":false,"hasConnectionOptions":false} []
+
+2024-05-24 11:51:07.821 [info] 2024-05-24T14:51:07.800Z extension INFO  Deactivating extension... []
+
+2024-05-24 11:51:07.821 [info] 2024-05-24T14:51:07.800Z connection controller INFO  Disconnect called, currently connected to [ null ]
+
+2024-05-24 11:51:07.821 [info] 2024-05-24T14:51:07.801Z language server controller INFO  Changing MongoDBService active connection... [ { connectionId: null } ]
+
+2024-05-24 11:51:07.821 [info] 2024-05-24T14:51:07.807Z connection controller INFO  Disconnect called, currently connected to [ null ]
+
+2024-05-24 11:51:07.821 [info] 2024-05-24T14:51:07.807Z language server controller INFO  Changing MongoDBService active connection... [ { connectionId: null } ]
+
+2024-05-24 11:51:07.824 [info] 2024-05-24T14:51:07.821Z language server controller INFO  Deactivating the language server... []
+
+2024-05-24 11:51:07.824 [info] 2024-05-24T14:51:07.821Z language server controller INFO  Deactivating the language server... []
+

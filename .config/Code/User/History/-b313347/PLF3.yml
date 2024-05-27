@@ -1,0 +1,73 @@
+---
+# global settings
+vault_agent_user: geocom
+vault_agent_group: users
+# defaults file for vault_agent_docker
+vault_agent_dir: "/path/to/agent"
+vault_addr: "https://vault.geocom.com.uy"
+retry_num_retries: 5
+
+auth_method: "approle"  # Puede ser "approle", "aws" o "userpass"
+app_name: "your_app_name"
+
+# approle settings
+policies: []
+token_type: "service"
+secret_id_ttl: "24h"
+token_num_uses: 0
+token_ttl: "1h"
+token_max_ttl: "24h"
+secret_id_num_uses: 0
+
+# Configuración para approle
+role_id_file: "{{ app_name }}-role_id"
+secret_id_file: "{{ app_name }}-secret_id"
+remove_secret_id_file_after_reading: "true"
+
+
+# Configuración para aws
+aws_mount_path: "auth/aws-subaccount"
+aws_role: "foobar"
+
+# Configuración para userpass
+userpass_username: "your_username"
+userpass_password: "your_password"
+
+sink_path: "/vault-agent"
+approle_files_path: "/vault-agent"
+token_file: ".token"
+use_auto_auth_token: "true"
+
+use_cache: true
+use_api_proxy: false
+use_listener_unix: false
+unix_listener_address: "/path/to/socket"
+tcp_listener_address: "0.0.0.0:8200"
+tls_disable: "true"
+enable_quit: true
+
+additional_sinks: []
+  # - type: "file"
+  #   path: "/tmp/file-foo"
+  # - type: "file"
+  #   wrap_ttl: "5m"
+  #   aad_env_var: "TEST_AAD_ENV"
+  #   dh_type: "curve25519"
+  #   dh_path: "/tmp/file-foo-dhpath2"
+  #   path: "/tmp/file-bar"
+
+templates: []
+  # - source: "/etc/vault/server.key.ctmpl"
+  #   destination: "/etc/vault/server.key"
+  # - source: "/etc/vault/server.crt.ctmpl"
+  #   destination: "/etc/vault/server.crt"
+
+# docker compose settings
+vault_agent_image: hashicorp/vault-enterprise
+vault_agent_tag: latest
+vault_agent_ports: "18200:8200"
+vault_agent_volumes:
+  "{{ vault_agent_dir }}:/vault-agent:rw"
+vault_agent_environment:
+  VAULT_ADDR: "{{ vault_addr }}"
+vault_agent_entrypoint: "vault agent -log-level debug -config=/vault-agent/{{ app_name }}-agent-config.hcl"

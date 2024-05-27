@@ -1,0 +1,221 @@
+Error: Command failed: command -v ansible-lint
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12) {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'command -v ansible-lint',
+  stdout: '',
+  stderr: ''
+}
+Path for lint: 
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+Error: Command failed: command -v ansible-lint
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:303:5) {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'command -v ansible-lint',
+  stdout: '',
+  stderr: ''
+}
+Path for lint: 
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+Error: Command failed: command -v ansible-lint
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12) {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'command -v ansible-lint',
+  stdout: '',
+  stderr: ''
+}
+Path for lint: 
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+Error: Command failed: command -v ansible-lint
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12) {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'command -v ansible-lint',
+  stdout: '',
+  stderr: ''
+}
+Path for lint: 
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+Error: Command failed: command -v ansible-lint
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12) {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'command -v ansible-lint',
+  stdout: '',
+  stderr: ''
+}
+Path for lint: 
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+Error: Command failed: command -v ansible-lint
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12) {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'command -v ansible-lint',
+  stdout: '',
+  stderr: ''
+}
+Path for lint: 
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+Error: Command failed: command -v ansible-lint
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:303:5) {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'command -v ansible-lint',
+  stdout: '',
+  stderr: ''
+}
+Path for lint: 
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+Error: Command failed: command -v ansible-lint
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12) {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'command -v ansible-lint',
+  stdout: '',
+  stderr: ''
+}
+Path for lint: 
+Error: Command failed: command -v ansible-lint
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12) {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'command -v ansible-lint',
+  stdout: '',
+  stderr: ''
+}
+Path for lint: 
+Error: Command failed: command -v ansible-lint
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12) {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'command -v ansible-lint',
+  stdout: '',
+  stderr: ''
+}
+Path for lint: 
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+cmd 'ansible-lint --version' was not executed with the following error: ' Command failed: ansible-lint --version
+/bin/sh: 1: ansible-lint: not found
+
+Error: Command failed: command -v ansible-lint
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:303:5) {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'command -v ansible-lint',
+  stdout: '',
+  stderr: ''
+}
+Path for lint: 

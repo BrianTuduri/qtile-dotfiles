@@ -1,0 +1,15 @@
+connector:
+  name: wpp-mongo-source-arg
+  config:
+    connector.class: com.mongodb.kafka.connect.MongoSourceConnector
+    tasks.max: '10'
+    connection.uri: mongodb://userApp:Xpr.ARGQA.PassRoot@srv-qa-sp-xpress-arg-mongo1:27017,srv-qa-sp-xpress-arg-mongo2:27017,srv-qa-sp-xpress-arg-mongo3:27017/admin?authSource=admin
+    errors.tolerance: all
+    pipeline: '[{"$match": {"ns.coll": "order"}}]'
+    flush.size: '100'
+    rotate.interval.ms: '1000'
+    topic.namespace.map: '{"*": "ARG-wpp-mongo-changes"}'
+    change.stream.full.document: updateLookup
+    output.format.key: json
+    output.format.value: json
+    output.schema.infer.value: true

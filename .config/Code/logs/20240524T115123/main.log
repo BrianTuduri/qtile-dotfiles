@@ -1,0 +1,14 @@
+2024-05-24 11:51:23.210 [info] update#setState idle
+2024-05-24 11:51:53.212 [info] update#setState checking for updates
+2024-05-24 11:51:53.448 [info] update#setState idle
+2024-05-24 12:51:53.216 [info] update#setState checking for updates
+2024-05-24 12:51:53.827 [info] update#setState idle
+2024-05-24 13:23:01.724 [info] Extension host with pid 40204 exited with code: 0, signal: unknown.
+2024-05-24 13:23:02.726 [error] Extension host with pid 40204 still exists, forcefully killing it...
+2024-05-24 13:33:27.589 [info] Extension host with pid 43564 exited with code: 0, signal: unknown.
+2024-05-24 13:33:51.694 [info] Extension host with pid 59776 exited with code: 0, signal: unknown.
+2024-05-24 13:51:53.220 [info] update#setState checking for updates
+2024-05-24 13:51:53.549 [info] update#setState idle
+2024-05-24 15:29:11.850 [error] Blocked vscode-file request vscode-file://vscode-app/home/brian/.vscode/extensions/mongodb.mongodb-vscode-1.6.0/images/sidebar-leaf.svg
+2024-05-24 15:29:11.943 [info] Extension host with pid 33518 exited with code: 0, signal: unknown.
+2024-05-24 15:29:12.540 [info] Extension host with pid 63806 exited with code: 0, signal: unknown.

@@ -1,0 +1,18 @@
+import imaplib
+
+# Configuración
+host = 'outlook.office365.com'
+port = 993
+email_address = 'BTuduri@geocom.com.uy'
+access_token = '0.AQ8Afpq5GwDJGkuK3yYdjDxVAYZ_Hec7reJEnSEH1w2sScgPADI.AgABAAIAAADnfolhJpSnRYB1SVj-Hgd8AgDs_wUA9P-AhJavA6X51bBKx-Iq5WZxj98Udc3Ex5b04YpG2W0Wrd4O3abxUQQAhOXPXbJlytBSwtXIynQUaTQ-VMKcD0uHCYqo98ypaLG6Qn3OQ0mz0mTNJEIS8Vgsee_uY3f21cpIlFgmRTsc09dFuvU7Bam0WN4Kr4YCwV5cm535ZDLefFuf4GTCRxrWTs341NgF0MXACZICd7yfIixvg8M9tFjTUGB2W1O98iZXGjPCLkKyydNWEMZeWHyCGqdzGlkmbdEKbISXZhpNB2MTHM8JRxDj_tQ0TWHx5K5t7Nh_hEfNSO9Gkqh9LcaxmSX9SczjP6wSU6KVPbzcd0w91qCKrAA075IEy_fVEx6wOCVP4rIyaeu9bRVMu460TNtCHSh4_8KIHqe2p7GPvDEUC35X30mTjq9DNyi5rhOhKy4iShvsZkLFHBN6j3fI3qPc7F9_8-8J4e6GuiltKAgC400uxNqSKNaY4fi3n0MM2K297TbBgy7WfbIGx0Lqvw4a8ydytOjuh1UafNLk6KovrFglP_Zw1bJK8J_JATBRh_8rQc_TZp7azY3Skmo__vz5IFWNPk83G_o15X6236BaMeJnjxYlNT-7MbDmx2VWifn8Jh4sMIivmaro4n0h3DBPgxVUjsgQ86zZhzXM6XHC3lGcEw18obtnT_HOf6YWhm5bevP-93RnZ4BcpiDaI6vTz4nZrcQWeFKMxiu_KXqLYUaS0LK1QhO6RZQPlga5YiHAQgvOvzH2SgQ98p2sAzEPodDPwLAt1uXaU6uxNOevZY2Kb-BZ2MmgopSJprKmpzDa'
+# Conectar al servidor IMAP
+mail = imaplib.IMAP4_SSL(host, port)
+
+# Generar la cadena de autenticación para OAuth2
+auth_string = 'user={}\1auth=Bearer {}\1\1'.format(email_address, access_token)
+
+# Autenticarse utilizando OAuth2
+mail.authenticate('XOAUTH2', lambda x: auth_string.encode())
+
+# Seleccionar la bandeja de entrada y realizar operaciones...
+mail.select('inbox')

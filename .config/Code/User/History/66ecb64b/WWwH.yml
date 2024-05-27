@@ -1,0 +1,10 @@
+kafka:
+  clusters:
+    - name: express-qa
+      bootstrapServers: 172.24.26.158:9092
+auth:
+  type: disabled
+management:
+  health:
+    ldap:
+      enabled: false

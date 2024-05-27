@@ -1,0 +1,7 @@
+connector:
+  name: sale-tickets-source-qa
+  config:
+    connector.class: org.apache.kafka.connect.file.FileStreamSinkConnector
+    tasks.max: '1'
+    topics: "test-topic"
+    file: "/path/to/test/output/file.txt"

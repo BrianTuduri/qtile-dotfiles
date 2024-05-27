@@ -1,0 +1,56 @@
+# Generate namespace
+module "secrets_namespace" {
+  source                = "git::https://gitlab.geocom.com.uy/scm/DevOPS/terraform-modules/rancher_project_namespace"
+  create_project        = false
+  cluster_id            = data.rancher2_cluster.imported_cluster.id
+  project_name          = "Vault"
+  namespace_name        = "vault"
+  notifications_enabled = false
+}
+
+resource "helm_release" "vault" {
+  namespace  = module.secrets_namespace.namespace
+  name       = "cluster-vault"
+  chart      = "vault"
+  version    = "0.28.0"
+  repository = "https://helm.releases.hashicorp.com"
+  values = [yamlencode({
+    global = { namespace = module.secrets_namespace.namespace }
+    ui     = { enabled = true }
+    server = {
+      image       = { repository = "${local.cluster_registry}/hashicorp/vault" }
+      dataStorage = { enabled = true, size = "5Gi" }
+      ingress = {
+        enabled = true
+        hosts   = [{ host = "vault-server.geocom.com.uy", paths = ["/"] }]
+        tls     = [{ host = "vault-server.geocom.com.uy" }]
+      }
+    }
+    injector = {
+      image      = { repository = "${local.cluster_registry}/hashicorp/vault-k8s" }
+      agentImage = { repository = "${local.cluster_registry}/hashicorp/vault" }
+    }
+    externalVaultAddr = "vault-server.geocom.com.uy"
+  })]
+  wait    = true
+  timeout = 600
+}
+resource "vault_mount" "kvv1" {
+  path        = "kvv1"
+  type        = "kv"
+  options     = { version = "1" }
+  description = "KV Version 1 secret engine mount"
+}
+resource "vault_ldap_auth_backend" "ldap" {
+  path       = "ldap"
+  url        = "ldap://172.24.18.180:389"
+  userdn     = "ou=Uruguay,ou=Geocom,dc=geocom,dc=com,dc=uy"
+  bindpass   = "3[6}L'&z^B%sg?&#)W"
+  binddn     = "gitlabsp@geocom.com.uy"
+  userattr   = "sAMAccountName"
+  discoverdn = false
+  groupdn    = "ou=Uruguay,ou=Geocom,dc=geocom,dc=com,dc=uy"
+  //groupfilter = "(&(objectClass=group)(member:1.2.840.113556.1.4.1941:={{.UserDN}}))"
+  userfilter = "(sAMAccountName={{.Username}})"
+  //upndomain   = "GEOCOM"
+}

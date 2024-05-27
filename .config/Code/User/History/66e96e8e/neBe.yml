@@ -1,0 +1,21 @@
+# Start
+order-tracker-frontend:
+  restart: always
+  image: registry.gitlab.geocom.com.uy:5005/uy-com-geocom-farmashop/order-tracker-frontend:400.1.19
+  #extra_hosts:
+  #  - "oms-farmacenter-qa.geocom.com.uy:172.24.54.74"  
+  ports:
+    - "8013:80"
+  environment:
+    TZ: "${TZ}"
+    MONGO_URL:
+    INDICATORS_CRON:
+    CONCENTRATOR_USER:
+    CONCENTRATOR_PASSWORD:
+    CONCENTRATOR_URL:
+  volumes:
+    - /tmp/configFrontEnd/:/tmp/configFrontEnd/
+  depends_on:
+    - order-tracker-backend
+  entrypoint: ["/tmp/configFrontEnd/.sh"]
+# End

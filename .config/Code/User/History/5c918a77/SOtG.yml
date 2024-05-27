@@ -1,0 +1,19 @@
+   main: # 'main' is the GitLab 'provider ID' of this LDAP server
+     label: 'LDAP'
+     host: 'foo.com.uy'
+     port: 389
+     uid: 'sAMAccountName'
+     method: 'plain' # "tls" or "ssl" or "plain"
+     bind_dn: 'gitlabsp@foo.com.uy'
+     password: "myPassword"
+     active_directory: true
+     allow_username_or_email_login: true
+     block_auto_created_users: false
+     base: 'OU=Uruguay,OU=foo,DC=foo,DC=com,DC=uy'
+     user_filter: ''
+     attributes:
+       username: ['uid', 'userid', 'sAMAccountName']
+       email:    ['mail', 'email', 'userPrincipalName']
+       name:       'cn'
+       first_name: 'givenName'
+       last_name:  'sn'

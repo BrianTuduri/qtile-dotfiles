@@ -1,0 +1,7 @@
+Logger Init
+Initialization complete.
+Loaded supported calls (Version 1.5)
+Batch of 1 Total time: 1012ms (Avg. Per Call: 1012ms)
+getSourceText: unexpected node type 'import_prefix'
+getSourceText: unexpected node type 'import_prefix'
+getSourceText: unexpected node type 'import_prefix'

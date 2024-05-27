@@ -1,0 +1,23 @@
+FROM jenkins/agent:jdk8
+
+ARG NODE_VERSION=21.7.1
+ARG NVM_VERSION=v0.39.7
+
+USER root
+RUN apt-get update && \
+    apt-get install -y curl git zip && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh | bash
+
+ENV NVM_DIR=/root/.nvm
+RUN echo 'export NVM_DIR="$NVM_DIR"' >> /etc/profile.d/nvm.sh && \
+    echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> /etc/profile.d/nvm.sh && \
+    echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> /etc/profile.d/nvm.sh
+
+RUN . $NVM_DIR/nvm.sh && \
+    nvm install 10.15.0 $NODE_VERSION && \
+    nvm use $NODE_VERSION && \
+    nvm alias default $NODE_VERSION
+
+SHELL ["/bin/bash", "-c"]

@@ -1,0 +1,44 @@
+- name: Including environment-specific variables
+  include_vars:
+    file: "{{ kafka_envs_vars_dir }}" # incluyo variables de el repositorio enviroments, en caso de QA: https://gitlab.geocom.com.uy/uy-com-geocom-scm/express-environments-configuration/-/blob/scm-test/QA/vars/QA.yml?ref_type=heads
+
+
+
+- name: "Creating the [ {{ kafka_plugin_directory }}/{{ ambiente }} ] directory"
+  file:
+    path: "{{ kafka_config_directory }}/{{ ambiente }}"
+    state: directory
+    mode: '0774'
+
+- name: "Creating the [ {{ kafka_topics_dir }} ] directory"
+  file:
+    path: "{{ kafka_topics_dir }}"
+    state: directory
+    mode: '0774'
+
+- name: "Creating the [ {{ kafka_connectors_dir }} ] directory"
+  file:
+    path: "{{ kafka_connectors_dir }}"
+    state: directory
+    mode: '0774'
+
+- name: Copying plugins
+  copy:
+    src: "{{ repo_home }}/plugins/"
+    dest: "{{ kafka_plugin_directory }}"
+    mode: '0774'
+    force: true
+
+- name: "Copying connectors to {{ kafka_connectors_dir }}"
+  copy:
+    src: "{{ kafka_local_connectors_dir }}/"
+    dest: "{{ kafka_connectors_dir }}"
+    mode: '0774'
+    force: true
+
+- name: "Copying topics to {{ kafka_topics_dir }}"
+  copy:
+    src: "{{ kafka_local_topics_dir }}/" 
+    dest: "{{ kafka_topics_dir }}"
+    mode: '0774'
+    force: true

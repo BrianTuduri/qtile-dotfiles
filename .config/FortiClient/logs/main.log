@@ -1,0 +1,767 @@
+[2024-02-28 12:53:05.003] [info]  Platform detected: fedora
+[2024-02-28 12:53:05.008] [info]  [ '/opt/forticlient/gui/FortiClient-linux-x64/FortiClient' ]
+[2024-02-28 12:53:05.056] [info]  Saml - init
+[2024-02-28 12:53:05.938] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-02-28 12:53:05.944] [info]  did-finish-load
+[2024-02-28 12:53:05.948] [info]  ready-to-show
+[2024-02-28 12:53:07.168] [info]  Events -  IPC_RENDERER_REQUEST.FETCH_INVITATION_CODE inviteCode=null
+[2024-02-28 12:53:07.409] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-02-28 12:53:07.409] [info]  Events - processArgv ["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-02-28 12:58:08.605] [info]  window-all-closed
+[2024-02-28 14:51:37.440] [info]  Platform detected: fedora
+[2024-02-28 14:51:37.445] [info]  [ '/opt/forticlient/gui/FortiClient-linux-x64/FortiClient' ]
+[2024-02-28 14:51:37.505] [info]  Saml - init
+[2024-02-28 14:51:38.360] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-02-28 14:51:38.366] [info]  did-finish-load
+[2024-02-28 14:51:38.370] [info]  ready-to-show
+[2024-02-28 14:51:39.391] [info]  Events -  IPC_RENDERER_REQUEST.FETCH_INVITATION_CODE inviteCode=null
+[2024-02-28 14:51:39.594] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-02-28 14:51:39.595] [info]  Events - processArgv ["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-02-28 14:52:16.297] [info]  window-all-closed
+[2024-03-01 15:40:50.872] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 15:40:50.877] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 15:40:50.890] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-01 15:40:50.908] [info]  web-contents-created contents.id=1
+[2024-03-01 15:40:50.923] [info]  Saml - init
+[2024-03-01 15:40:50.924] [info]  Saml - listenSamlLoginRequest
+[2024-03-01 15:40:51.293] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-01 15:40:51.298] [info]  MAIN did-finish-load
+[2024-03-01 15:40:51.300] [info]  MAIN ready-to-show
+[2024-03-01 15:40:52.441] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-01 15:40:52.442] [info]  WindowManager handleWindowLoaded
+[2024-03-01 15:40:52.442] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 15:40:52.443] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 15:41:19.818] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-01 15:41:19.819] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-01 15:41:25.686] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 15:41:25.690] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 15:41:25.703] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-01 15:41:25.722] [info]  web-contents-created contents.id=1
+[2024-03-01 15:41:25.737] [info]  Saml - init
+[2024-03-01 15:41:25.737] [info]  Saml - listenSamlLoginRequest
+[2024-03-01 15:41:26.121] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-01 15:41:26.126] [info]  MAIN did-finish-load
+[2024-03-01 15:41:26.128] [info]  MAIN ready-to-show
+[2024-03-01 15:41:27.267] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-01 15:41:27.268] [info]  WindowManager handleWindowLoaded
+[2024-03-01 15:41:27.269] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 15:41:27.270] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 15:44:01.603] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-01 15:44:01.604] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-01 15:49:33.714] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 15:49:33.718] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 15:49:33.727] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-01 15:49:33.745] [info]  web-contents-created contents.id=1
+[2024-03-01 15:49:33.759] [info]  Saml - init
+[2024-03-01 15:49:33.760] [info]  Saml - listenSamlLoginRequest
+[2024-03-01 15:49:34.129] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-01 15:49:34.133] [info]  MAIN did-finish-load
+[2024-03-01 15:49:34.135] [info]  MAIN ready-to-show
+[2024-03-01 15:49:35.286] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-01 15:49:35.287] [info]  WindowManager handleWindowLoaded
+[2024-03-01 15:49:35.288] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 15:49:35.289] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 15:49:53.390] [info]  doRegisterWithVdom ip=sslvpn.geocom.com.uy vdom=Default
+[2024-03-01 15:49:53.598] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 15:49:53.794] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 15:50:15.514] [info]  doRegisterWithVdom ip=sslvpn.geocom.com.uy:10443 vdom=Default
+[2024-03-01 15:50:15.669] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 15:50:15.850] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 15:51:05.305] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 15:51:18.861] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 15:51:58.826] [info]  IPC_RENDERER_REQUEST.UNLOCK_FORTICLIENT
+[2024-03-01 15:52:13.768] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 15:52:19.070] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 15:52:19.273] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 15:52:21.343] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 15:52:24.954] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-01 15:52:25.123] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-01 15:52:25.199] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-01 15:52:45.923] [info]  EpctrlStatusChange: Updating view of vulnerability-scan
+[2024-03-01 15:53:04.710] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 15:53:13.805] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 15:53:17.010] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-01 15:53:17.011] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-01 15:53:57.627] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 15:53:57.631] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 15:53:57.645] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-01 15:53:57.665] [info]  web-contents-created contents.id=1
+[2024-03-01 15:53:57.682] [info]  Saml - init
+[2024-03-01 15:53:57.683] [info]  Saml - listenSamlLoginRequest
+[2024-03-01 15:53:58.049] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-01 15:53:58.053] [info]  MAIN did-finish-load
+[2024-03-01 15:53:58.056] [info]  MAIN ready-to-show
+[2024-03-01 15:53:59.273] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-01 15:53:59.274] [info]  WindowManager handleWindowLoaded
+[2024-03-01 15:53:59.275] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 15:53:59.275] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 15:54:14.423] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-01 15:54:14.424] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-01 15:54:22.373] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 15:54:22.378] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 15:54:22.390] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-01 15:54:22.407] [info]  web-contents-created contents.id=1
+[2024-03-01 15:54:22.423] [info]  Saml - init
+[2024-03-01 15:54:22.424] [info]  Saml - listenSamlLoginRequest
+[2024-03-01 15:54:22.790] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-01 15:54:22.795] [info]  MAIN did-finish-load
+[2024-03-01 15:54:22.797] [info]  MAIN ready-to-show
+[2024-03-01 15:54:23.979] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-01 15:54:23.980] [info]  WindowManager handleWindowLoaded
+[2024-03-01 15:54:23.980] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 15:54:23.981] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 15:54:50.090] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 15:54:56.573] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 15:55:05.977] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 15:55:34.571] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 15:55:42.913] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 15:55:43.066] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 15:55:45.527] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 15:55:53.279] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-01 15:55:57.101] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 15:55:58.360] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-01 15:55:58.360] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-01 15:58:19.014] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 15:58:19.021] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 15:58:19.036] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-01 15:58:19.055] [info]  web-contents-created contents.id=1
+[2024-03-01 15:58:19.070] [info]  Saml - init
+[2024-03-01 15:58:19.071] [info]  Saml - listenSamlLoginRequest
+[2024-03-01 15:58:19.474] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-01 15:58:19.479] [info]  MAIN did-finish-load
+[2024-03-01 15:58:19.481] [info]  MAIN ready-to-show
+[2024-03-01 15:58:20.657] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-01 15:58:20.658] [info]  WindowManager handleWindowLoaded
+[2024-03-01 15:58:20.658] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 15:58:20.659] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 15:58:42.346] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 15:58:42.514] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 15:58:45.237] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 15:58:53.856] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-01 15:58:53.857] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-01 16:04:06.533] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 16:04:06.538] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 16:04:06.551] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-01 16:04:06.571] [info]  web-contents-created contents.id=1
+[2024-03-01 16:04:06.586] [info]  Saml - init
+[2024-03-01 16:04:06.587] [info]  Saml - listenSamlLoginRequest
+[2024-03-01 16:04:06.943] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-01 16:04:06.947] [info]  MAIN did-finish-load
+[2024-03-01 16:04:06.949] [info]  MAIN ready-to-show
+[2024-03-01 16:04:08.124] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-01 16:04:08.125] [info]  WindowManager handleWindowLoaded
+[2024-03-01 16:04:08.126] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 16:04:08.127] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 16:04:13.968] [info]  EpctrlStatusChange: Updating view of systemsettings
+[2024-03-01 16:04:35.017] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-01 16:04:35.018] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-01 16:04:37.324] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 16:04:37.329] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 16:04:37.342] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-01 16:04:37.360] [info]  web-contents-created contents.id=1
+[2024-03-01 16:04:37.376] [info]  Saml - init
+[2024-03-01 16:04:37.377] [info]  Saml - listenSamlLoginRequest
+[2024-03-01 16:04:37.783] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-01 16:04:37.789] [info]  MAIN did-finish-load
+[2024-03-01 16:04:37.791] [info]  MAIN ready-to-show
+[2024-03-01 16:04:39.013] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-01 16:04:39.013] [info]  WindowManager handleWindowLoaded
+[2024-03-01 16:04:39.014] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 16:04:39.014] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 16:05:17.166] [info]  EpctrlStatusChange: Updating view of vpn-settings
+[2024-03-01 16:05:50.344] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 16:05:50.521] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 16:05:53.133] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 16:06:05.275] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 16:06:06.445] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-01 16:06:06.445] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-01 16:59:48.621] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 16:59:48.627] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 16:59:48.639] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-01 16:59:48.683] [info]  web-contents-created contents.id=1
+[2024-03-01 16:59:48.706] [info]  Saml - init
+[2024-03-01 16:59:48.707] [info]  Saml - listenSamlLoginRequest
+[2024-03-01 16:59:49.217] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-01 16:59:49.223] [info]  MAIN did-finish-load
+[2024-03-01 16:59:49.226] [info]  MAIN ready-to-show
+[2024-03-01 16:59:50.266] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-01 16:59:50.267] [info]  WindowManager handleWindowLoaded
+[2024-03-01 16:59:50.267] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 16:59:50.268] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 17:00:04.760] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:00:05.026] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:00:48.435] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-01 17:01:14.630] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:01:14.806] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:01:34.601] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-01 17:01:34.602] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-01 17:01:40.089] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 17:01:40.093] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 17:01:40.106] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-01 17:01:40.124] [info]  web-contents-created contents.id=1
+[2024-03-01 17:01:40.146] [info]  Saml - init
+[2024-03-01 17:01:40.147] [info]  Saml - listenSamlLoginRequest
+[2024-03-01 17:01:40.550] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-01 17:01:40.556] [info]  MAIN did-finish-load
+[2024-03-01 17:01:40.559] [info]  MAIN ready-to-show
+[2024-03-01 17:01:41.530] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-01 17:01:41.531] [info]  WindowManager handleWindowLoaded
+[2024-03-01 17:01:41.532] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 17:01:41.532] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 17:01:49.946] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-01 17:01:55.126] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:01:55.278] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:02:24.374] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:02:24.514] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:02:51.052] [info]  EpctrlStatusChange: Updating view of vpn-settings
+[2024-03-01 17:03:03.136] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:03:03.268] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:03:46.272] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:03:46.418] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:03:52.555] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-01 17:04:54.791] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-01 17:04:56.458] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:04:56.624] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:04:58.089] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-01 17:04:58.089] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-01 17:05:26.383] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 17:05:26.389] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 17:05:26.403] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-01 17:05:26.424] [info]  web-contents-created contents.id=1
+[2024-03-01 17:05:26.455] [info]  Saml - init
+[2024-03-01 17:05:26.456] [info]  Saml - listenSamlLoginRequest
+[2024-03-01 17:05:26.884] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-01 17:05:26.890] [info]  MAIN did-finish-load
+[2024-03-01 17:05:26.893] [info]  MAIN ready-to-show
+[2024-03-01 17:05:27.949] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-01 17:05:27.950] [info]  WindowManager handleWindowLoaded
+[2024-03-01 17:05:27.951] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 17:05:27.951] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 17:05:29.294] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 17:05:29.373] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 17:05:29.526] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 17:05:32.211] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 17:05:32.351] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 17:05:41.192] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-01 17:05:41.193] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-01 17:05:48.837] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 17:05:48.843] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 17:05:48.855] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-01 17:05:48.874] [info]  web-contents-created contents.id=1
+[2024-03-01 17:05:48.890] [info]  Saml - init
+[2024-03-01 17:05:48.891] [info]  Saml - listenSamlLoginRequest
+[2024-03-01 17:05:49.294] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-01 17:05:49.300] [info]  MAIN did-finish-load
+[2024-03-01 17:05:49.302] [info]  MAIN ready-to-show
+[2024-03-01 17:05:50.266] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-01 17:05:50.267] [info]  WindowManager handleWindowLoaded
+[2024-03-01 17:05:50.268] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-01 17:05:50.268] [info]  WindowManager handleCreateMainWindow
+[2024-03-01 17:06:00.061] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:06:00.211] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:06:33.720] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-01 17:06:43.216] [info]  EpctrlStatusChange: Updating view of avatar-settings
+[2024-03-01 17:07:35.563] [info]  EpctrlStatusChange: Updating view of vpn-settings
+[2024-03-01 17:07:53.942] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:08:37.575] [info]  EpctrlStatusChange: Updating view of vpn-settings
+[2024-03-01 17:08:42.592] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:09:11.508] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:09:11.638] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:09:39.682] [info]  EpctrlStatusChange: Updating view of vpn-settings
+[2024-03-01 17:09:44.140] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:10:12.074] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:10:12.214] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-01 17:10:40.888] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-01 17:10:48.762] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-01 17:10:48.763] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-04 11:47:33.722] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-04 11:47:33.729] [info]  WindowManager handleCreateMainWindow
+[2024-03-04 11:47:33.744] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-04 11:47:33.787] [info]  web-contents-created contents.id=1
+[2024-03-04 11:47:33.807] [info]  Saml - init
+[2024-03-04 11:47:33.808] [info]  Saml - listenSamlLoginRequest
+[2024-03-04 11:47:34.269] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-04 11:47:34.275] [info]  MAIN did-finish-load
+[2024-03-04 11:47:34.277] [info]  MAIN ready-to-show
+[2024-03-04 11:47:35.429] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-04 11:47:35.430] [info]  WindowManager handleWindowLoaded
+[2024-03-04 11:47:35.431] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-04 11:47:35.431] [info]  WindowManager handleCreateMainWindow
+[2024-03-04 11:47:46.797] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-04 11:47:57.368] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-04 11:47:57.536] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-04 11:48:14.461] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-04 11:48:14.462] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-04 11:51:01.743] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-04 11:51:01.747] [info]  WindowManager handleCreateMainWindow
+[2024-03-04 11:51:01.758] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-04 11:51:01.774] [info]  web-contents-created contents.id=1
+[2024-03-04 11:51:01.790] [info]  Saml - init
+[2024-03-04 11:51:01.790] [info]  Saml - listenSamlLoginRequest
+[2024-03-04 11:51:02.208] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-04 11:51:02.213] [info]  MAIN did-finish-load
+[2024-03-04 11:51:02.215] [info]  MAIN ready-to-show
+[2024-03-04 11:51:13.924] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-04 11:51:13.925] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-04 11:51:25.927] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-04 11:51:25.931] [info]  WindowManager handleCreateMainWindow
+[2024-03-04 11:51:25.944] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-04 11:51:25.959] [info]  web-contents-created contents.id=1
+[2024-03-04 11:51:25.975] [info]  Saml - init
+[2024-03-04 11:51:25.976] [info]  Saml - listenSamlLoginRequest
+[2024-03-04 11:51:26.396] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-04 11:51:26.401] [info]  MAIN did-finish-load
+[2024-03-04 11:51:26.403] [info]  MAIN ready-to-show
+[2024-03-04 11:51:26.835] [info]  EpctrlStatusChange: Updating view of malware-settings
+[2024-03-04 11:51:26.984] [info]  EpctrlStatusChange: Updating view of malware-settings
+[2024-03-04 11:51:27.715] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-04 11:51:27.716] [info]  WindowManager handleWindowLoaded
+[2024-03-04 11:51:27.716] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-04 11:51:27.717] [info]  WindowManager handleCreateMainWindow
+[2024-03-04 11:51:28.897] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-04 11:51:29.064] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-04 11:52:30.418] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-04 11:53:18.568] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-04 11:53:18.568] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-04 11:53:49.398] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-04 11:53:49.403] [info]  WindowManager handleCreateMainWindow
+[2024-03-04 11:53:49.419] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-04 11:53:49.438] [info]  web-contents-created contents.id=1
+[2024-03-04 11:53:49.453] [info]  Saml - init
+[2024-03-04 11:53:49.454] [info]  Saml - listenSamlLoginRequest
+[2024-03-04 11:53:49.843] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-04 11:53:49.848] [info]  MAIN did-finish-load
+[2024-03-04 11:53:49.851] [info]  MAIN ready-to-show
+[2024-03-04 11:53:50.998] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-04 11:53:50.999] [info]  WindowManager handleWindowLoaded
+[2024-03-04 11:53:51.000] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-04 11:53:51.000] [info]  WindowManager handleCreateMainWindow
+[2024-03-04 11:54:35.728] [info]  EpctrlStatusChange: Updating view of vpn-settings
+[2024-03-04 11:54:57.950] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-04 11:54:58.113] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-04 11:55:36.954] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-04 11:56:19.845] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-04 11:56:20.005] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-04 11:56:26.823] [info]  EpctrlStatusChange: Updating view of avatar-settings
+[2024-03-04 11:56:38.416] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-04 11:57:24.699] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-04 11:57:24.844] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-04 11:57:28.080] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-04 11:57:39.666] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-04 11:57:41.188] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-04 11:57:42.443] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-04 11:57:42.444] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-11 12:24:34.844] [info]  Server init() port number is 
+[2024-03-11 12:24:34.855] [info]  Fail to retrieve port number from file.
+[2024-03-11 12:24:35.858] [info]  Server init() port number is 43499
+[2024-03-11 12:24:35.858] [info]  initWebSocket port is 43499
+[2024-03-11 12:24:35.905] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-11 12:24:35.906] [info]  WindowManager handleCreateMainWindow
+[2024-03-11 12:24:35.922] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-11 12:24:35.946] [info]  web-contents-created contents.id=1
+[2024-03-11 12:24:35.966] [info]  Saml - init
+[2024-03-11 12:24:35.968] [info]  Saml - listenSamlLoginRequest
+[2024-03-11 12:24:35.969] [info]  Server init() port number is 43499
+[2024-03-11 12:24:36.558] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-11 12:24:36.567] [info]  MAIN did-finish-load
+[2024-03-11 12:24:36.571] [info]  MAIN ready-to-show
+[2024-03-11 12:24:38.371] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-11 12:24:38.538] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-11 12:24:38.539] [info]  WindowManager handleWindowLoaded
+[2024-03-11 12:24:39.040] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-11 12:24:39.041] [info]  WindowManager handleCreateMainWindow
+[2024-03-11 12:24:48.134] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-11 12:24:48.279] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-11 12:24:49.896] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-11 12:24:53.763] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-11 12:24:54.048] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-11 12:25:05.229] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-11 12:25:06.470] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-11 12:25:06.471] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-11 17:16:17.157] [info]  Server init() port number is 
+[2024-03-11 17:16:17.164] [info]  Fail to retrieve port number from file.
+[2024-03-11 17:16:18.168] [info]  Server init() port number is 43499
+[2024-03-11 17:16:18.169] [info]  initWebSocket port is 43499
+[2024-03-11 17:16:18.231] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-11 17:16:18.232] [info]  WindowManager handleCreateMainWindow
+[2024-03-11 17:16:18.248] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-11 17:16:18.271] [info]  web-contents-created contents.id=1
+[2024-03-11 17:16:18.287] [info]  Saml - init
+[2024-03-11 17:16:18.288] [info]  Saml - listenSamlLoginRequest
+[2024-03-11 17:16:18.289] [info]  Server init() port number is 43499
+[2024-03-11 17:16:18.759] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-11 17:16:18.766] [info]  MAIN did-finish-load
+[2024-03-11 17:16:18.768] [info]  MAIN ready-to-show
+[2024-03-11 17:16:20.163] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-11 17:16:20.280] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-11 17:16:20.281] [info]  WindowManager handleWindowLoaded
+[2024-03-11 17:16:20.782] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-11 17:16:20.783] [info]  WindowManager handleCreateMainWindow
+[2024-03-11 17:16:32.069] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-11 17:16:32.230] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-11 17:16:34.008] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-11 17:16:41.366] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-11 17:16:41.574] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-11 17:16:45.238] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-11 17:16:46.524] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-11 17:16:46.524] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-13 10:15:30.947] [info]  Server init() port number is 
+[2024-03-13 10:15:30.957] [info]  Fail to retrieve port number from file.
+[2024-03-13 10:15:31.959] [info]  Server init() port number is 46597
+[2024-03-13 10:15:31.960] [info]  initWebSocket port is 46597
+[2024-03-13 10:15:32.008] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-13 10:15:32.009] [info]  WindowManager handleCreateMainWindow
+[2024-03-13 10:15:32.027] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-13 10:15:32.059] [info]  web-contents-created contents.id=1
+[2024-03-13 10:15:32.082] [info]  Saml - init
+[2024-03-13 10:15:32.083] [info]  Saml - listenSamlLoginRequest
+[2024-03-13 10:15:32.084] [info]  Server init() port number is 46597
+[2024-03-13 10:15:32.674] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-13 10:15:32.683] [info]  MAIN did-finish-load
+[2024-03-13 10:15:32.686] [info]  MAIN ready-to-show
+[2024-03-13 10:15:34.201] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-13 10:15:34.306] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-13 10:15:34.307] [info]  WindowManager handleWindowLoaded
+[2024-03-13 10:15:34.808] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-13 10:15:34.810] [info]  WindowManager handleCreateMainWindow
+[2024-03-13 10:15:40.696] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-13 10:15:40.902] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-13 10:15:45.616] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-13 10:15:45.799] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-13 10:16:06.691] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-13 10:16:06.692] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-30 19:21:57.206] [info]  Server init() port number is 
+[2024-03-30 19:21:57.218] [info]  Fail to retrieve port number from file.
+[2024-03-30 19:21:58.222] [info]  Server init() port number is 37787
+[2024-03-30 19:21:58.223] [info]  initWebSocket port is 37787
+[2024-03-30 19:21:58.286] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-30 19:21:58.288] [info]  WindowManager handleCreateMainWindow
+[2024-03-30 19:21:58.304] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-30 19:21:58.335] [info]  web-contents-created contents.id=1
+[2024-03-30 19:21:58.357] [info]  Saml - init
+[2024-03-30 19:21:58.358] [info]  Saml - listenSamlLoginRequest
+[2024-03-30 19:21:58.359] [info]  Server init() port number is 37787
+[2024-03-30 19:21:58.842] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-30 19:21:58.848] [info]  MAIN did-finish-load
+[2024-03-30 19:21:58.852] [info]  MAIN ready-to-show
+[2024-03-30 19:22:00.024] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:22:00.116] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-30 19:22:00.117] [info]  WindowManager handleWindowLoaded
+[2024-03-30 19:22:00.619] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-30 19:22:00.620] [info]  WindowManager handleCreateMainWindow
+[2024-03-30 19:22:29.847] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-30 19:22:54.033] [info]  EpctrlStatusChange: Updating view of vulnerability-scan
+[2024-03-30 19:22:54.189] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:24:00.776] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-30 19:24:00.953] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:25:07.139] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-30 19:25:07.318] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:26:13.631] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-30 19:26:13.787] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:27:20.279] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-30 19:27:20.454] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:27:40.486] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-30 19:28:26.691] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-30 19:28:26.868] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:29:33.352] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-30 19:29:33.530] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:30:40.068] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-30 19:30:40.224] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:31:46.710] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-30 19:31:46.896] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:32:53.242] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-30 19:32:53.425] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:33:59.897] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-30 19:34:00.061] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:34:37.716] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-30 19:35:06.519] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-30 19:35:06.731] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:35:11.380] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-30 19:36:13.194] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-30 19:36:13.399] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:37:19.857] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-03-30 19:37:20.048] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:37:20.072] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-30 19:37:20.073] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-30 19:38:19.707] [info]  Server init() port number is 
+[2024-03-30 19:38:19.713] [info]  Fail to retrieve port number from file.
+[2024-03-30 19:38:20.716] [info]  Server init() port number is 39181
+[2024-03-30 19:38:20.717] [info]  initWebSocket port is 39181
+[2024-03-30 19:38:20.773] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-30 19:38:20.774] [info]  WindowManager handleCreateMainWindow
+[2024-03-30 19:38:20.793] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-30 19:38:20.810] [info]  web-contents-created contents.id=1
+[2024-03-30 19:38:20.828] [info]  Saml - init
+[2024-03-30 19:38:20.829] [info]  Saml - listenSamlLoginRequest
+[2024-03-30 19:38:20.830] [info]  Server init() port number is 39181
+[2024-03-30 19:38:21.291] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-30 19:38:21.298] [info]  MAIN did-finish-load
+[2024-03-30 19:38:21.301] [info]  MAIN ready-to-show
+[2024-03-30 19:38:22.843] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:38:22.951] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-30 19:38:22.952] [info]  WindowManager handleWindowLoaded
+[2024-03-30 19:38:23.453] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-30 19:38:23.454] [info]  WindowManager handleCreateMainWindow
+[2024-03-30 19:38:53.396] [info]  EpctrlStatusChange: Updating view of vpn-settings
+[2024-03-30 19:38:53.628] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:39:10.941] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-30 19:39:10.942] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-03-30 19:39:14.032] [info]  Server init() port number is 
+[2024-03-30 19:39:14.039] [info]  Fail to retrieve port number from file.
+[2024-03-30 19:39:15.042] [info]  Server init() port number is 39181
+[2024-03-30 19:39:15.043] [info]  initWebSocket port is 39181
+[2024-03-30 19:39:15.101] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-30 19:39:15.103] [info]  WindowManager handleCreateMainWindow
+[2024-03-30 19:39:15.124] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-03-30 19:39:15.144] [info]  web-contents-created contents.id=1
+[2024-03-30 19:39:15.171] [info]  Saml - init
+[2024-03-30 19:39:15.173] [info]  Saml - listenSamlLoginRequest
+[2024-03-30 19:39:15.174] [info]  Server init() port number is 39181
+[2024-03-30 19:39:15.628] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-03-30 19:39:15.635] [info]  MAIN did-finish-load
+[2024-03-30 19:39:15.638] [info]  MAIN ready-to-show
+[2024-03-30 19:39:17.189] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:39:17.281] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-03-30 19:39:17.282] [info]  WindowManager handleWindowLoaded
+[2024-03-30 19:39:17.784] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-03-30 19:39:17.785] [info]  WindowManager handleCreateMainWindow
+[2024-03-30 19:39:25.968] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-03-30 19:39:59.267] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-30 19:39:59.489] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:41:04.981] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-30 19:41:05.211] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:42:10.608] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-30 19:42:10.822] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:43:16.335] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-30 19:43:16.545] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:44:22.355] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-03-30 19:44:22.558] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-03-30 19:45:17.840] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-03-30 19:45:17.841] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-04-05 13:26:31.730] [info]  Server init() port number is 
+[2024-04-05 13:26:31.737] [info]  Fail to retrieve port number from file.
+[2024-04-05 13:26:32.739] [info]  Server init() port number is 34909
+[2024-04-05 13:26:32.740] [info]  initWebSocket port is 34909
+[2024-04-05 13:26:32.790] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-04-05 13:26:32.791] [info]  WindowManager handleCreateMainWindow
+[2024-04-05 13:26:32.811] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-04-05 13:26:32.837] [info]  web-contents-created contents.id=1
+[2024-04-05 13:26:32.855] [info]  Saml - init
+[2024-04-05 13:26:32.856] [info]  Saml - listenSamlLoginRequest
+[2024-04-05 13:26:32.856] [info]  Server init() port number is 34909
+[2024-04-05 13:26:33.255] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-04-05 13:26:33.259] [info]  MAIN did-finish-load
+[2024-04-05 13:26:33.262] [info]  MAIN ready-to-show
+[2024-04-05 13:26:34.555] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-05 13:26:34.642] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-04-05 13:26:34.643] [info]  WindowManager handleWindowLoaded
+[2024-04-05 13:26:35.144] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-04-05 13:26:35.145] [info]  WindowManager handleCreateMainWindow
+[2024-04-05 13:26:45.727] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-04-05 13:27:18.504] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-04-05 13:27:18.505] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-04-15 09:52:42.324] [info]  Server init() port number is 
+[2024-04-15 09:52:42.332] [info]  Fail to retrieve port number from file.
+[2024-04-15 09:52:43.335] [info]  Server init() port number is 36101
+[2024-04-15 09:52:43.336] [info]  initWebSocket port is 36101
+[2024-04-15 09:52:43.400] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-04-15 09:52:43.401] [info]  WindowManager handleCreateMainWindow
+[2024-04-15 09:52:43.416] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-04-15 09:52:43.442] [info]  web-contents-created contents.id=1
+[2024-04-15 09:52:43.459] [info]  Saml - init
+[2024-04-15 09:52:43.460] [info]  Saml - listenSamlLoginRequest
+[2024-04-15 09:52:43.461] [info]  Server init() port number is 36101
+[2024-04-15 09:52:43.870] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-04-15 09:52:43.876] [info]  MAIN did-finish-load
+[2024-04-15 09:52:43.879] [info]  MAIN ready-to-show
+[2024-04-15 09:52:44.846] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-15 09:52:44.906] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-04-15 09:52:44.907] [info]  WindowManager handleWindowLoaded
+[2024-04-15 09:52:45.408] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-04-15 09:52:45.409] [info]  WindowManager handleCreateMainWindow
+[2024-04-15 09:53:06.493] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-04-15 09:53:06.613] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-04-15 09:53:17.322] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-04-15 09:53:17.462] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-15 09:54:18.681] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-04-15 09:54:18.830] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-15 09:54:34.536] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-04-15 09:54:34.908] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-04-15 09:54:53.221] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-04-15 09:54:53.222] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-04-26 09:43:32.484] [info]  Server init() port number is 
+[2024-04-26 09:43:32.493] [info]  Fail to retrieve port number from file.
+[2024-04-26 09:43:33.496] [info]  Server init() port number is 41671
+[2024-04-26 09:43:33.497] [info]  initWebSocket port is 41671
+[2024-04-26 09:43:33.552] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-04-26 09:43:33.553] [info]  WindowManager handleCreateMainWindow
+[2024-04-26 09:43:33.569] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-04-26 09:43:33.604] [info]  web-contents-created contents.id=1
+[2024-04-26 09:43:33.627] [info]  Saml - init
+[2024-04-26 09:43:33.628] [info]  Saml - listenSamlLoginRequest
+[2024-04-26 09:43:33.629] [info]  Server init() port number is 41671
+[2024-04-26 09:43:34.141] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-04-26 09:43:34.146] [info]  MAIN did-finish-load
+[2024-04-26 09:43:34.149] [info]  MAIN ready-to-show
+[2024-04-26 09:43:35.739] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-26 09:43:35.841] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-04-26 09:43:35.842] [info]  WindowManager handleWindowLoaded
+[2024-04-26 09:43:36.343] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-04-26 09:43:36.344] [info]  WindowManager handleCreateMainWindow
+[2024-04-26 09:43:49.209] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-04-26 09:43:49.452] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-26 09:44:50.825] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-04-26 09:44:51.063] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-26 09:44:53.000] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-04-26 09:44:53.156] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-04-26 09:45:52.393] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-04-26 09:45:52.628] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-26 09:46:42.631] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-04-26 09:46:42.757] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-04-26 09:46:54.656] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-04-26 09:46:54.900] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-26 09:47:21.450] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-04-26 09:47:21.450] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-04-28 23:22:22.748] [info]  Server init() port number is 
+[2024-04-28 23:22:22.755] [info]  Fail to retrieve port number from file.
+[2024-04-28 23:22:23.759] [info]  Server init() port number is 45889
+[2024-04-28 23:22:23.760] [info]  initWebSocket port is 45889
+[2024-04-28 23:22:23.821] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-04-28 23:22:23.822] [info]  WindowManager handleCreateMainWindow
+[2024-04-28 23:22:23.836] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-04-28 23:22:23.866] [info]  web-contents-created contents.id=1
+[2024-04-28 23:22:23.885] [info]  Saml - init
+[2024-04-28 23:22:23.886] [info]  Saml - listenSamlLoginRequest
+[2024-04-28 23:22:23.887] [info]  Server init() port number is 45889
+[2024-04-28 23:22:24.273] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-04-28 23:22:24.278] [info]  MAIN did-finish-load
+[2024-04-28 23:22:24.280] [info]  MAIN ready-to-show
+[2024-04-28 23:22:26.054] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:22:26.204] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-04-28 23:22:26.205] [info]  WindowManager handleWindowLoaded
+[2024-04-28 23:22:26.706] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-04-28 23:22:26.707] [info]  WindowManager handleCreateMainWindow
+[2024-04-28 23:22:26.840] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-04-28 23:22:27.173] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:22:38.898] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-04-28 23:22:38.898] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-04-28 23:28:33.171] [info]  Server init() port number is 
+[2024-04-28 23:28:33.176] [info]  Fail to retrieve port number from file.
+[2024-04-28 23:28:34.178] [info]  Server init() port number is 45889
+[2024-04-28 23:28:34.179] [info]  initWebSocket port is 45889
+[2024-04-28 23:28:34.226] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-04-28 23:28:34.227] [info]  WindowManager handleCreateMainWindow
+[2024-04-28 23:28:34.241] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-04-28 23:28:34.253] [info]  web-contents-created contents.id=1
+[2024-04-28 23:28:34.278] [info]  Saml - init
+[2024-04-28 23:28:34.279] [info]  Saml - listenSamlLoginRequest
+[2024-04-28 23:28:34.279] [info]  Server init() port number is 45889
+[2024-04-28 23:28:34.630] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-04-28 23:28:34.634] [info]  MAIN did-finish-load
+[2024-04-28 23:28:34.636] [info]  MAIN ready-to-show
+[2024-04-28 23:28:35.300] [info]  EpctrlStatusChange: Updating view of malware-settings
+[2024-04-28 23:28:35.418] [info]  EpctrlStatusChange: Updating view of malware-settings
+[2024-04-28 23:28:35.767] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:28:35.884] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:28:36.727] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:28:36.870] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-04-28 23:28:36.871] [info]  WindowManager handleWindowLoaded
+[2024-04-28 23:28:37.373] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-04-28 23:28:37.373] [info]  WindowManager handleCreateMainWindow
+[2024-04-28 23:29:35.561] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-04-28 23:29:35.713] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-04-28 23:29:35.928] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:29:36.067] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:30:37.142] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-04-28 23:30:37.270] [info]  EpctrlStatusChange: Updating view of compliance
+[2024-04-28 23:30:37.510] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:30:37.610] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:30:43.353] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-04-28 23:30:43.353] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-04-28 23:34:13.649] [info]  Server init() port number is 
+[2024-04-28 23:34:13.653] [info]  Fail to retrieve port number from file.
+[2024-04-28 23:34:14.655] [info]  Server init() port number is 45889
+[2024-04-28 23:34:14.656] [info]  initWebSocket port is 45889
+[2024-04-28 23:34:14.705] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-04-28 23:34:14.706] [info]  WindowManager handleCreateMainWindow
+[2024-04-28 23:34:14.721] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-04-28 23:34:14.735] [info]  web-contents-created contents.id=1
+[2024-04-28 23:34:14.751] [info]  Saml - init
+[2024-04-28 23:34:14.752] [info]  Saml - listenSamlLoginRequest
+[2024-04-28 23:34:14.753] [info]  Server init() port number is 45889
+[2024-04-28 23:34:15.101] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-04-28 23:34:15.106] [info]  MAIN did-finish-load
+[2024-04-28 23:34:15.108] [info]  MAIN ready-to-show
+[2024-04-28 23:34:16.772] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:34:16.873] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-04-28 23:34:16.874] [info]  WindowManager handleWindowLoaded
+[2024-04-28 23:34:17.375] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-04-28 23:34:17.376] [info]  WindowManager handleCreateMainWindow
+[2024-04-28 23:34:44.694] [info]  EpctrlStatusChange: Updating view of systemsettings
+[2024-04-28 23:34:45.046] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:35:46.114] [info]  EpctrlStatusChange: Updating view of systemsettings
+[2024-04-28 23:35:46.467] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:36:47.522] [info]  EpctrlStatusChange: Updating view of systemsettings
+[2024-04-28 23:36:47.850] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:37:48.822] [info]  EpctrlStatusChange: Updating view of systemsettings
+[2024-04-28 23:37:48.954] [info]  EpctrlStatusChange: Updating view of systemsettings
+[2024-04-28 23:37:49.056] [info]  EpctrlStatusChange: Updating view of systemsettings
+[2024-04-28 23:37:49.233] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:37:49.355] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:37:49.541] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:38:51.558] [info]  EpctrlStatusChange: Updating view of systemsettings
+[2024-04-28 23:38:51.695] [info]  EpctrlStatusChange: Updating view of systemsettings
+[2024-04-28 23:38:51.923] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:38:52.113] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:39:52.671] [info]  EpctrlStatusChange: Updating view of systemsettings
+[2024-04-28 23:39:52.972] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:40:54.504] [info]  EpctrlStatusChange: Updating view of systemsettings
+[2024-04-28 23:40:54.800] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-28 23:41:27.865] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-04-28 23:41:27.866] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-04-29 09:24:14.108] [info]  Server init() port number is 
+[2024-04-29 09:24:14.114] [info]  Fail to retrieve port number from file.
+[2024-04-29 09:24:15.117] [info]  Server init() port number is 36631
+[2024-04-29 09:24:15.118] [info]  initWebSocket port is 36631
+[2024-04-29 09:24:15.173] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-04-29 09:24:15.174] [info]  WindowManager handleCreateMainWindow
+[2024-04-29 09:24:15.189] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-04-29 09:24:15.218] [info]  web-contents-created contents.id=1
+[2024-04-29 09:24:15.236] [info]  Saml - init
+[2024-04-29 09:24:15.236] [info]  Saml - listenSamlLoginRequest
+[2024-04-29 09:24:15.237] [info]  Server init() port number is 36631
+[2024-04-29 09:24:15.645] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-04-29 09:24:15.650] [info]  MAIN did-finish-load
+[2024-04-29 09:24:15.652] [info]  MAIN ready-to-show
+[2024-04-29 09:24:17.205] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-29 09:24:17.305] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-04-29 09:24:17.305] [info]  WindowManager handleWindowLoaded
+[2024-04-29 09:24:17.806] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-04-29 09:24:17.807] [info]  WindowManager handleCreateMainWindow
+[2024-04-29 09:24:21.449] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-04-29 09:24:21.569] [info]  VpnHandler UNHANDLED {"isTrusted":true}
+[2024-04-29 09:24:39.890] [info]  EpctrlStatusChange: Updating view of vpn
+[2024-04-29 09:24:40.162] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-04-29 09:24:43.420] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-04-29 09:24:43.421] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.
+[2024-05-03 02:17:22.576] [info]  Server init() port number is 
+[2024-05-03 02:17:22.582] [info]  Fail to retrieve port number from file.
+[2024-05-03 02:17:23.586] [info]  Server init() port number is 35645
+[2024-05-03 02:17:23.587] [info]  initWebSocket port is 35645
+[2024-05-03 02:17:23.637] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-05-03 02:17:23.638] [info]  WindowManager handleCreateMainWindow
+[2024-05-03 02:17:23.652] [info]  MAIN MainWindow - createWindow Platform detected: fedora
+[2024-05-03 02:17:23.679] [info]  web-contents-created contents.id=1
+[2024-05-03 02:17:23.697] [info]  Saml - init
+[2024-05-03 02:17:23.698] [info]  Saml - listenSamlLoginRequest
+[2024-05-03 02:17:23.698] [info]  Server init() port number is 35645
+[2024-05-03 02:17:24.086] [info]  compliance configDir=/home/brian/.config/FortiClient/config
+[2024-05-03 02:17:24.091] [info]  MAIN did-finish-load
+[2024-05-03 02:17:24.092] [info]  MAIN ready-to-show
+[2024-05-03 02:17:25.345] [info]  GetVisibleTabs - visibleTabs={"AVTabIsHidden":true,"VPNTabIsHidden":false,"VULNTabIsHidden":false,"ComplianceTabIsHidden":false,"ZtnaIsHidden":true,"WfTabIsHidden":true,"SandboxTabIsHidden":true,"AETabIsHidden":true,"FwTabIsHidden":true}
+[2024-05-03 02:17:25.433] [info]  IPC_RENDERER_REQUEST.LOADED
+[2024-05-03 02:17:25.433] [info]  WindowManager handleWindowLoaded
+[2024-05-03 02:17:25.935] [info]  WindowManager handlePossibleProtocolLauncherArgs argv=["/opt/forticlient/gui/FortiClient-linux-x64/FortiClient"]
+[2024-05-03 02:17:25.935] [info]  WindowManager handleCreateMainWindow
+[2024-05-03 02:17:30.995] [info]  WindowManager WindowManager - handleWindowClosed
+[2024-05-03 02:17:30.995] [info]  WindowManager WindowManager - all windows are destroyed. quit the app.

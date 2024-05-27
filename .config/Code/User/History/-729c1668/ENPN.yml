@@ -1,0 +1,6 @@
+topic:
+  name: ARG-chain-accum-errors
+  partitions: 2
+  replicas: 3
+  config:
+    retention.ms: 300000

@@ -1,0 +1,1 @@
+mongodb://userApp:Xpr.QAARG.PassRoot@srv-qa-sp-xpress-arg-mongo1:27017,srv-qa-sp-xpress-arg-mongo2:27017,srv-qa-sp-xpress-arg-mongo3:27017/admin?authSource=admin

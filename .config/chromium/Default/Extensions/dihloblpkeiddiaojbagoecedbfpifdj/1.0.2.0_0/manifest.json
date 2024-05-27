@@ -1,0 +1,19 @@
+{
+   "action": {
+      "default_popup": "popup.html",
+      "default_title": "Download Chrome History"
+   },
+   "description": "Export your Chrome History as an Excel-readable CSV file or as a JSON file.",
+   "icons": {
+      "128": "images/icon-128x128.png",
+      "16": "images/icon-16x16.png",
+      "32": "images/icon-48x48.png",
+      "48": "images/icon-48x48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmD46U7pKAwMujmFxohMa6DffDgcQrK30FnIiwaHrWqmKTsYZIFAFBgQ8++9NFvpnfAgGZMeZ66Vbk68PNTiPxk+9srZUpq8ahOIMXUEsPsJJMAGvyZKQuP2F4X4T9j0i24+X376h4/fHviJ+iv854x+6L9Kv5JMrckRYGIOr0di1Lr6mrcPdyXuihPn5hJscM6P+arioIWPLkPclwWtvMsFrxRNeFRSIzc69Hb7BGeGAX3m6CXVuusJeBMLrz8IST4NR+q9V863YcHLE8e2EV1EANNuvGA7hnkgABhseGXfrHYsFU4y2rfBBH2064oNupIri/23OqPr+oGMtXKdpvQIDAQAB",
+   "manifest_version": 3,
+   "name": "Export Chrome History",
+   "permissions": [ "downloads", "history" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.0.2.0"
+}

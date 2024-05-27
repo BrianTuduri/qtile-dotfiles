@@ -1,0 +1,197 @@
+---
+- name: Setup host
+  tags: never, setup
+  hosts: "all"
+  gather_facts: true
+  become: true
+  vars:
+    docker_compose_path: /usr/bin/docker compose
+    pip_install_packages:
+      - name: docker
+  # roles:
+    # - geerlingguy.pip
+    # - geerlingguy.docker  
+  
+  tasks:
+    - name: "Create deploy path: {{ deploy_path }}"
+      ansible.builtin.file:
+        path: "{{deploy_path}}"
+        owner: "{{ ansible_user }}"
+        state: directory
+        mode: "0755"
+
+    - name: Copy rabbitmq_message_exchange
+      copy:
+        src: "{{ env_rabbit }}rabbitmq_delayed_message_exchange-3.12.0.ez"
+        dest: "/home/geocom/oms"
+        
+    - name: Copy service
+      ansible.builtin.template:
+        src: "files/compose.service.j2"
+        dest: "/etc/systemd/system/{{ systemd_service_name }}"
+        mode: "0755"
+
+    - name: Set NATed IPs
+      loop:
+        - "10.102.204.194 registry.gitlab.geocom.com.uy gitlab.geocom.com.uy"
+        - "10.102.204.193 nexus.geocom.com.uy"
+      ansible.builtin.lineinfile:
+        dest: /etc/hosts
+        line: "{{ item }}"
+      when : JENKINS_INSTANCE|length != 0
+
+    # - name: Download Lazydocker for Linux
+    #   tags: lazydocker
+    #   any_errors_fatal: false
+    #   vars:
+    #     lazydocker_version: "0.21.1" # https://formulae.brew.sh/api/formula/lazydocker.json
+    #   ansible.builtin.unarchive:
+    #     dest: /usr/bin/
+    #     mode: "766"
+    #     remote_src: true
+    #     src: "https://github.com/jesseduffield/lazydocker/releases/download/v{{ lazydocker_version }}/lazydocker_{{ lazydocker_version }}_Linux_x86_64.tar.gz"
+
+- name: Install Docker Compose
+  tags: always
+  hosts: "all"
+  gather_facts: false
+  tasks:
+    - name: Docker login
+      become: true
+      community.docker.docker_login:
+        registry_url: "registry.gitlab.geocom.com.uy:5005"
+        username: "{{  registry_token_user }}"
+        password: "{{ registry_token }}"
+    
+    - name: Status ssl
+      ansible.builtin.stat:
+        path: "/tmp/ssl"
+      register: statSsl
+    - name: Have /tmp/ssl ?
+      ansible.builtin.set_fact:
+        haveSsl: "{{ statSsl.stat.exists }}"
+
+    - name: Handle services templates
+      delegate_to: localhost
+      block:
+        - name: Get services files
+          ansible.builtin.shell: "cp -rf {{ env_directory }}/services . && ls -1 ./services"
+          changed_when: true
+          register: shellOutput
+        
+        - name: Status of RabbitMQ
+          ansible.builtin.stat:
+            path: "{{ env_directory }}/services/Redis.yml"
+          register: statRedis
+        - name: Have Redis ?
+          ansible.builtin.set_fact:
+              haveRedis: "{{ statRedis.stat.exists }}"
+
+        - name: Status of RabbitMQ
+          ansible.builtin.stat:
+            path: "{{ env_directory }}/rabbitmqWithPlugins.dockerfile"
+          register: statRabbit
+        - name: Is Commons env?
+          ansible.builtin.set_fact:
+              isCommons: "{{ not statRabbit.stat.exists }}"   
+
+    - name: "Templating docker-compose.yml . . ."
+      vars:
+        services: "{{ shellOutput.stdout_lines }}"
+      ansible.builtin.template:
+        src: "files/docker-compose.yml.j2"
+        dest: "{{ deploy_path }}/docker-compose.yml"
+        mode: "0755"
+    
+    
+    - name: "Create nginx path: "
+      ansible.builtin.file:
+        path: "/home/geocom/oms/commons/nginx/ssl"
+        owner: "{{ ansible_user }}"
+        state: directory
+        mode: "0755"
+
+    - name: "Templating nginx.conf . . ."
+      when: isCommons
+      ansible.builtin.template:
+        src: "{{ env_directory }}/nginx.conf.j2"
+        dest: "{{ deploy_path }}/nginx/nginx.conf"
+        mode: "0644"
+
+    - name: "Copying ssl directory . . ."
+      when: isCommons and haveSsl
+      loop:
+        - { src: "/tmp/ssl/" , dest: "{{ deploy_path }}/nginx/ssl/" }
+        #- { src: "/tmp/ssl/geoscm.jks" , dest: "{{ deploy_path }}/geoscm.jks"}        
+      loop_control:
+        loop_var: which
+      ansible.builtin.copy:
+        src: "{{which.src}}"
+        dest: "{{which.dest}}"
+        mode: "0644"
+        remote_src: true
+
+    - name: Copy .env!
+      ansible.builtin.copy:
+        src: "{{ env_directory }}/.env"
+        dest: "{{ deploy_path }}/.env"
+        mode: "0644"
+    - name: Copy rabbitmq!
+      when: statRabbit.stat.exists
+      ansible.builtin.copy:
+        src: "{{ env_directory }}/rabbitmqWithPlugins.dockerfile"
+        dest: "{{ deploy_path }}/rabbitmqWithPlugins.dockerfile"
+        mode: "0644"
+
+    - name: Running
+      become: true
+      block:              
+        # - name: "Copy daemon configs"
+        #   ansible.builtin.copy:
+        #     src: "files/custom_daemon.json"
+        #     dest: "/etc/docker/daemon.json"
+        #     mode: "0755"
+        - name: "Setup volumes"
+          when: isCommons
+          block:
+            - name: Set storage perms
+              loop:
+                - volume: elasticsearch
+                  user: 1000
+                  group: 1000
+              #  - volume: graylog
+              #  user: 1100
+              #  group: 1100
+              #  - volume: graylog/config
+              #  user: 1100
+              #  group: 1100
+              ansible.builtin.file:
+                state: directory
+                mode: "0755"
+                path: "{{ deploy_path }}/storage/{{ item.volume }}/"
+                owner: "{{ item.user }}"
+                group: "{{ item.group }}"
+                recurse: true
+                                  
+            - name: Allow mongodb port  
+              ansible.posix.firewalld:
+                port: 27017/tcp
+                permanent: true
+                state: enabled
+            - name: reload firewalld
+              service:
+                name: firewalld
+                state: reloaded
+
+        - name: Running compose . . .
+          when: isCommons
+          ansible.builtin.systemd:
+            name: "docker.service"
+            state: restarted
+            daemon_reload: true
+            
+        - name: Running compose . . .
+          ansible.builtin.systemd:
+            name: "{{ systemd_service_name }}"
+            state: restarted
+            enabled: true

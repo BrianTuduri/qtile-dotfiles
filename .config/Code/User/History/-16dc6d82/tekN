@@ -1,0 +1,37 @@
+FROM nexus.geocom.com.uy/openjdk:8-jdk
+
+WORKDIR /project
+
+RUN apt-get update && \
+    apt-get install -y wget curl git ca-certificates tar && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV GRADLE_HOME=/opt/gradle/gradle-4.10.3
+ENV PATH=${GRADLE_HOME}/bin:$NVM_DIR/versions/node/v$NODE_VERSION/bin:${PATH}
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 6.3.0
+
+# gradle
+RUN wget https://services.gradle.org/distributions/gradle-4.10.3-all.zip && \
+    mkdir -p /opt/gradle ${NVM_DIR} && \
+    unzip -d /opt/gradle gradle-4.10.3-all.zip && \
+    rm gradle-4.10.3-all.zip
+
+# nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+# node js with nvm
+RUN . "$NVM_DIR/nvm.sh" && nvm install $NODE_VERSION && nvm use $NODE_VERSION && nvm alias default $NODE_VERSION
+
+ARG user=jenkins
+ARG group=jenkins
+ARG uid=1000
+ARG gid=1000
+
+RUN groupadd -g ${gid} ${group} && \
+    useradd -d /home/${user} -u ${uid} -g ${group} -m ${user}
+
+RUN chown -R ${uid}:${gid} /bin /opt/ /usr/bin/ \
+    && chmod -R 777 /bin /opt/ /usr/bin/
+
+USER ${user}

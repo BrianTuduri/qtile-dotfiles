@@ -1,0 +1,16 @@
+connector:
+  name: peya-mongo-source-arg
+  config:
+    connector.class: com.mongodb.kafka.connect.MongoSourceConnector
+    tasks.max: '10'
+    connection.uri: mongodb://userApp:Xpr.QAARG.PassRoot@srv-qa-sp-xpress-arg-mongo1:27017,srv-qa-sp-xpress-arg-mongo1:27017,srv-qa-sp-xpress-arg-mongo13:27017/admin?authSource=admin
+    topics: mongo-source-topic
+    errors.tolerance: all
+    pipeline: '[{"$match": {"ns.coll": "peyaOrder"}}]'
+    flush.size: '100'
+    rotate.interval.ms: '1000'
+    topic.namespace.map: '{"*": "ARG-peya-mongo-changes"}'
+    change.stream.full.document: updateLookup
+    output.format.key: json
+    output.format.value: json
+    output.schema.infer.value: 'true'

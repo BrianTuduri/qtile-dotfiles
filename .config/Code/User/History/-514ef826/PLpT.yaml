@@ -1,0 +1,6 @@
+topic:
+  name: QA-job-status-event
+  partitions: 2
+  replicas: 3
+  config:
+  retention.ms: 300000

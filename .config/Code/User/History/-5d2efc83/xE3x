@@ -1,0 +1,16 @@
+FROM jenkins/agent:jdk8
+
+USER root
+
+SHELL ["/bin/bash", "-c"]
+
+RUN apt-get update && apt-get install -y curl git zip
+
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+RUN [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm install 21.7.1 && export NVM_DIR="$HOME/.nvm" && \
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" && \
+    nvm install node_version && nvm use node_version
+
+CMD ["tail", "-f", "/dev/null"]

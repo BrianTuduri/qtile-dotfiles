@@ -1,0 +1,22 @@
+FROM jenkins/agent:jdk8
+
+USER root
+
+# Instala dependencias necesarias
+RUN apt-get update && apt-get install -y curl git zip
+
+# Instala nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# Configura nvm para que esté disponible automáticamente
+# Añadir la configuración de nvm al archivo .profile para asegurar que se cargue
+RUN echo 'export NVM_DIR="$HOME/.nvm"' >> /etc/profile && \
+    echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> /etc/profile && \
+    echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> /etc/profile
+
+# Opcional: Ejecutar .profile automáticamente al iniciar /bin/sh
+# Esto puede variar dependiendo de la distribución base de la imagen y podría no ser necesario
+RUN echo 'if [ -f /etc/profile ]; then . /etc/profile; fi' >> $HOME/.shrc && \
+    echo 'source $HOME/.shrc' >> $HOME/.bashrc
+
+CMD ["tail", "-f", "/dev/null"]

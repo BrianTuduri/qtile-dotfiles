@@ -1,0 +1,18 @@
+connector:
+  name: sale-tickets-source-qa
+  config:
+    class: com.mongodb.kafka.connect.MongoSourceConnector
+    database: geopos3-ticket
+    collection: saleTickets
+    errors.tolerance: all
+    connection.uri: mongodb://myUserAdmin:abc123@192.168.240.165:27020,192.168.240.166:27020/?authSource=admin&serverSelectionTimeoutMS=60000
+    topic.prefix: QA-mongo
+    copy.existing: true
+    key.converter": org.apache.kafka.connect.json.JsonConverter
+    key.converter.schemas.enable: false
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: false
+    flush.size: 100
+    rotate.interval.ms: 1000
+    publish.full.document.only: true
+    tasksMax: 2

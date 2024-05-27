@@ -1,0 +1,26 @@
+# Usamos como base jenkins/agent con Java 8
+FROM jenkins/agent:jdk8
+
+# Argumentos para versiones de Node y NVM
+ARG NODE_VERSION=21.7.1
+ARG NVM_VERSION=v0.39.0
+
+# Instalamos dependencias necesarias, incluido curl y git
+USER root
+RUN apt-get update && \
+    apt-get install -y curl git && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh | bash
+
+ENV NVM_DIR=/root/.nvm
+RUN echo 'export NVM_DIR="$NVM_DIR"' >> /etc/profile.d/nvm.sh && \
+    echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> /etc/profile.d/nvm.sh && \
+    echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> /etc/profile.d/nvm.sh
+
+RUN . $NVM_DIR/nvm.sh && \
+    nvm install $NODE_VERSION && \
+    nvm use $NODE_VERSION && \
+    nvm alias default $NODE_VERSION
+
+SHELL ["/bin/bash", "-c"]

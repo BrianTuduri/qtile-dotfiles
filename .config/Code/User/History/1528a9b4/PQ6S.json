@@ -1,0 +1,17 @@
+{
+  "name": "wpp-mongo-source-qa",
+  "config": {
+    "connector.class": "com.mongodb.kafka.connect.MongoSourceConnector",
+    "tasks.max": "10",
+    "connection.uri": "mongodb://userApp:Xpr.QA.PassRoot@srv-qa-sp-xpress-uych-mongo1:27017,srv-qa-sp-xpress-uych-mongo2:27017,srv-qa-sp-xpress-uych-mongo3:27017/admin?authSource=admin",
+    "errors.tolerance": "all",
+    "pipeline": "[{\"$match\": {\"ns.coll\": \"order\"}}]",
+    "flush.size": "100",
+    "rotate.interval.ms": "1000",
+    "topic.namespace.map": "{\"*\": \"QA-wpp-mongo-changes\"}",
+    "change.stream.full.document": "updateLookup",
+    "output.format.key": "json",
+    "output.format.value": "json",
+    "output.schema.infer.value": true
+  }
+}

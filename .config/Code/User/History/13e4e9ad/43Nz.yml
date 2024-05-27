@@ -1,0 +1,21 @@
+---
+- name: Encontrar y listar archivos .yml para Topics y Connectors
+  hosts: kafka
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Buscar los archivos .yml de topicos en {{ ambiente }}
+      find:
+        paths: "Environments/{{ ambiente }}/Kafka/Topics"
+        patterns: "*.yml"
+      register: topics_files
+
+    - name: Crear lista de nombres de archivos de Topics
+      set_fact:
+        topic_list: "{{ topics_files.files | map(attribute='path') | list }}"
+      
+    - name: Install kafka
+      roles:
+        - geocom.geoscm.kafka_add_topic  
+      tags:
+        - apply-topic

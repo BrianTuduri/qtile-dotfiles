@@ -1,0 +1,150 @@
+2024-05-24 11:49:40.309 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:49:40.310 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:49:40.310 [error] Error: Command failed: git rev-parse --absolute-git-dir
+fatal: not a git repository (or any of the parent directories): .git
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12)
+2024-05-24 11:49:40.310 [error] Error: Command failed: git rev-parse --absolute-git-dir
+fatal: not a git repository (or any of the parent directories): .git
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12)
+2024-05-24 11:49:40.310 [info] Will not blame '/home/brian/.config/qtile/settings/groups.py'. Not in a git repository.
+2024-05-24 11:49:40.310 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:49:40.352 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:49:40.382 [error] Error: Command failed: git rev-parse --absolute-git-dir
+fatal: not a git repository (or any of the parent directories): .git
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12)
+2024-05-24 11:49:40.434 [error] Error: Command failed: git rev-parse --absolute-git-dir
+fatal: not a git repository (or any of the parent directories): .git
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12)
+2024-05-24 11:49:40.434 [info] Will not blame '/home/brian/.config/qtile/settings/keys.py'. Not in a git repository.
+2024-05-24 11:50:06.765 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:50:06.777 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:50:06.793 [error] Error: Command failed: git rev-parse --absolute-git-dir
+fatal: not a git repository (or any of the parent directories): .git
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12)
+2024-05-24 11:50:06.803 [error] Error: Command failed: git rev-parse --absolute-git-dir
+fatal: not a git repository (or any of the parent directories): .git
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12)
+2024-05-24 11:50:06.804 [info] Will not blame '/home/brian/.config/qtile/settings/layouts.py'. Not in a git repository.
+2024-05-24 11:50:48.302 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:50:48.314 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:50:48.329 [error] Error: Command failed: git rev-parse --absolute-git-dir
+fatal: not a git repository (or any of the parent directories): .git
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12)
+2024-05-24 11:50:48.337 [error] Error: Command failed: git rev-parse --absolute-git-dir
+fatal: not a git repository (or any of the parent directories): .git
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12)
+2024-05-24 11:50:48.337 [info] Will not blame '/home/brian/.config/qtile/settings/mouse.py'. Not in a git repository.
+2024-05-24 11:50:52.584 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:50:52.603 [error] Error: Command failed: git rev-parse --absolute-git-dir
+fatal: not a git repository (or any of the parent directories): .git
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12)
+2024-05-24 11:50:52.604 [info] Will not blame '/home/brian/.config/qtile/settings/layouts.py'. Not in a git repository.
+2024-05-24 11:50:53.607 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:50:53.627 [error] Error: Command failed: git rev-parse --absolute-git-dir
+fatal: not a git repository (or any of the parent directories): .git
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12)
+2024-05-24 11:50:53.627 [info] Will not blame '/home/brian/.config/qtile/settings/mouse.py'. Not in a git repository.
+2024-05-24 11:50:54.056 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:50:54.074 [error] Error: Command failed: git rev-parse --absolute-git-dir
+fatal: not a git repository (or any of the parent directories): .git
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12)
+2024-05-24 11:50:54.074 [info] Will not blame '/home/brian/.config/qtile/settings/layouts.py'. Not in a git repository.
+2024-05-24 11:50:54.617 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:50:54.638 [error] Error: Command failed: git rev-parse --absolute-git-dir
+fatal: not a git repository (or any of the parent directories): .git
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12)
+2024-05-24 11:50:54.638 [info] Will not blame '/home/brian/.config/qtile/settings/mouse.py'. Not in a git repository.
+2024-05-24 11:50:54.947 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:50:54.965 [error] Error: Command failed: git rev-parse --absolute-git-dir
+fatal: not a git repository (or any of the parent directories): .git
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12)
+2024-05-24 11:50:54.965 [info] Will not blame '/home/brian/.config/qtile/settings/layouts.py'. Not in a git repository.
+2024-05-24 11:50:55.801 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:50:55.822 [error] Error: Command failed: git rev-parse --absolute-git-dir
+fatal: not a git repository (or any of the parent directories): .git
+
+    at ChildProcess.exithandler (node:child_process:423:12)
+    at ChildProcess.emit (node:events:517:28)
+    at maybeClose (node:internal/child_process:1098:16)
+    at Socket.<anonymous> (node:internal/child_process:450:11)
+    at Socket.emit (node:events:517:28)
+    at Pipe.<anonymous> (node:net:350:12)
+2024-05-24 11:50:55.822 [info] Will not blame '/home/brian/.config/qtile/settings/mouse.py'. Not in a git repository.

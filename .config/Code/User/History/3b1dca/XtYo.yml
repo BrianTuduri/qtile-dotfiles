@@ -1,0 +1,103 @@
+---
+- name: Setup Kafka
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: root
+  remote_user: root
+  roles:
+    - geocom.geoscm.kafka_run_connect
+  vars:
+    # extras directories
+    - kafka_extras_directories: []
+    # topics
+    - kafka_src_local_topics_dir: ""
+    - kafka_dest_topics_dir: ""
+    # connectors
+    - kafka_src_local_connectors_dir: ""
+    - kafka_dest_local_connectors_dir: ""
+    # plugins
+    - kafka_src_plugin_directory: "{{ repo_home }}/plugins/"
+    - kafka_dest_plugin_directory: "{{ kafka_plugin_directory }}"
+    # debug
+    - connector_debug: false
+  tags:
+    - "apply-topic"
+    - "add_connectors"
+    - "apply_connect"
+
+    
+
+- name: Crear topicos
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: root
+  remote_user: root
+  roles:
+    - geocom.geoscm.kafka_add_topic
+  vars:
+    - topic_files_path: "{{ kafka_topics_dir }}"
+  tags: 
+    - "apply-topic"
+
+- name: Create connect
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: root
+  remote_user: root
+  roles:
+    - geocom.geoscm.kafka_run_connect
+  vars:
+    - kafka_connect_api_url: "{{ kafka_connect_api_url }}"
+    - kafka_connect_mode: "distributed"
+    - kafka_connect_directory: "{{ kafka_config_directory }}/{{ ambiente }}"
+     - kafka_connect_properties_file: "connect-distributed.properties"
+    - kafka_connect_config_files: []
+    - connector_debug: false
+  tags: 
+    - "apply-connect"
+
+- name: Create connectors
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: root
+  remote_user: root
+  roles:
+    - geocom.geoscm.kafka_create_connector
+  vars:
+    - kafka_connect_api_url: "{{ kafka_connect_api_url }}"
+    - kafka_connectors_dir: " {{ kafka_local_connectors_dir }}"
+    - connector_debug: false
+  tags: 
+    - "add-connectors"
+
+- name: Delete topics
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: root
+  remote_user: root
+  roles:
+    - geocom.geoscm.kafka_delete_topic
+  vars:
+    - topic_files_path: "{{ kafka_topics_dir }}"
+  tags: 
+    - "delete-topics"
+
+- name: Delete connectors
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: root
+  remote_user: root
+  roles:
+    - geocom.geoscm.kafka_delete_connector
+  vars:
+    - kafka_connect_api_url: "{{ kafka_connect_api_url }}"
+    - kafka_connectors_dir: " {{ kafka_local_connectors_dir }}"
+    - connector_debug: false
+  tags: 
+    - "delete-connectors"

@@ -1,0 +1,36 @@
+---
+# defaults file for kafka_run_connect
+kafka_bin_directory: "/kafka/kafka/bin"
+bootstrap_servers: "localhost:9092"
+
+kafka_connect_mode: "distributed" # "standalone" o "distributed"
+kafka_config_directory: "/kafka/etc/kafka"
+kafka_connect_properties_file: "connect.properties"
+kafka_connect_config_files: [] # lista de archivos properties de los conectores
+
+# connection variables in mode standalone or distributed
+group_id: connect-cluster
+key_converter: org.apache.kafka.connect.json.JsonConverter
+value_converter: org.apache.kafka.connect.json.JsonConverter
+key_converter_schemas_enable: true
+value_converter_schemas_enable: true
+offset_storage_topic: connect-offsets
+offset_storage_replication_factor: 1
+config_storage_topic: connect-configs
+config_storage_replication_factor: 1
+status_storage_topic: connect-status
+status_storage_replication_factor: 1
+offset_flush_interval_ms: 10000
+rest_api_listeners: "HTTP://:8083"
+plugin.path: "/usr/local/share/java,/usr/local/share/kafka/plugins,/opt/connectors,{{ kafka_plugin_directory }}"
+offset_storage_file_filename: "/tmp/connect.offsets"
+
+# connection command for mode standalone or distributed
+connect_command: >
+  nohup sh {{ kafka_bin_directory }}/connect-{{ kafka_connect_mode }}.sh
+  {{ kafka_config_directory }}/{{ kafka_connect_properties_file }}
+  {% for file in kafka_connect_config_files %}
+  {{ kafka_config_directory }}/{{ file }}
+  {% endfor %}
+  &> {{ kafka_bin_directory }}/connect_output.log
+  2> {{ kafka_bin_directory }}/connect_error.log

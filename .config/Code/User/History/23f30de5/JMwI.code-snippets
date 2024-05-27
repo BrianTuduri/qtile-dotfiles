@@ -1,0 +1,14 @@
+{
+	"when": {
+		"prefix": "when",
+		"description": "when",
+		"scope": "groovy",
+		"body": [
+			"when {",
+			"                expression {",
+			"                    return false",
+			"                }",
+			"            }"
+		]
+	}
+}

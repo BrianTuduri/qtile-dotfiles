@@ -1,0 +1,123 @@
+---
+- name: Deploy Vault Agent
+  hosts: all
+  become: yes
+  vars:
+    vault_addr: "https://vault.geocom.com.uy"
+    vault_agent_dir: "/vault-agent"
+    # Valores sensibles encriptados con Ansible Vault
+    vault_token: !vault |
+      $ANSIBLE_VAULT;1.1;AES256
+      33613736666235333938393565323438313766343761666631363765333533623334383533363138
+      6130353035633238623530336437383331396162653761630a646266656666353731646434663238
+      66656130343934616164346263306130393230396439643264326531653331353730666434363638
+      3134306163643139350a373265373563623038343162393366313064313164333333303866623339
+      65366461633233343531353938326533323265613265626436616364353132333162396164363162
+
+  tasks:
+    - name: Install required packages
+      ansible.builtin.apt:
+        name:
+          - docker.io
+          - jq
+        state: present
+        update_cache: yes
+
+    - name: Start Docker service
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Create Vault Agent directory
+      ansible.builtin.file:
+        path: "{{ vault_agent_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Write geoswitch-vault-agent.hcl configuration file
+      ansible.builtin.copy:
+        dest: "{{ vault_agent_dir }}/geoswitch-vault-agent.hcl"
+        content: |
+          pid_file = "{{ vault_agent_dir }}/pidfile"
+          auto_auth {
+            method {
+              type = "approle"
+              config = {
+                role_id_file_path = "{{ vault_agent_dir }}/geoswitch-role_id"
+                secret_id_file_path = "{{ vault_agent_dir }}/geoswitch-secret_id"
+                remove_secret_id_file_after_reading = false
+              }
+            }
+            sink {
+              type = "file"
+              config = {
+                path = "{{ vault_agent_dir }}/token"
+              }
+            }
+          }
+          cache {
+            use_auto_auth_token = true
+          }
+          listener "tcp" {
+              address = "0.0.0.0:8200"
+              tls_disable = true
+          }
+          vault {
+            address = "{{ vault_addr }}"
+          }
+
+    - name: Enable AppRole authentication
+      ansible.builtin.command: "vault auth enable approle"
+      environment:
+        VAULT_ADDR: "{{ vault_addr }}"
+        VAULT_TOKEN: "{{ vault_token }}"
+      register: enable_approle
+      changed_when: "'enabled' in enable_approle.stdout"
+
+    - name: Create AppRole role
+      ansible.builtin.command: "vault write auth/approle/role/geoswitch token_policies=alkosto-policy-qa"
+      environment:
+        VAULT_ADDR: "{{ vault_addr }}"
+        VAULT_TOKEN: "{{ vault_token }}"
+      register: create_role
+      changed_when: "'created' in create_role.stdout"
+
+    - name: Read Role ID
+      ansible.builtin.command: "vault read -format=json auth/approle/role/geoswitch/role-id | jq -r '.data.role_id' > {{ vault_agent_dir }}/geoswitch-role_id"
+      environment:
+        VAULT_ADDR: "{{ vault_addr }}"
+        VAULT_TOKEN: "{{ vault_token }}"
+      args:
+        creates: "{{ vault_agent_dir }}/geoswitch-role_id"
+
+    - name: Write Secret ID
+      ansible.builtin.command: "vault write -format=json -f auth/approle/role/geoswitch/secret-id | jq -r '.data.secret_id' > {{ vault_agent_dir }}/geoswitch-secret_id"
+      environment:
+        VAULT_ADDR: "{{ vault_addr }}"
+        VAULT_TOKEN: "{{ vault_token }}"
+      args:
+        creates: "{{ vault_agent_dir }}/geoswitch-secret_id"
+
+    - name: Deploy Docker Compose for Vault Agent
+      ansible.builtin.copy:
+        dest: "{{ vault_agent_dir }}/docker-compose.yml"
+        content: |
+          version: '3.7'
+          services:
+            vault-agent-demo:
+              image: hashicorp/vault-enterprise:latest
+              restart: always
+              ports:
+                - "18200:8200"
+              volumes:
+                - "{{ vault_agent_dir }}:/vault-agent:rw"
+              environment:
+                VAULT_ADDR: "{{ vault_addr }}"
+              container_name: vault-agent-demo
+              entrypoint: "vault agent -log-level debug -config=/vault-agent/geoswitch-vault-agent.hcl"
+
+    - name: Start Vault Agent with Docker Compose
+      ansible.builtin.command: docker-compose up -d
+      args:
+        chdir: "{{ vault_agent_dir }}"

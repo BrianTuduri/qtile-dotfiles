@@ -1,0 +1,31 @@
+---
+- name: Leer contenido del archivo JSON
+  slurp:
+    src: "{{ file.path }}"
+  register: file_content
+
+- name: File content
+  debug:
+    msg: "File content is: {{ file.path }}"
+
+- name: Convertir contenido a JSON
+  set_fact:
+    connector_config: "{{ file_content['content'] | b64decode | from_json }}"
+
+- name: Connector config output
+  debug:
+    msg: "Connector config is: {{ connector_config }}"
+
+- name: Publicar configuración del connector a Kafka Connect
+  uri:
+    url: "{{ kafka_connect_api_url }}"
+    method: POST
+    body: "{{ connector_config }}"
+    body_format: json
+    status_code: [201, 200]
+    return_content: yes
+  register: response
+
+- name: Respuesta de la API
+  debug:
+    var: response.json

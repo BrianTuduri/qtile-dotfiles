@@ -1,0 +1,47 @@
+keep_alived_ip: "172.24.26.158"
+
+kafka_connectors_dir: "{{ repo_home }}/Environments/{{ ambiente }}/Kafka/Connectors/json"
+kafka_connect_api_url: "http://{{ keep_alived_ip }}:{{ 8083 if ambiente == 'QA' else 8084 if ambiente == 'DEV' else 8085 if ambiente == 'ARGENTINA' else 8083 }}/connectors"
+
+bootstrap_servers: "{{ groups[ambiente][0] }}:9092"
+
+group_id: connect-cluster
+
+key_converter: org.apache.kafka.connect.json.JsonConverter
+value_converter: org.apache.kafka.connect.json.JsonConverter
+  
+key_converter_schemas_enable: true
+value_converter_schemas_enable: true
+
+offset_storage_topic: connect-offsets
+offset_storage_replication_factor: 1
+offset_flush_interval_ms: 10000
+
+config_storage_topic: connect-configs
+config_storage_replication_factor: 1
+
+status_storage_topic: connect-status
+status_storage_replication_factor: 1
+
+### kafka directory
+kafka_config_directory: /kafka/etc/kafka
+kafka_data_directory: /kafka/var/lib/kafka
+kafka_log_directory: /kafka/var/log/kafka
+kafka_bin_directory: /kafka/kafka/bin/
+kafka_plugin_directory: "{{ kafka_data_directory }}/plugins"
+
+### envs
+environments:
+  - QA
+  # - ARGENTINA
+  # - DEV
+
+### conneectors
+connectors:
+  - connector_mongo.properties
+  - connector_mongo_sale_tickets.properties
+  - meli_connector_mongo.properties
+  - peya_connector_mongo.properties
+  - sink_mongo_sale_tickets.properties
+  - soy_delivery_connector_mongo.properties
+  - wpp_connector_mongo.properties

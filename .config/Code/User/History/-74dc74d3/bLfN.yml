@@ -1,0 +1,4 @@
+- name: "Creando directorio config/{{ ambiente }}"
+  file:
+    path: "{{ kafka_config_directory }}/{{ ambiente }}"
+    state: directory

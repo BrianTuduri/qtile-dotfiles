@@ -1,0 +1,37 @@
+---
+# tasks file for kafka_add_topic
+- name: "Buscar archivos de configuración de topics"
+  ansible.builtin.find:
+    paths: "{{ topic_files_path }}"
+    patterns: "*.yml"
+  register: topic_files
+
+- name: "Leer contenido de archivos de configuración de topics"
+  ansible.builtin.include_vars:
+    file: "{{ item.path }}"
+    name: "topic_var"
+  loop: "{{ topic_files.files }}"
+  loop_control:
+    loop_var: item
+
+- name: "Crear Kafka Topics"
+  command:
+    argv:
+      - sh
+      - "{{ kafka_bin_directory }}/kafka-topics.sh"
+      - --bootstrap-server
+      - "{{ bootstrap_servers }}"
+      - --topic
+      - "{{ topic_var.topic.name }}"
+      - --create
+      - --partitions
+      - "{{ topic_var.topic.partitions }}"
+      - --replication-factor
+      - "{{ topic_var.topic.replicas }}"
+      - --config
+      - "retention.ms={{ topic_var.topic.config['retention.ms'] }}"
+  loop: "{{ topic_files.files }}"
+  loop_control:
+    loop_var: item
+  ignore_errors: true
+  failed_when: false

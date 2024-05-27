@@ -1,0 +1,4 @@
+2024-05-24 12:11:14.504 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:11:14.535 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:11:14.547 [info] git blame -C --incremental -- /home/brian/repos-geocom/kafka-deploy-oxxo/jenkins/deploy_kafka.groovy
+2024-05-24 12:11:14.570 [info] Blamed "/home/brian/repos-geocom/kafka-deploy-oxxo/jenkins/deploy_kafka.groovy"

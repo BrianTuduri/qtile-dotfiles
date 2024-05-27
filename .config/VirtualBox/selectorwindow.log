@@ -1,0 +1,21 @@
+00:00:00.580993 VirtualBox GUI VM Selector Window 7.0.16 r162802 linux.amd64 (Apr 12 2024 18:56:22) release log
+00:00:00.580997 Log opened 2024-05-09T13:01:37.816473000Z
+00:00:00.580998 Build Type: release
+00:00:00.581007 OS Product: Linux
+00:00:00.581009 OS Release: 6.1.0-20-amd64
+00:00:00.581010 OS Version: #1 SMP PREEMPT_DYNAMIC Debian 6.1.85-1 (2024-04-11)
+00:00:00.581077 DMI Product Name: Inspiron 3505
+00:00:00.581102 DMI Product Version: 1.13.0
+00:00:00.581120 Firmware type: UEFI
+00:00:00.581470 Secure Boot: Disabled
+00:00:00.581585 Host RAM: 13860MB (13.5GB) total, 9490MB (9.2GB) available
+00:00:00.581596 Executable: /usr/lib/virtualbox/VirtualBox
+00:00:00.581597 Process ID: 9082
+00:00:00.581598 Package type: LINUX_64BITS_DEBIAN_12_0
+00:00:00.581687 Qt version: 5.15.8
+00:00:00.583905 GUI: UIMediumEnumerator: Initial medium-enumeration finished!
+00:00:00.607952 GUI: UIMediumEnumerator: Medium-enumeration started...
+00:00:00.607990 GUI: UIMediumEnumerator: Medium-enumeration finished!
+00:00:01.478744 GUI: UIDesktopWidgetWatchdog::sltHandleHostScreenAvailableGeometryCalculated: Screen 0 work area is actually resized to: 0x24 x 1920x1056
+00:00:01.490517 GUI: UIDesktopWidgetWatchdog::sltHandleHostScreenAvailableGeometryCalculated: Screen 1 work area is actually resized to: 0x24 x 1920x1056
+00:00:04.706294 GUI: UICommon: Handling aboutToQuit request..

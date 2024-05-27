@@ -1,0 +1,6 @@
+topic:
+  topicName: QA-offline-delay-invoice
+  partitions: 2
+  replicas: 3
+  config:
+    retention.ms: 300000

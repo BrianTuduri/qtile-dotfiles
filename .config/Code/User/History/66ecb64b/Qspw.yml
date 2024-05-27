@@ -1,0 +1,83 @@
+logging:
+  level:
+    root: debug
+    com.provectus: debug
+    org.springframework.security: debug
+kafka:
+  clusters:
+    - name: "express-qa"
+      bootstrapServers: "172.24.26.158:9092"
+
+rbac:
+  roles:
+    - name: "readonly"
+      clusters:
+        - local
+        - dev
+        - staging
+        - prod
+      subjects:
+        - provider: ldap
+          type: group
+          value: "users" # Assuming "users" would represent all LDAP users
+      permissions:
+        - resource: clusterconfig
+          actions: [ "view" ]
+
+        - resource: topic
+          value: ".*"
+          actions: [ "view", "messages_read" ]
+
+        - resource: consumer
+          value: ".*"
+          actions: [ "view" ]
+
+        - resource: schema
+          value: ".*"
+          actions: [ "view" ]
+
+        - resource: connect
+          value: ".*"
+          actions: [ "view" ]
+
+        - resource: acl
+          actions: [ "view" ]
+
+    - name: "admins"
+      clusters:
+        - local
+        - dev
+        - staging
+        - prod
+      subjects:
+        - provider: ldap
+          type: group
+          value: "geoscm" # Specifically targeting the "scm" group for admin access
+      permissions:
+        - resource: applicationconfig
+          actions: all
+      
+        - resource: clusterconfig
+          actions: all
+
+        - resource: topic
+          value: ".*"
+          actions: all
+
+        - resource: consumer
+          value: ".*"
+          actions: all
+
+        - resource: schema
+          value: ".*"
+          actions: all
+
+        - resource: connect
+          value: ".*"
+          actions: all
+
+        - resource: ksql
+          actions: all
+          
+        - resource: acl
+          actions: [ "view", "edit" ]

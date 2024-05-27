@@ -1,0 +1,48 @@
+# Usamos la imagen base especificada
+FROM jenkins/agent:jdk21
+
+USER root
+
+ARG JDK6_URL="https://nexus.geocom.com.uy/repository/Ghiggia/tools/swbase/64bits/java/jdk-6.tar.gz"
+ARG JDK8_URL="https://nexus.geocom.com.uy/repository/Ghiggia/tools/swbase/64bits/java/jdk-8.tar.gz"
+ARG JDK11_URL="https://nexus.geocom.com.uy/repository/Ghiggia/tools/swbase/64bits/java/jdk-11.tar.gz"
+ARG JDK17_URL="https://nexus.geocom.com.uy/repository/Ghiggia/tools/swbase/64bits/java/jdk-17.tar.gz"
+ARG JDK21_URL="https://nexus.geocom.com.uy/repository/Ghiggia/tools/swbase/64bits/java/jdk-21.tar.gz"
+
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    zip \
+    wget \
+    software-properties-common
+
+RUN mkdir /usr/lib/jvm && \
+    curl -LfsS ${JDK6_URL} | tar -xz -C /usr/lib/jvm && \
+    curl -LfsS ${JDK8_URL} | tar -xz -C /usr/lib/jvm && \
+    curl -LfsS ${JDK11_URL} | tar -xz -C /usr/lib/jvm && \
+    curl -LfsS ${JDK17_URL} | tar -xz -C /usr/lib/jvm && \
+    curl -LfsS ${JDK21_URL} | tar -xz -C /usr/lib/jvm
+
+RUN update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.6.0_45/bin/java 96 && \
+    update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.6.0_45/bin/javac 96 && \
+    # JDK 8
+    update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_191/bin/java 97 && \
+    update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_191/bin/javac 97 && \
+    # JDK 11
+    update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-11.0.14/bin/java 98 && \
+    update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-11.0.14/bin/javac 98 && \
+    # JDK 17
+    update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-17/bin/java 99 && \
+    update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-17/bin/javac 99 && \
+    # JDK 21
+    update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-21.0.2/bin/java 100 && \
+    update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-21.0.2/bin/javac 100
+    # Set default version for java
+    ##update-alternatives --set java /usr/lib/jvm/jdk-21.0.2/bin/java && \
+    ##update-alternatives --set java /usr/lib/jvm/jdk-21.0.2/bin/javac
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+USER jenkins
+
+CMD ["sleep", "infinity"]

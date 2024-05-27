@@ -1,0 +1,21 @@
+auth:
+  type: "LDAP"
+management:
+  health:
+    ldap:
+      enabled: true
+spring:
+  ldap:
+    urls: ldap://172.24.18.180:389
+    base: "ou=Uruguay,ou=Geocom,dc=geocom,dc=com,dc=uy"
+    admin-user: "gitlabsp@geocom.com.uy"
+    admin-password: "3[6}L'&z^B%sg?&#)W"
+    user-filter-search-filter: "(&(uid={0})(objectClass=person))"
+oauth2:
+  ldap:
+    activeDirectory: false
+      domain: 172.24.18.180
+kafka:
+  clusters:
+    - name: express-qa
+      bootstrapServers: 172.24.26.158:9092

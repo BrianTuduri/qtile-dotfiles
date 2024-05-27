@@ -1,0 +1,35 @@
+---
+group_name: "kafka"
+
+# keepalived
+keepalived_ip: "10.145.189.73"
+keepalived_interface: "ens192"
+keepalived_cni: "27"
+
+# api connectors
+kafka_connect_api_url: "http://{{ keepalived_ip }}:{{ kafka_connect_port_env }}/connectors"
+
+# bootstrap server 
+bootstrap_servers: "{{ keepalived_ip }}:9999"
+
+# kafka local directory
+kafka_local_connectors_dir: "{{ repo_home }}/Environments/{{ ambiente }}/Kafka/Connectors"
+kafka_local_topics_dir: "{{ repo_home }}/Environments/{{ ambiente }}/Kafka/Topics"
+kafka_envs_vars_dir: "{{ repo_home }}/Environments/{{ ambiente }}/vars/{{ ambiente }}.yml"
+
+# kafka directory
+kafka_config_directory: /kafka/etc/kafka
+# client env directory
+kafka_client_config_directory: "{{ kafka_config_directory }}/{{ ambiente }}"
+# data
+kafka_data_directory: /kafka/var/lib/kafka
+# binarys
+kafka_bin_directory: /kafka/kafka/bin/
+# plugins
+kafka_plugin_directory: "{{ kafka_config_directory }}/plugins"
+# connectors
+kafka_connectors_dir: "{{ kafka_config_directory }}/{{ ambiente }}/connectors"
+# topics
+kafka_topics_dir: "{{ kafka_config_directory }}/{{ ambiente }}/topics"
+# log
+kafka_log_directory: /kafka/var/log/kafka

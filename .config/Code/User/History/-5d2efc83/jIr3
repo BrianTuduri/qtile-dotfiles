@@ -1,0 +1,20 @@
+FROM jenkins/agent:jdk8
+
+USER root
+
+SHELL ["/bin/bash", "-c"]
+
+RUN apt-get update && apt-get install -y curl git zip
+
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+ENV NVM_DIR="/root/.nvm"
+ENV PATH="$NVM_DIR/bin:$PATH"
+
+RUN mkdir -p /etc/profile.d && echo 'export NVM_DIR="$NVM_DIR"' >> /etc/profile.d/nvm.sh
+RUN echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> /etc/profile.d/nvm.sh
+RUN echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> /etc/profile.d/nvm.sh
+
+RUN chmod +x /etc/profile.d/nvm.sh && nvm install 21.7.1
+
+CMD ["tail", "-f", "/dev/null"]

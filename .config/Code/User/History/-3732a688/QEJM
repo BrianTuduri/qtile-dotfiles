@@ -1,0 +1,42 @@
+# Usamos la imagen base especificada
+FROM jenkins/agent:jdk21
+
+USER root
+
+# Definimos las URLs de descarga de las JDKs
+ARG JDK6_URL="https://nexus.geocom.com.uy/repository/Ghiggia/tools/swbase/64bits/java/jdk-6.tar.gz"
+ARG JDK8_URL="https://nexus.geocom.com.uy/repository/Ghiggia/tools/swbase/64bits/java/jdk-8.tar.gz"
+ARG JDK11_URL="https://nexus.geocom.com.uy/repository/Ghiggia/tools/swbase/64bits/java/jdk-11.tar.gz"
+ARG JDK21_URL="https://nexus.geocom.com.uy/repository/Ghiggia/tools/swbase/64bits/java/jdk-21.tar.gz"
+
+# Instalamos herramientas necesarias, incluyendo wget que necesitaremos para descargar los JDKs
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    zip \
+    wget \
+    software-properties-common
+
+# Instalamos las JDKs utilizando curl
+RUN mkdir /usr/lib/jvm && \
+    curl -LfsS ${JDK6_URL} | tar -xz -C /usr/lib/jvm && \
+    curl -LfsS ${JDK8_URL} | tar -xz -C /usr/lib/jvm && \
+    curl -LfsS ${JDK11_URL} | tar -xz -C /usr/lib/jvm && \
+    curl -LfsS ${JDK21_URL} | tar -xz -C /usr/lib/jvm
+
+# Configuramos las alternativas para las versiones de JDK
+# Asegúrate de ajustar los nombres de los directorios si son diferentes
+RUN update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-6/bin/java 4 && \
+    update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-8/bin/java 3 && \
+    update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-11/bin/java 2 && \
+    update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-21/bin/java 1 && \
+    update-alternatives --set java /usr/lib/jvm/jdk-21/bin/java
+
+# Limpieza de archivos de paquetes innecesarios para reducir el tamaño de la imagen
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+USER jenkins
+
+# Comando para mantener el contenedor en ejecución
+CMD ["sleep", "infinity"]

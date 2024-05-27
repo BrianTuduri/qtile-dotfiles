@@ -1,0 +1,14 @@
+FROM registry.gitlab.geocom.com.uy:5005/scm-docker-images/openjdk:3.35-5
+
+RUN wget -qO /tmp/jdk-21_linux-x64_bin.deb https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.deb \
+    && dpkg -i /tmp/jdk-21_linux-x64_bin.deb \
+    && rm /tmp/jdk-21_linux-x64_bin.deb
+
+RUN update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-21-oracle-x64/bin/java 2 \
+    && update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk-21-oracle-x64/bin/javac 2
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN update-alternatives --set java /usr/lib/jvm/jdk-21-oracle-x64/bin/java
+
+ENV JAVA_HOME /usr/lib/jvm/jdk-21-oracle-x64

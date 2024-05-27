@@ -1,0 +1,18 @@
+2024-05-27 01:31:06.051 [info] (Client) Pylance async client (2024.5.1) started with python extension (2024.6.0)
+2024-05-27 01:31:07.083 [info] [Info  - 1:31:07 AM] (6372) Pylance language server 2024.5.1 (pyright version 1.1.360, commit 4bc8428d) starting
+2024-05-27 01:31:07.083 [info] [Info  - 1:31:07 AM] (6372) Server root directory: file:///home/brian/.vscode/extensions/ms-python.vscode-pylance-2024.5.1/dist
+2024-05-27 01:31:07.095 [info] [Info  - 1:31:07 AM] (6372) Starting service instance "qtile"
+2024-05-27 01:31:07.107 [info] [Info  - 1:31:07 AM] (6372) Auto-Indent enabled
+2024-05-27 01:31:07.182 [info] [Info  - 1:31:07 AM] (6372) Setting pythonPath for service "qtile": "/bin/python3"
+2024-05-27 01:31:07.182 [info] [Info  - 1:31:07 AM] (6372) Setting environmentName for service "qtile": "3.11.2 (global)"
+2024-05-27 01:31:07.243 [info] [Info  - 1:31:07 AM] (6372) Assuming Python version 3.11.2.final.0
+2024-05-27 01:31:08.264 [info] [Info  - 1:31:08 AM] (6372) Found 10 source files
+2024-05-27 01:31:09.017 [info] [Info  - 1:31:09 AM] (6372) Background analysis(1) root directory: file:///home/brian/.vscode/extensions/ms-python.vscode-pylance-2024.5.1/dist
+2024-05-27 01:31:09.018 [info] [Info  - 1:31:09 AM] (6372) Background analysis(1) started
+2024-05-27 01:31:09.706 [info] [Info  - 1:31:09 AM] (6372) Indexer background runner(2) root directory: file:///home/brian/.vscode/extensions/ms-python.vscode-pylance-2024.5.1/dist (index)
+2024-05-27 01:31:09.707 [info] [Info  - 1:31:09 AM] (6372) Indexing(2) started
+2024-05-27 01:31:12.094 [info] [Info  - 1:31:12 AM] (6372) [BG(1)] Long operation: analyzing: file:///home/brian/.config/qtile/config.py (2564ms)
+2024-05-27 01:31:12.790 [info] [Info  - 1:31:12 AM] (6372) [IDX(2)] Long operation: scan packages file:///home/brian/.config/qtile (2124ms)
+2024-05-27 01:31:12.791 [info] [Info  - 1:31:12 AM] (6372) scanned(2) 252 files over 1 exec env
+2024-05-27 01:31:13.177 [info] [Info  - 1:31:13 AM] (6372) indexed(2) 169 files over 1 exec env
+2024-05-27 01:31:13.294 [info] [Info  - 1:31:13 AM] (6372) Indexing finished(2).

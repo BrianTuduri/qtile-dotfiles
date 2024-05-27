@@ -1,0 +1,2 @@
+FROM nexus.geocom.com.uy/scm-docker-images/openjdk:mvn2.2.1-jdk8
+WORKDIR /project

@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  vault-agent-demo:
+    image: hashicorp/vault-enterprise:latest
+    restart: always
+    ports:
+      - "18200:8200"
+    volumes:
+      - ./vault-agent:/vault-agent:rw
+      - ./nginx:/usr/share/nginx/html:rw
+    environment:
+      VAULT_ADDR: "http://vault_dev:8200"
+      
+    container_name: vault-agent-demo
+    entrypoint: "vault agent -log-level debug -config=/vault-agent/nginx-vault-agent.hcl"

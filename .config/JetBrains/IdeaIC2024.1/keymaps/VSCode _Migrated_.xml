@@ -1,0 +1,10 @@
+<keymap version="1" name="VSCode (Migrated)" parent="VSCode">
+  <action id="CollapseAllRegions">
+    <keyboard-shortcut first-keystroke="ctrl k" second-keystroke="ctrl 0" />
+    <keyboard-shortcut first-keystroke="alt x" />
+  </action>
+  <action id="ExpandAllRegions">
+    <keyboard-shortcut first-keystroke="ctrl k" second-keystroke="ctrl j" />
+    <keyboard-shortcut first-keystroke="alt d" />
+  </action>
+</keymap>

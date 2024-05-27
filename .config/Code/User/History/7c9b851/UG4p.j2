@@ -1,0 +1,108 @@
+pid_file = "./pidfile"
+
+vault {
+    address = "{{ vault_addr }}"
+    retry {
+        num_retries = {{ retry_num_retries }}
+    }
+}
+
+auto_auth {
+{% if auth_method == "approle" %}
+    method {
+        type = "approle"
+
+        config = {
+            role_id_file_path = "{{ approle_files_path}}/{{ role_id_file }}"
+            secret_id_file_path = "{{ approle_files_path }}/{{ secret_id_file }}"
+            remove_secret_id_file_after_reading = {{ remove_secret_id_file_after_reading }}
+        }
+    }
+{% elif auth_method == "aws" %}
+    method {
+        type = "aws"
+        mount_path = "{{ aws_mount_path }}"
+        config = {
+            type = "iam"
+            role = "{{ aws_role }}"
+        }
+    }
+{% elif auth_method == "userpass" %}
+    method {
+        type = "userpass"
+        config = {
+            username = "{{ userpass_username }}"
+            password = "{{ userpass_password }}"
+        }
+    }
+{% endif %}
+
+    sink {
+        type = "file"
+        config = {
+            path = "{{ sink_path }}/{{ token_file }}" 
+        }
+    }
+
+{% if additional_sinks %}
+{% for sink in additional_sinks %}
+    sink "{{ sink.type }}" {
+        {% if sink.wrap_ttl %}
+        wrap_ttl = "{{ sink.wrap_ttl }}"
+        {% endif %}
+        {% if sink.aad_env_var %}
+        aad_env_var = "{{ sink.aad_env_var }}"
+        {% endif %}
+        {% if sink.dh_type %}
+        dh_type = "{{ sink.dh_type }}"
+        {% endif %}
+        {% if sink.dh_path %}
+        dh_path = "{{ sink.dh_path }}"
+        {% endif %}
+        config = {
+            path = "{{ sink.path }}"
+        }
+    }
+{% endfor %}
+{% endif %}
+}
+
+{% if use_cache and not use_api_proxy %}
+cache {
+    use_auto_auth_token = {{ use_auto_auth_token }}
+}
+{% elif use_api_proxy and not use_cache %}
+api_proxy {
+    use_auto_auth_token = {{ use_auto_auth_token }}
+}
+{% else %}
+# Neither cache nor api_proxy are active, or both are active, which is not allowed.
+# Note that only one can be true if both have the property "use_auto_auth_token" because it generates conflicts.
+{% endif %}
+
+
+
+{% if use_listener_unix %}
+listener "unix" {
+    address = "{{ unix_listener_address }}"
+    tls_disable = {{ tls_disable }}
+
+    agent_api {
+        enable_quit = {{ enable_quit }}
+    }
+}
+{% endif %}
+
+listener "tcp" {
+    address = "{{ tcp_listener_address }}"
+    tls_disable = {{ tls_disable }}
+}
+
+{% if templates %}
+{% for template in templates %}
+template {
+    source = "{{ template.source }}"
+    destination = "{{ template.destination }}"
+}
+{% endfor %}
+{% endif %}

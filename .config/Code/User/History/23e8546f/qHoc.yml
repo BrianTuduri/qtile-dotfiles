@@ -1,0 +1,22 @@
+- name: Encontrar archivos YAML de configuración de connectors
+  find:
+    paths: "{{ kafka_connectors_dir }}"
+    patterns: "*.yml"
+    file_type: file
+    recurse: yes
+  register: yml_files
+
+- name: Verificar si la variable yml_files está vacía
+  debug:
+    msg: "{{ 'La variable files no está vacía' if yml_files.matched > 1 else 'Está vacía' }}"
+
+- name: YAML files
+  debug:
+    msg: "YAML files are: {{ yml_files.files }}"
+
+- name: Leer y cargar cada archivo YAML
+  include_tasks: load_and_post_connector.yml
+  loop: "{{ yml_files.files }}"
+  loop_control:
+    loop_var: file
+  ignore_errors: true

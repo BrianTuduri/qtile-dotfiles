@@ -1,0 +1,76 @@
+def CONFIG = [
+    REGISTRY: "registry.gitlab.geocom.com.uy:5005",
+    DOCKER_IP_CREDENTIAL: 'docker_node_geocom',
+    DOCKER_SERVER_CREDENTIAL: 'docker_slave_credential',
+    REGISTRY_CREDENTIAL: 'jenkins_registry_user',
+    GIT_CREDENTIAL_ID: "15940393-32ad-416e-ad80-b8ea71536641",
+]
+
+pipeline {
+    agent { label 'release_it' }
+
+    environment {
+        IMAGE_NAME = '' // Se inicializa vacío, se asignará dinámicamente
+    }
+
+    stages {
+        stage('Preparation') {
+            steps {
+                checkout scm
+                script {
+                    // Establecer nombre de imagen dinámicamente
+                    IMAGE_NAME = "${CONFIG.REGISTRY}/${params.proyecto}:${env.BUILD_ID}".toLowerCase()
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.withTool('docker') {
+                        withCredentials([usernameColonPassword(credentialsId: CONFIG.DOCKER_IP_CREDENTIAL, variable: 'IP_PORT')]) {
+                            withCredentials([dockerCert(credentialsId: CONFIG.DOCKER_SERVER_CREDENTIAL, variable: 'DOCKER_CERT')]) {
+                                docker.withServer(IP_PORT, CONFIG.DOCKER_SERVER_CREDENTIAL) {
+                                    docker.withRegistry("https://${CONFIG.REGISTRY}", CONFIG.REGISTRY_CREDENTIAL) {
+                                        docker.build(IMAGE_NAME, ".")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Maven Release') {
+            steps {
+                script {
+                    docker.withTool('docker') {
+                        docker.image(IMAGE_NAME).inside("-v /home/jenkins/.m2:/root/.m2") {
+                            def mavenCommands = "clean install" // Comando Maven por defecto
+                            if (params.tarea == 'release') {
+                                mavenCommands = "-Dresume=false release:prepare release:perform"
+                            } else if (params.tarea == 'regenerate_version') {
+                                mavenCommands = "clean package"
+                            } else {
+                                mavenCommands = "clean deploy"
+                            }
+
+                            sh "mvn ${mavenCommands}"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Limpieza: Eliminar imagen Docker. Considera la política de retención de tu registro.
+            script {
+                docker.rmi(IMAGE_NAME)
+            }
+            echo "Pipeline completado. Revisa la consola para detalles."
+        }
+    }
+}

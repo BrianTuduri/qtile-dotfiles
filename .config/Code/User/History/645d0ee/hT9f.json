@@ -1,0 +1,17 @@
+{
+"config": {
+    "change.stream.full.document": "updateLookup",
+    "connection.uri": "mongodb://userApp:Xpr.QA.PassRoot@srv-qa-sp-xpress-uych-mongo1:27017,srv-qa-sp-xpress-uych-mongo2:27017,srv-qa-sp-xpress-uych-mongo3:27017/admin?authSource=admin",
+    "connector.class": "com.mongodb.kafka.connect.MongoSourceConnector",
+    "errors.tolerance": "all",
+    "flush.size": "100",
+    "output.format.key": "schema",
+    "output.schema.key": "{\"type\": \"record\",\"name\": \"keySchema\",\"fields\" : [ { \"name\": \"documentKey\", \"type\": \"string\" } ]}",
+    "pipeline": "[{\"$match\": {\"ns.coll\": {\"$regex\": \"^(compositeBarcodeConfig|kioskoItems|kioskoCategories|baseArticles|measureUnits|kioskoPriceLists|storesStock|supplier|expressPromotion|tax|bank|taxRule|currencies|currencyQuotation|issuerPlanData|paymentModes|quotations|financialSurcharge|user|permission|role|entryResources|configuration|terminalFeature|fileResource|offlineConfiguration|chain|store|client|clientsGroup|clientNationality|companyParams|clientOfflineConfiguration|terminal_status|cashierAmountCategories|dgiFoliosRange|sitefNotification)$\"}}}]}",
+    "rotate.interval.ms": "1000",
+    "tasks.max": "10",
+    "topic.namespace.map": "{\"*\": \"QA-mongo-changes\"}",
+    "topics": "mongo-source-topic"
+},
+"name": "mongo-express-source-qa"
+}

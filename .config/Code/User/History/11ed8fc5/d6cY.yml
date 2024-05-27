@@ -1,0 +1,7 @@
+connector:
+  name: test-topic
+  config:
+    connector.class: org.apache.kafka.connect.file.FileStreamSinkConnector
+    tasks.max: '1'
+    topics: "test-topic"
+    file: "/tmp/test-topic.log"

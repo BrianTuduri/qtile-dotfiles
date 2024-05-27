@@ -1,0 +1,6 @@
+---
+# defaults file for gen-backend
+address_b: ""
+backend_username: ""
+backend_password: ""
+dest_backend_path: ""

@@ -1,0 +1,53 @@
+--- 
+
+- name: apply kafka connect vars
+  set_fact:
+    kafka_connectors_dir: "{{ repo_home }}/Environments/{{ ambiente }}/Kafka/Connectors/json"
+    kafka_connect_api_url: "http://{{ keep_alived_ip }}:{{ 8083 if ambiente == 'QA' else 8084 if ambiente == 'DEV' else 8085 if ambiente == 'ARGENTINA' else 8083 }}/connectors"
+
+- name: Create Connectors properties
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false    
+  roles:
+    - add_connectors
+  tags: 
+    - add-connectors
+
+- name: Create topic
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false
+  roles:
+    - add_topics
+  tags: 
+    - add-topics
+
+- name: Aplicando connect
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false
+  roles:
+    - apply_connect
+  tags: 
+    - apply-connect
+
+- name: Añadir Topicos
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false
+  roles:
+    - add_topics
+  tags: 
+    - apply-topic
+
+- name: Nuke Topicos & Connectors
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false
+  roles:
+    - delete_topics
+#    - delete_connectors
+  tags: 
+    - delete
+

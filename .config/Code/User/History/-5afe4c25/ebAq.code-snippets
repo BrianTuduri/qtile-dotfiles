@@ -1,0 +1,801 @@
+{
+	"when": {
+		"prefix": "when",
+		"description": "",
+		"scope": "groovy",
+		"body": [
+			"when { expression { return ${0:expression } }"
+		]
+	},
+  "Pipeline Block": {
+    "prefix": "pipeline",
+    "description": "Jenkins Declarative Pipeline",
+    "scope": "groovy",
+    "body": [
+      "pipeline {",
+      "    agent { label \"${1:agent}\" }",
+      "    options {",
+      "        ansiColor('xterm') // Interpretación de colores ANSI con esquema de colores 'xterm'.",
+      "        ",
+      "        // Rotación de registros y artefactos. Se mantendrán los últimos 5 registros de compilación.",
+      "        buildDiscarder logRotator(",
+      "            artifactDaysToKeepStr: '',  // Días para mantener los artefactos (vacío significa sin límite)",
+      "            artifactNumToKeepStr: '',   // Número de artefactos para mantener (vacío significa sin límite)",
+      "            daysToKeepStr: '',          // Días para mantener los registros de compilación (vacío significa sin límite)",
+      "            numToKeepStr: '5'           // Número de registros de compilación para mantener",
+      "        )",
+      "        disableConcurrentBuilds() // Deshabilita la ejecución concurrente de más de una compilación del mismo trabajo.",
+      "        quietPeriod(5) // Establece un período de silencio de 5 segundos antes de que comience la compilación.",
+      "    }",
+      "    environment { ",
+      "        branch = \"${2:branch}\"",
+      "    }",
+      "    stages {",
+      "        stage('Checkout . . .') {",
+      "            steps {",
+      "                script {     ",
+      "                    echo 'Hello World'",
+      "                }",
+      "            }",
+      "        }",
+      "        stage('Example Deploy') {",
+      "            when {",
+      "                branch 'production'",
+      "            }",
+      "            steps {",
+      "                echo 'Deploying'",
+      "            }",
+      "        }",
+      "    }",
+      "    post {",
+      "        always{",
+      "            echo 'Fase: always'",
+      "        }",
+      "        success {",
+      "            echo 'Fase: success'",
+      "        }",
+      "        failure {",
+      "            echo 'Fase: failure'",
+      "        }",
+      "        aborted {",
+      "            echo 'Fase: aborted'",
+      "        }",
+      "    }",
+      "}",
+      ""
+    ]
+  },
+  "Agent Block": {
+    "prefix": "agent",
+    "description": "Agent block",
+    "scope": "groovy",
+    "body": ["agent {", "    label '${1:label}'", "}", ""]
+  },
+  "Environment Block": {
+    "prefix": "env",
+    "description": "Environment variables",
+    "scope": "groovy",
+    "body": ["environment {", "    ${1:VAR_NAME} = '${2:value}'", "}"]
+  },
+  "Parameters Block": {
+    "prefix": "params",
+    "description": "Parameters",
+    "scope": "groovy",
+    "body": [
+      "parameters {",
+      "    string(name: '${1:name}', defaultValue: '${2:value}', description: '${3:description}')",
+      "}"
+    ]
+  },
+  "When Block": {
+    "prefix": "when",
+    "description": "When condition",
+    "scope": "groovy",
+    "body": ["when {", "  ${1:condition}", "}"]
+  },
+  "Post Block": {
+    "prefix": "post",
+    "description": "Post-build actions",
+    "scope": "groovy",
+    "body": ["post {", "  always {", "    // actions", "  }", "}"]
+  },
+  "Steps Block": {
+    "prefix": "steps",
+    "description": "Steps block",
+    "scope": "groovy",
+    "body": ["steps {", "// actions", "}"]
+  },
+  "Script Block": {
+    "prefix": "script",
+    "description": "Script block",
+    "scope": "groovy",
+    "body": ["script {", "  // Groovy script", "}"]
+  },
+  "Try-Catch Block": {
+    "prefix": "trycatch",
+    "description": "Try-Catch block",
+    "scope": "groovy",
+    "body": [
+      "try {",
+      "  // actions",
+      "} catch(Exception e) {",
+      "  // handle exception",
+      "}"
+    ]
+  },
+  "Timeout Block": {
+    "prefix": "timeout",
+    "description": "Timeout block",
+    "scope": "groovy",
+    "body": ["timeout(time: ${1:10}, unit: 'MINUTES') {", "// actions", "}", ""]
+  },
+  "Node Block": {
+    "prefix": "node",
+    "description": "Node block",
+    "scope": "groovy",
+    "body": ["node('${1:label}') {", "// actions", "}"]
+  },
+  "Docker Agent": {
+    "prefix": "dockerAgent",
+    "description": "Docker agent",
+    "scope": "groovy",
+    "body": [
+      "agent {",
+      "    docker {",
+      "        image '${1:image}'",
+      "        args '${2:args}'",
+      "    }",
+      "}"
+    ]
+  },
+  "Dockerfile Agent": {
+    "prefix": "dockerfileAgent",
+    "description": "Dockerfile agent",
+    "scope": "groovy",
+    "body": [
+      "agent {",
+      "    dockerfile {",
+      "        filename '${1:Dockerfile}'",
+      "        dir '${2:dir}'",
+      "    }",
+      "}"
+    ]
+  },
+  "Kubernetes Agent": {
+    "prefix": "k8sAgent",
+    "description": "Kubernetes agent",
+    "scope": "groovy",
+    "body": [
+      "agent {",
+      "  kubernetes {",
+      "    label '${1:label}'",
+      "    yaml '''",
+      "    apiVersion: v1",
+      "    kind: Pod",
+      "    metadata:",
+      "      labels:",
+      "        some-label: some-label-value",
+      "    spec:",
+      "      containers:",
+      "      - name: maven",
+      "        image: maven:3-alpine",
+      "        command:",
+      "        - cat",
+      "        tty: true",
+      "    '''",
+      "  }",
+      "}"
+    ]
+  },
+  "Git Checkout": {
+    "prefix": "git",
+    "description": "Git checkout",
+    "scope": "groovy",
+    "body": ["git url: '${1:repository}', branch: '${2:branch}'"]
+  },
+  "Stash": {
+    "prefix": "stash",
+    "description": "Stash files",
+    "scope": "groovy",
+    "body": ["stash(name: '${1:name}', includes: '${2:includes}')"]
+  },
+  "Unstash": {
+    "prefix": "unstash",
+    "description": "Unstash files",
+    "scope": "groovy",
+    "body": ["unstash '${1:name}'"]
+  },
+  "Parallel Block": {
+    "prefix": "parallel",
+    "description": "Parallel block",
+    "scope": "groovy",
+    "body": [
+      "parallel {",
+      "    stage('Stage 1') {",
+      "        steps {",
+      "        // actions",
+      "        }",
+      "    }",
+      "    stage('Stage 2') {",
+      "        steps {",
+      "        // actions",
+      "        }",
+      "    }",
+      "}"
+    ]
+  },
+  "Input Block": {
+    "prefix": "input",
+    "description": "Input block",
+    "scope": "groovy",
+    "body": [
+      "input {",
+      "  message 'Are you sure?'",
+      "  ok 'Yes'",
+      "  cancel 'No'",
+      "}"
+    ]
+  },
+  "Mail Block": {
+    "prefix": "mail",
+    "description": "Send email",
+    "scope": "groovy",
+    "body": [
+      "emailext(to: '${1:email}', subject: '${2:subject}', body: '${3:body}')"
+    ]
+  },
+  "Archive JUnit": {
+    "prefix": "junit",
+    "description": "Archive JUnit reports",
+    "scope": "groovy",
+    "body": ["junit '**/target/test-*.xml'"]
+  },
+  "Clean Workspace": {
+    "prefix": "cleanWs",
+    "description": "Clean workspace",
+    "scope": "groovy",
+    "body": ["cleanWs()"]
+  },
+  "Declarative Checkout": {
+    "prefix": "declCheckout",
+    "description": "Declarative checkout",
+    "scope": "groovy",
+    "body": [
+      "checkout([",
+      "    \\$class                           : 'GitSCM',",
+      "    branches                         : [[name: \"${1:branch}\"]],",
+      "    doGenerateSubmoduleConfigurations: false,",
+      "    extensions                       : [",
+      "        [\\$class: 'RelativeTargetDirectory', relativeTargetDir: \"${2:path/to/repo}\"],",
+      "        [\\$class: 'LocalBranch', localBranch: \"${3:localBranch}\"]",
+      "    ],",
+      "    gitTool                          : 'jgit',",
+      "    submoduleCfg                     : [],",
+      "    userRemoteConfigs                : [[credentialsId: \"${4:credentials}\",",
+      "    url          : 'url']]",
+      "])"
+    ]
+  },
+  "With Credentials": {
+    "prefix": "withCreds",
+    "description": "With credentials block",
+    "scope": "groovy",
+    "body": [
+      "withCredentials([usernamePassword(credentialsId: '${1:credentialsId}', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {",
+      "  // actions",
+      "}"
+    ]
+  },
+  "With Docker": {
+    "prefix": "withDocker",
+    "description": "With Docker block",
+    "scope": "groovy",
+    "body": [
+      "withDockerRegistry([credentialsId: '${1:credentialsId}', url: '${2:url}']) {",
+      "  // actions",
+      "}"
+    ]
+  },
+  "With Env": {
+    "prefix": "withEnv",
+    "description": "With environment variables",
+    "scope": "groovy",
+    "body": ["withEnv(['${1:VAR_NAME}=${2:value}']) {", "  // actions", "}"]
+  },
+  "Tool Install": {
+    "prefix": "tool",
+    "description": "Tool installer",
+    "scope": "groovy",
+    "body": ["def toolPath = tool name: '${1:toolName}', type: '${2:toolType}'"]
+  },
+  "Wait For Condition": {
+    "prefix": "waitUntil",
+    "description": "Wait until condition is met",
+    "scope": "groovy",
+    "body": ["waitUntil {", "  // condition", "}"]
+  },
+  "Wrap": {
+    "prefix": "wrap",
+    "description": "Wrap block",
+    "scope": "groovy",
+    "body": [
+      "wrap([$class: '${1:wrapperClass}', ${2:additionalParameters}]) {",
+      "  // actions",
+      "}"
+    ]
+  },
+  "WS": {
+    "prefix": "ws",
+    "description": "Workspace block",
+    "scope": "groovy",
+    "body": ["ws('${1:workspace}') {", "  // actions", "}"]
+  },
+  "Timestamp": {
+    "prefix": "timestamps",
+    "description": "Timestamps for logs",
+    "scope": "groovy",
+    "body": ["timestamps {", "  // actions", "}"]
+  },
+  "Ansi Color": {
+    "prefix": "ansiColor",
+    "description": "ANSI color for logs",
+    "scope": "groovy",
+    "body": ["ansiColor('xterm') {", "  // actions", "}"]
+  },
+  "Lock Resource": {
+    "prefix": "lock",
+    "description": "Lock resource",
+    "scope": "groovy",
+    "body": ["lock(resource: '${1:resourceName}') {", "  // actions", "}"]
+  },
+  "Milestone": {
+    "prefix": "milestone",
+    "description": "Milestone",
+    "scope": "groovy",
+    "body": ["milestone(${1:id})"]
+  },
+  "Retry Block": {
+    "prefix": "retry",
+    "description": "Retry block",
+    "scope": "groovy",
+    "body": ["retry(${1:3}) {", "  // actions", "}"]
+  },
+  "Sleep": {
+    "prefix": "sleep",
+    "description": "Sleep",
+    "scope": "groovy",
+    "body": ["sleep time: ${1:5}, unit: 'SECONDS'"]
+  },
+  "Stage Name": {
+    "prefix": "stage",
+    "description": "Stage with name",
+    "scope": "groovy",
+    "body": ["stage('${1:Stage Name}') {", "  // actions", "}"]
+  },
+  "Timeout Time": {
+    "prefix": "timeoutTime",
+    "description": "Timeout with time",
+    "scope": "groovy",
+    "body": ["timeout(time: ${1:10}, unit: 'MINUTES') {", "  // actions", "}"]
+  },
+  "Unstable": {
+    "prefix": "unstable",
+    "description": "Mark build as unstable",
+    "scope": "groovy",
+    "body": ["unstable('${1:message}')"]
+  },
+  "Unwrap": {
+    "prefix": "unwrap",
+    "description": "Unwrap",
+    "scope": "groovy",
+    "body": ["unwrap([$class: '${1:wrapperClass}']) {", "  // actions", "}"]
+  },
+  "Warning": {
+    "prefix": "warn",
+    "description": "Warning",
+    "scope": "groovy",
+    "body": ["warnError('${1:message}')"]
+  },
+  "With Context": {
+    "prefix": "withContext",
+    "description": "With context",
+    "scope": "groovy",
+    "body": [
+      "withContext([$class: '${1:contextClass}', ${2:additionalParameters}]) {",
+      "  // actions",
+      "}"
+    ]
+  },
+  "With Credentials ID": {
+    "prefix": "withCredsId",
+    "description": "With credentials by ID",
+    "scope": "groovy",
+    "body": [
+      "withCredentials([string(credentialsId: '${1:credentialsId}', variable: '${2:variableName}')]) {",
+      "  // actions",
+      "}"
+    ]
+  },
+  "With Docker Server": {
+    "prefix": "withDockerServer",
+    "description": "With Docker server",
+    "scope": "groovy",
+    "body": [
+      "withDockerServer([uri: '${1:uri}', credentialsId: '${2:credentialsId}']) {",
+      "  // actions",
+      "}"
+    ]
+  },
+  "With Env Var": {
+    "prefix": "withEnvVar",
+    "description": "With environment variable",
+    "scope": "groovy",
+    "body": ["withEnv(['${1:VAR_NAME}=${2:value}']) {", "  // actions", "}"]
+  },
+  "With Maven": {
+    "prefix": "withMaven",
+    "description": "With Maven",
+    "scope": "groovy",
+    "body": [
+      "withMaven(maven: 'maven3', mavenLocalRepo: '.repository') {",
+      "// actions",
+      "}"
+    ]
+  },
+  "With Node": {
+    "prefix": "withNode",
+    "description": "With Node",
+    "scope": "groovy",
+    "body": ["node {", "// actions", "}"]
+  },
+  "With SonarQube": {
+    "prefix": "withSonar",
+    "description": "With SonarQube environment",
+    "scope": "groovy",
+    "body": ["withSonarQubeEnv('My SonarQube Server') {", "  // actions", "}"]
+  },
+  "With Gradle": {
+    "prefix": "withGradle",
+    "description": "With Gradle wrapper",
+    "scope": "groovy",
+    "body": ["sh './gradlew ${1:build}'"]
+  },
+  "With NPM": {
+    "prefix": "withNpm",
+    "description": "With NPM",
+    "scope": "groovy",
+    "body": ["sh 'npm install'"]
+  },
+  "With Python": {
+    "prefix": "withPython",
+    "description": "With Python",
+    "scope": "groovy",
+    "body": ["sh 'python ${1:script.py}'"]
+  },
+  "With Ruby": {
+    "prefix": "withRuby",
+    "description": "With Ruby",
+    "scope": "groovy",
+    "body": ["sh 'ruby ${1:script.rb}'"]
+  },
+  "With Go": {
+    "prefix": "withGo",
+    "description": "With Go",
+    "scope": "groovy",
+    "body": ["sh 'go build ${1:main.go}'"]
+  },
+  "With Java": {
+    "prefix": "withJava",
+    "description": "With Java",
+    "scope": "groovy",
+    "body": ["sh 'javac ${1:Main.java}'"]
+  },
+  "With DotNet": {
+    "prefix": "withDotNet",
+    "description": "With .NET",
+    "scope": "groovy",
+    "body": ["sh 'dotnet build'"]
+  },
+  "With Docker Build": {
+    "prefix": "withDockerBuild",
+    "description": "With Docker Build",
+    "scope": "groovy",
+    "body": ["sh 'docker build -t ${1:image_name} .'"]
+  },
+  "With Docker Push": {
+    "prefix": "withDockerPush",
+    "description": "With Docker Push",
+    "scope": "groovy",
+    "body": ["sh 'docker push ${1:image_name}'"]
+  },
+  "With Docker Pull": {
+    "prefix": "withDockerPull",
+    "description": "With Docker Pull",
+    "scope": "groovy",
+    "body": ["sh 'docker pull ${1:image_name}'"]
+  },
+  "With Docker Run": {
+    "prefix": "withDockerRun",
+    "description": "With Docker Run",
+    "scope": "groovy",
+    "body": ["sh 'docker run ${1:image_name}'"]
+  },
+  "With S3 Upload": {
+    "prefix": "withS3Upload",
+    "description": "With S3 Upload",
+    "scope": "groovy",
+    "body": ["sh 'aws s3 cp ${1:file} s3://${2:bucket_name}/'"]
+  },
+  "With S3 Download": {
+    "prefix": "withS3Download",
+    "description": "With S3 Download",
+    "scope": "groovy",
+    "body": ["sh 'aws s3 cp s3://${1:bucket_name}/${2:file} ${3:destination}'"]
+  },
+  "With SSH": {
+    "prefix": "withSSH",
+    "description": "With SSH",
+    "scope": "groovy",
+    "body": [
+      "sshagent(['${1:ssh_key_id}']) {",
+      "  sh 'ssh ${2:user}@${3:host} \"${4:command}\"'",
+      "}"
+    ]
+  },
+  "With Ansible": {
+    "prefix": "withAnsible",
+    "description": "With Ansible",
+    "scope": "groovy",
+    "body": ["sh 'ansible-playbook ${1:playbook.yml}'"]
+  },
+  "With Terraform": {
+    "prefix": "withTerraform",
+    "description": "With Terraform",
+    "scope": "groovy",
+    "body": ["sh 'terraform apply'"]
+  },
+  "With Kubernetes Apply": {
+    "prefix": "withK8sApply",
+    "description": "With Kubernetes Apply",
+    "scope": "groovy",
+    "body": ["sh 'kubectl apply -f ${1:file.yaml}'"]
+  },
+  "With Kubernetes Delete": {
+    "prefix": "withK8sDelete",
+    "description": "With Kubernetes Delete",
+    "scope": "groovy",
+    "body": ["sh 'kubectl delete -f ${1:file.yaml}'"]
+  },
+  "With Helm Install": {
+    "prefix": "withHelmInstall",
+    "description": "With Helm Install",
+    "scope": "groovy",
+    "body": ["sh 'helm install ${1:release_name} ${2:chart_name}'"]
+  },
+  "With Helm Upgrade": {
+    "prefix": "withHelmUpgrade",
+    "description": "With Helm Upgrade",
+    "scope": "groovy",
+    "body": ["sh 'helm upgrade ${1:release_name} ${2:chart_name}'"]
+  },
+  "With Helm Delete": {
+    "prefix": "withHelmDelete",
+    "description": "With Helm Delete",
+    "scope": "groovy",
+    "body": ["sh 'helm delete ${1:release_name}'"]
+  },
+  "With Git Clone": {
+    "prefix": "withGitClone",
+    "description": "With Git Clone",
+    "scope": "groovy",
+    "body": ["sh 'git clone ${1:repository_url}'"]
+  },
+  "With Git Checkout": {
+    "prefix": "withGitCheckout",
+    "description": "With Git Checkout",
+    "scope": "groovy",
+    "body": ["sh 'git checkout ${1:branch_name}'"]
+  },
+  "With Git Pull": {
+    "prefix": "withGitPull",
+    "description": "With Git Pull",
+    "scope": "groovy",
+    "body": ["sh 'git pull'"]
+  },
+  "With Git Push": {
+    "prefix": "withGitPush",
+    "description": "With Git Push",
+    "scope": "groovy",
+    "body": ["sh 'git push origin ${1:branch_name}'"]
+  },
+  "With Git Commit": {
+    "prefix": "withGitCommit",
+    "description": "With Git Commit",
+    "scope": "groovy",
+    "body": ["sh 'git commit -m \"${1:message}\"'"]
+  },
+  "With Git Add": {
+    "prefix": "withGitAdd",
+    "description": "With Git Add",
+    "scope": "groovy",
+    "body": ["sh 'git add ${1:file}'"]
+  },
+  "With Git Tag": {
+    "prefix": "withGitTag",
+    "description": "With Git Tag",
+    "scope": "groovy",
+    "body": ["sh 'git tag ${1:tag_name}'"]
+  },
+  "Docker With Registry": {
+    "prefix": "dockerWithRegistry",
+    "description": "Docker with Registry",
+    "scope": "groovy",
+    "body": [
+      "docker.withRegistry('https://${1:registry}', '${2:credentialsId}') {",
+      "  // actions",
+      "}"
+    ]
+  },
+  "Docker With Server": {
+    "prefix": "dockerWithServer",
+    "description": "Docker with Server",
+    "scope": "groovy",
+    "body": [
+      "docker.withServer('${1:uri}', '${2:credentialsId}') {",
+      "  // actions",
+      "}"
+    ]
+  },
+  "Docker Build": {
+    "prefix": "dockerBuild",
+    "description": "Docker Build",
+    "scope": "groovy",
+    "body": ["def image = docker.build('${1:imageName}')"]
+  },
+  "Docker Push": {
+    "prefix": "dockerPush",
+    "description": "Docker Push",
+    "scope": "groovy",
+    "body": ["image.push('${1:tag}')"]
+  },
+  "Docker Pull": {
+    "prefix": "dockerPull",
+    "description": "Docker Pull",
+    "scope": "groovy",
+    "body": ["docker.image('${1:imageName}').pull()"]
+  },
+  "Docker Run": {
+    "prefix": "dockerRun",
+    "description": "Docker Run",
+    "scope": "groovy",
+    "body": ["docker.image('${1:imageName}').run('${2:args}')"]
+  },
+  "Docker Inside": {
+    "prefix": "dockerInside",
+    "description": "Docker Inside",
+    "scope": "groovy",
+    "body": ["docker.image('${1:imageName}').inside {", "  // actions", "}"]
+  },
+  "Docker Custom Image": {
+    "prefix": "dockerCustomImage",
+    "description": "Docker Custom Image",
+    "scope": "groovy",
+    "body": ["docker.image('${1:imageName}:${2:tag}')"]
+  },
+  "Docker Agent": {
+    "prefix": "dockerAgent",
+    "description": "Docker Agent",
+    "scope": "groovy",
+    "body": [
+      "agent {",
+      "  docker {",
+      "    image '${1:imageName}'",
+      "    label '${2:label}'",
+      "    args '${3:args}'",
+      "  }",
+      "}"
+    ]
+  },
+  "Docker Args": {
+    "prefix": "dockerArgs",
+    "description": "Docker Args",
+    "scope": "groovy",
+    "body": [
+      "agent {",
+      "  docker {",
+      "    image '${1:imageName}'",
+      "    args '${2:args}'",
+      "  }",
+      "}"
+    ]
+  },
+  "Docker Reuse Node": {
+    "prefix": "dockerReuseNode",
+    "description": "Docker Reuse Node",
+    "scope": "groovy",
+    "body": [
+      "agent {",
+      "  docker {",
+      "    image '${1:imageName}'",
+      "    reuseNode true",
+      "  }",
+      "}"
+    ]
+  },
+  "Docker Custom Workspace": {
+    "prefix": "dockerCustomWorkspace",
+    "description": "Docker Custom Workspace",
+    "scope": "groovy",
+    "body": [
+      "agent {",
+      "  docker {",
+      "    image '${1:imageName}'",
+      "    customWorkspace '${2:path}'",
+      "  }",
+      "}"
+    ]
+  },
+  "Docker Always Pull": {
+    "prefix": "dockerAlwaysPull",
+    "description": "Docker Always Pull",
+    "scope": "groovy",
+    "body": [
+      "agent {",
+      "  docker {",
+      "    image '${1:imageName}'",
+      "    alwaysPull true",
+      "  }",
+      "}"
+    ]
+  },
+  "Docker Registry URL": {
+    "prefix": "dockerRegistryUrl",
+    "description": "Docker Registry URL",
+    "scope": "groovy",
+    "body": [
+      "agent {",
+      "  docker {",
+      "    image '${1:imageName}'",
+      "    registryUrl 'https://${2:registry}'",
+      "  }",
+      "}"
+    ]
+  },
+  "Docker Registry Credentials": {
+    "prefix": "dockerRegistryCredentials",
+    "description": "Docker Registry Credentials",
+    "scope": "groovy",
+    "body": [
+      "agent {",
+      "  docker {",
+      "    image '${1:imageName}'",
+      "    registryCredentialsId '${2:credentialsId}'",
+      "  }",
+      "}"
+    ]
+  },
+  "read properties file": {
+    "prefix": "rdp",
+    "description": "read properties file",
+    "scope": "groovy",
+    "body": [
+      "    def conf = readProperties file: \"${env.WORKSPACE}@${1:path}\""
+    ]
+  },
+  "shell stdout": {
+    "prefix": "sh",
+    "description": "",
+    "scope": "groovy",
+    "body": ["sh(script: ${1:script}, returnStdout: true)"]
+  },
+  "Trigger with cron": {
+    "prefix": "trgr_cron",
+    "description": "Triggering of jenkins with crontab",
+    "scope": "groovy",
+    "body": [
+      "triggers {",
+      "    cron('0 2 * * *') // Todos los días a las 2 am",
+      "}"
+    ]
+  }
+}

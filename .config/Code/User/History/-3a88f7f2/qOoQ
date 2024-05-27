@@ -1,0 +1,62 @@
+def CONFIG = [
+    REGISTRY: "registry.gitlab.geocom.com.uy:5005",
+    DOCKER_IP_CREDENTIAL: 'docker_node_geocom',
+    DOCKER_SERVER_CREDENTIAL: 'docker_slave_credential',
+    REGISTRY_CREDENTIAL: 'jenkins_registry_user',
+    GIT_CREDENTIAL_ID: "15940393-32ad-416e-ad80-b8ea71536641",
+]
+pipeline {
+    agent { label 'release_it' }
+    environment {
+        // 
+    }
+    options {
+        // 
+    }
+    stages {
+        stage('Release') {
+            steps {
+                script {
+                    // Checkout del código y configuraciones previas
+                    dir('proy') {
+                        // Preparación para construir y usar el Dockerfile
+                        def mavenCommands = "clean install" // Comandos Maven por defecto
+                        if (params.tarea == 'release') {
+                            mavenCommands = "-Dresume=false release:prepare release:perform"
+                        } else if (params.tarea == 'regenerate_version') {
+                            mavenCommands = "clean package"
+                        } else {
+                            mavenCommands = "clean deploy"
+                        }
+
+                        // Construir y ejecutar en Docker
+                        docker.build("openjdk8").inside("-v /home/jenkins/.m2:/root/.m2") {
+                            // Ejecutar los comandos de Maven especificados
+                            sh "mvn ${mavenCommands}"
+                        }
+
+                        // Copiar los archivos de construcción al path específico del agente
+                        def buildPath = "/path/especifico/de/construccion"
+                        sh "cp -R * ${buildPath}"
+                    }
+                    ///
+                    docker.withTool('docker') {
+                        withCredentials([usernameColonPassword(credentialsId: CONFIG["DOCKER_IP_CREDENTIAL"], variable: 'IP_PORT')]) {
+                            withCredentials([dockerCert(credentialsId: CONFIG["DOCKER_SERVER_CREDENTIAL"], variable: 'DOCKER_CERT')]) {
+                                docker.withServer(IP_PORT, 'docker_slave_credential') {
+                                    docker.withRegistry("https://${CONFIG["REGISTRY"]}", CONFIG["REGISTRY_CREDENTIAL"]) {
+                                    if (!isRegenerate) sshagent(['15940393-32ad-416e-ad80-b8ea71536641']) { sh "release-it ${params.increment} --ci" }
+                                    String buildVersion = readJSON(file: 'package.json')['version']
+                                    docker.build("${CONFIG["REGISTRY"]}/${params.proyecto}:${buildVersion}".toLowerCase(), ".").push()
+                                    currentBuild.displayName = "#${BUILD_NUMBER}-${params.proyecto.split('/').last()}_v${buildVersion}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                ///
+            }
+        }
+    }
+}

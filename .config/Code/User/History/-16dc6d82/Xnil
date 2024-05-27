@@ -1,0 +1,27 @@
+FROM nexus.geocom.com.uy/openjdk:8-jdk
+
+WORKDIR /project
+
+RUN apt-get update && \
+    apt-get install -y wget tar git
+
+RUN wget https://services.gradle.org/distributions/gradle-4.10.3-all.zip && \
+    mkdir /opt/gradle && \
+    unzip -d /opt/gradle gradle-4.10.3-all.zip && \
+    rm gradle-4.10.3-all.zip
+
+ENV GRADLE_HOME=/opt/gradle/gradle-4.10.3
+ENV PATH=${GRADLE_HOME}/bin:${PATH}
+
+ARG user=jenkins
+ARG group=jenkins
+ARG uid=1000
+ARG gid=1000
+
+RUN groupadd -g ${gid} ${group} && \
+    useradd -d /home/${user} -u ${uid} -g ${group} -m ${user}
+
+RUN chown -R ${uid}:${gid} /bin /opt/ /usr/bin/ \
+    && chmod -R 777 /bin /opt/ /usr/bin/
+
+USER ${user}

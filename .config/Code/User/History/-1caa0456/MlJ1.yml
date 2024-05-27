@@ -1,0 +1,70 @@
+---
+# tasks file for kafka_setup_provisioning
+
+- name: "Creating Kafka extras directories"
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0774'
+  loop: "{{ kafka_extras_directories }}"
+
+- name: Change SELinux context for Kafka directory
+  ansible.builtin.command:
+    cmd: chcon -R -t bin_t /kafka/
+  when: ansible_selinux.status == "enabled"  # esto se ejecuta solo si SELinux está habilitado.
+
+- name: Get firewall Status
+  ansible.builtin.systemd_service:
+    name: "firewalld"
+  when: ansible_facts['os_family'] == "RedHat"
+  register: firewalld_service_status
+
+- name: "Firewall Status"
+  debug:
+    var: firewalld_service_status
+
+- name: Add firewall rule for Kafka ports (RedHat family)
+  ansible.builtin.firewalld:
+    port: "{{ item }}/tcp"
+    permanent: true
+    state: enabled
+    immediate: yes
+  loop: "{{ kafka_ports }}"
+  when: 
+    - ansible_facts['os_family'] == "RedHat"
+    - firewalld_service_status.ActiveState == "active"
+
+- name: Add firewall rule for Kafka ports (Debian family)
+  ansible.builtin.apt:
+    name: ufw
+    state: present
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Allow Kafka ports (Debian family)
+  ansible.builtin.command:
+    cmd: "ufw allow {{ item }}"
+  loop: "{{ kafka_ports }}"
+  when: ansible_facts['os_family'] == "Debian"
+
+
+- name: "Copying plugins to {{ kafka_dest_plugin_directory }}"
+  copy:
+    src: "{{ kafka_src_plugin_directory }}"
+    dest: "{{ kafka_dest_plugin_directory }}"
+    mode: '0774'
+    force: true
+
+- name: "Copying connectors to {{ kafka_dest_connectors_dir }}"
+  copy:
+    src: "{{ kafka_src_local_connectors_dir }}/"
+    dest: "{{ kafka_dest_connectors_dir }}"
+    mode: '0774'
+    force: true
+
+- name: "Copying topics to {{ kafka_dest_topics_dir }}"
+  copy:
+    src: "{{ kafka_src_local_topics_dir }}/" 
+    dest: "{{ kafka_dest_topics_dir }}"
+    mode: '0774'
+    force: true
+

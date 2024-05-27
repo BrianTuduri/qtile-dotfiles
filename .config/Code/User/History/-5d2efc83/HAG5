@@ -1,0 +1,25 @@
+FROM jenkins/agent:jdk8
+
+USER root
+
+SHELL ["/bin/bash", "-c"]
+
+# Instalar dependencias necesarias
+RUN apt-get update && apt-get install -y curl git zip
+
+# Instalar NVM
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# Configuración del entorno para NVM
+ENV NVM_DIR="/root/.nvm"
+ENV NVM_SYMLINK="/usr/local/bin/nvm"
+RUN echo '#!/bin/sh' > $NVM_SYMLINK
+RUN echo 'export NVM_DIR="$NVM_DIR"' >> $NVM_SYMLINK
+RUN echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $NVM_SYMLINK
+RUN echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> $NVM_SYMLINK
+RUN chmod +x $NVM_SYMLINK
+
+# Crear un enlace simbólico para node y npm al PATH para asegurar la disponibilidad global
+ENV PATH=$NVM_DIR/versions/node/$(ls $NVM_DIR/versions/node/ | sort -V | tail -1)/bin:$PATH
+
+CMD ["tail", "-f", "/dev/null"]

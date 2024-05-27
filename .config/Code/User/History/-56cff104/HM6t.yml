@@ -1,0 +1,43 @@
+---
+# tasks file for kafka_add_topic
+- name: Create topics
+  vars:
+  include_tasks: topics.yml
+  loop: "{{ TOPIC_LIST }}"
+
+  # toDo: Crear lista topics list desde ansible
+
+  # + cat topic_list.yml
+# TOPIC_LIST:
+# - QA-article-import-blocks.yaml
+# - QA-ca-accum-errors.yaml
+# - QA-chain-accum-errors.yaml
+# - QA-import-blocks-status.yaml
+# - QA-import-blocks.yaml
+# - QA-job-status-event.yaml
+# - QA-meli-mongo-changes.yaml
+# - QA-mongo-changes-errors.yaml
+# - QA-mongo-changes.yaml
+# - QA-mongo-sale-tickets-migration.yaml
+# - QA-offline-cashier-amounts.yaml
+# - QA-offline-delay-invoice.yaml
+# - QA-offline-mail-tickets.yaml
+# - QA-offline-stock-movements.yaml
+# - QA-offline-tickets.yaml
+# - QA-peya-mongo-changes.yaml
+# - QA-soy-delivery-mongo-changes.yaml
+# - QA-sync-manual-download-error-process.yaml
+# - QA-ticket-sender-errors.yaml
+# - QA-total-accum-errors.yaml
+# - QA-wpp-mongo-changes.yaml
+# [Pipeline] sh
+# + cat connector_list.yml
+# CONNECTORS_LIST:
+# - connector_mongo.yml
+# - connector_mongo_sale_tickets.yml
+# - json
+# - meli_connector_mongo.yml
+# - peya_connector_mongo.yml
+# - sink_mongo_sale_tickets.yml
+# - soy_delivery_connector_mongo.yml
+# - wpp_connector_mongo.yml

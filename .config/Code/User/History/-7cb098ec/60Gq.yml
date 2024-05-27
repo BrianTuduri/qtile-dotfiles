@@ -1,0 +1,46 @@
+---     
+- name: Create Connectors properties
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false    
+  roles:
+    - add_connectors
+  tags: 
+    - add-connectors
+
+- name: Create topic
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false
+  roles:
+    - add_topics
+  tags: 
+    - add-topics
+
+- name: Aplicando connect
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false
+  roles:
+    - apply_connect
+  tags: 
+    - apply-connect
+
+- name: Añadir Topicos
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false
+  ansible.builtin.import_playbook: kafka/add_topics.yml
+  tags: 
+    - apply-topic
+
+- name: Nuke Topicos & Connectors
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false
+  roles:
+    - delete_topics
+#    - delete_connectors
+  tags: 
+    - delete
+

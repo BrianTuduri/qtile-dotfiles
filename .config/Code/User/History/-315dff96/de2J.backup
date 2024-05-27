@@ -1,0 +1,119 @@
+{
+  "version": 4,
+  "terraform_version": "1.7.4",
+  "serial": 62,
+  "lineage": "f2119fba-0cff-8bad-3063-91082d8c84a2",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "kubernetes_config_map",
+      "name": "config_test",
+      "provider": "provider[\"registry.terraform.io/hashicorp/kubernetes\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "binary_data": null,
+            "data": {
+              "DYNAMIC_CONFIG_ENABLED": "true",
+              "config_test.yml": "kafka:\n  clusters:\n    - name: express-qa-test\n      bootstrapServers: 172.24.26.158:9092\nauth:\n  type: disabled\nmanagement:\n  health:\n    ldap:\n      enabled: false\n"
+            },
+            "id": "kafka-ui-test/config_test",
+            "immutable": false,
+            "metadata": [
+              {
+                "annotations": null,
+                "generate_name": "",
+                "generation": 0,
+                "labels": null,
+                "name": "config_test",
+                "namespace": "kafka-ui-test",
+                "resource_version": "10929300",
+                "uid": "cc618738-dab0-46e5-b141-188c60e69a3d"
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "module": "module.kafka-ui",
+      "mode": "managed",
+      "type": "helm_release",
+      "name": "kafka-ui",
+      "provider": "provider[\"registry.terraform.io/hashicorp/helm\"]",
+      "instances": [
+        {
+          "status": "tainted",
+          "schema_version": 1,
+          "attributes": {
+            "atomic": false,
+            "chart": "kafka-ui",
+            "cleanup_on_fail": false,
+            "create_namespace": true,
+            "dependency_update": false,
+            "description": null,
+            "devel": null,
+            "disable_crd_hooks": false,
+            "disable_openapi_validation": false,
+            "disable_webhooks": false,
+            "force_update": false,
+            "id": "kafka-ui",
+            "keyring": null,
+            "lint": false,
+            "manifest": null,
+            "max_history": 0,
+            "metadata": [
+              {
+                "app_version": "v0.7.1",
+                "chart": "kafka-ui",
+                "name": "kafka-ui",
+                "namespace": "kafka-ui-test",
+                "revision": 1,
+                "values": "{\"existingConfigMap\":\"config_test\",\"hostAliases\":[{\"hostnames\":[\"srv-qa-int-sp-scm-kafka1\"],\"ip\":\"172.24.26.130\"},{\"hostnames\":[\"srv-qa-int-sp-scm-kafka2\"],\"ip\":\"172.24.26.131\"},{\"hostnames\":[\"srv-qa-int-sp-scm-kafka3\"],\"ip\":\"172.24.26.132\"}],\"image\":{\"registry\":\"nexus-mirror.geocom.com.uy\"},\"ingress\":{\"enabled\":true,\"host\":\"kafkaui-test.geocom.com.uy\"},\"yamlApplicationConfigConfigMap\":{\"key\":\"config_test.yml\",\"name\":\"config_test\"}}",
+                "version": "0.7.5"
+              }
+            ],
+            "name": "kafka-ui",
+            "namespace": "kafka-ui-test",
+            "pass_credentials": false,
+            "postrender": [],
+            "recreate_pods": false,
+            "render_subchart_notes": true,
+            "replace": false,
+            "repository": "https://nexus.geocom.com.uy/repository/helm-hosted/",
+            "repository_ca_file": null,
+            "repository_cert_file": null,
+            "repository_key_file": null,
+            "repository_password": null,
+            "repository_username": null,
+            "reset_values": false,
+            "reuse_values": false,
+            "set": [],
+            "set_list": [],
+            "set_sensitive": [],
+            "skip_crds": false,
+            "status": "failed",
+            "timeout": 300,
+            "values": [
+              "\"existingConfigMap\": \"config_test\"\n\"hostAliases\":\n- \"hostnames\":\n  - \"srv-qa-int-sp-scm-kafka1\"\n  \"ip\": \"172.24.26.130\"\n- \"hostnames\":\n  - \"srv-qa-int-sp-scm-kafka2\"\n  \"ip\": \"172.24.26.131\"\n- \"hostnames\":\n  - \"srv-qa-int-sp-scm-kafka3\"\n  \"ip\": \"172.24.26.132\"\n\"image\":\n  \"registry\": \"nexus-mirror.geocom.com.uy\"\n\"ingress\":\n  \"enabled\": true\n  \"host\": \"kafkaui-test.geocom.com.uy\"\n\"yamlApplicationConfigConfigMap\":\n  \"key\": \"config_test.yml\"\n  \"name\": \"config_test\"\n"
+            ],
+            "verify": false,
+            "version": "0.7.5",
+            "wait": true,
+            "wait_for_jobs": false
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "kubernetes_config_map.config_test"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}

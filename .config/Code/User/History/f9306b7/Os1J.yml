@@ -1,0 +1,23 @@
+---
+# tasks file for kafka_run_connect
+
+- name: "Generate properties for mode {{ kafka_connect_mode }}"
+  template:
+    src: "{{ repo_home }}/ansible/templates/connect-{{ kafka_connect_mode }}.properties.j2"
+    dest: "{{ kafka_connect_directory }}/connect-{{ kafka_connect_mode }}.properties"
+    mode: '0774'
+    force: true
+
+- name: Validate required variables
+  assert:
+    that:
+      - kafka_connect_mode is defined
+      - kafka_connect_mode in ['standalone', 'distributed']
+      - kafka_bin_directory is defined
+      - kafka_config_directory is defined
+      - kafka_connect_properties_file is defined
+    fail_msg: "Validation of input variables failed"
+
+- name: Execute Kafka Connect with configuration files
+  shell: "{{ connect_command }}"
+  when: kafka_connect_config_files is defined and kafka_connect_config_files | length > 0

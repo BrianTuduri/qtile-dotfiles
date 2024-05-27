@@ -1,0 +1,3 @@
+- name: "Execute the connect for the {{ ambiente }} environment"
+  shell: |
+    nohup sh {{ kafka_bin_directory }}/connect-distributed.sh {{ kafka_config_directory }}/{{ ambiente }}/connect-distributed.properties &

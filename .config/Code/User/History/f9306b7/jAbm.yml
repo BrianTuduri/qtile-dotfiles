@@ -1,0 +1,46 @@
+---
+# tasks file for kafka_run_connect
+
+- name: Validate required variables
+  assert:
+    that:
+      - kafka_connect_mode is defined
+      - kafka_connect_mode in ['standalone', 'distributed']
+      - kafka_bin_directory is defined
+      - kafka_config_directory is defined
+      - kafka_connect_directory is defined
+      - kafka_connect_properties_file is defined
+    fail_msg: "Validation of input variables failed"
+
+- name: Obtener el PID del servicio en el puerto 8083
+  ansible.builtin.shell: lsof -i :{{ kafka_connect_port_env }} | awk 'NR==2{print $2}'
+  register: lsof_output
+  ignore_errors: true
+
+- name: Verificar si hay conectores disponibles en el servicio
+  ansible.builtin.shell: "curl -s {{ kafka_connect_api_url }}"
+  register: curl_output
+  ignore_errors: true
+
+- name: Establecer 'run_connect' a true si se encuentra el PID o hay conectores disponibles
+  set_fact:
+    run_connect: true
+  when: lsof_output.stdout != "" or curl_output.stdout != ""
+
+- name: Matar el proceso en el puerto 8083 si 'run_connect' es true
+  ansible.builtin.shell: kill -9 {{ lsof_output.stdout }}
+  when: run_connect and lsof_output.stdout != ""
+
+- name: Mostrar el valor de 'run_connect'
+  ansible.builtin.debug:
+    var: run_connect
+
+- name: "Generate properties for mode {{ kafka_connect_mode }}"
+  template:
+    src: "templates/connect-{{ kafka_connect_mode }}.properties.j2"
+    dest: "{{ kafka_connect_directory }}/connect-{{ kafka_connect_mode }}.properties"
+    mode: '0774'
+    force: true
+
+- name: Execute Kafka Connect with configuration files
+  shell: "{{ connect_command }}"

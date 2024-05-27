@@ -1,0 +1,3 @@
+- name: Ejecutar scripts de conectores para cada entorno
+  shell: |
+    nohup sh {{ kafka_bin_directory }}/connect-distributed.sh {{ kafka_config_directory }}/{{ ambiente }}/connect-distributed.properties &

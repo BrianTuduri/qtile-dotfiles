@@ -1,0 +1,5 @@
+2024-05-24 13:33:50.665 [info] (Client) Pylance async client (2024.5.1) started with python extension (2024.6.0)
+2024-05-24 13:33:51.641 [info] [Info  - 1:33:51 PM] (60892) Pylance language server 2024.5.1 (pyright version 1.1.360, commit 4bc8428d) starting
+2024-05-24 13:33:51.674 [info] [Info  - 1:33:51 PM] (60892) Server root directory: file:///home/brian/.vscode/extensions/ms-python.vscode-pylance-2024.5.1/dist
+2024-05-24 13:33:51.676 [info] [Info  - 1:33:51 PM] (60892) Starting service instance "kafka-deploy-gama"
+2024-05-24 13:33:51.678 [info] [Info  - 1:33:51 PM] (60892) Auto-Indent enabled

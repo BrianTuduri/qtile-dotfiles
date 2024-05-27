@@ -1,0 +1,12 @@
+---
+# tasks file for kafka_run_connect
+  - name: "Execute the connect for the {{ ambiente }} environment"
+  shell: |
+    nohup sh {{ kafka_bin_directory }}/connect-distributed.sh {{ kafka_config_directory }}/connect-distributed.properties &
+
+
+# kafka bin directory ( donde se ubica el directorio de binarios de kafka)
+
+# kafka_config_directory (donde se ubica el directorio con el properties para connectar (puede ser connect-distributed.properties o connect-standalone.properties) )
+
+# type the connect (connect-distributed.sh o connect-standalone.sh)

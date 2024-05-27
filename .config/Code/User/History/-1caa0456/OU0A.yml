@@ -1,0 +1,31 @@
+---
+# tasks file for kafka_setup_provisioning
+
+- name: "Creating Kafka extras directories"
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0774'
+  loop: "{{ kafka_extras_directories }}"
+
+- name: "Copying plugins to {{ kafka_dest_plugin_directory }}"
+  copy:
+    src: "{{ kafka_src_plugin_directory }}"
+    dest: "{{ kafka_dest_plugin_directory }}"
+    mode: '0774'
+    force: true
+
+- name: "Copying connectors to {{ kafka_dest_connectors_dir }}"
+  copy:
+    src: "{{ kafka_src_local_connectors_dir }}/"
+    dest: "{{ kafka_dest_connectors_dir }}"
+    mode: '0774'
+    force: true
+
+- name: "Copying topics to {{ kafka_dest_topics_dir }}"
+  copy:
+    src: "{{ kafka_src_local_topics_dir }}/" 
+    dest: "{{ kafka_dest_topics_dir }}"
+    mode: '0774'
+    force: true
+

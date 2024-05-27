@@ -1,0 +1,4 @@
+---
+# defaults file for kafkas_setup_provisioning
+kafka_bin_directory: "/kafka/kafka/bin"
+bootstrap_servers: "localhost:9092"

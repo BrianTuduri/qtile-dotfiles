@@ -1,0 +1,9 @@
+# NIXPKGS_ALLOW_UNFREE=1 \
+#    nix-shell -p terraform -p cowsay \
+#        --command \
+#        "/home/rdifede/Repositorios/kubernetes_ansible_collection/Infrastructure/Clusters/QA/runPlaybook.bash"
+REPO_HOME="**"
+RANCHER_TOKEN="**"
+BACKEND_USERNAME="**"
+BACKEND_TOKEN="**" # Gitlab Access Token
+ANSIBLE_COW_SELECTION=small

@@ -1,0 +1,26 @@
+FROM jenkins/agent:jdk8
+
+USER root
+
+# Usamos bash para los comandos de instalación
+SHELL ["/bin/bash", "-c"]
+
+RUN apt-get update && apt-get install -y curl git zip
+
+# Instalar nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# Establece el directorio NVM
+ENV NVM_DIR="/root/.nvm"
+
+# Crea un script de inicialización que cargue nvm para cualquier shell
+RUN echo '#!/bin/sh' > /etc/profile.d/nvm.sh && \
+    echo 'export NVM_DIR="$HOME/.nvm"' >> /etc/profile.d/nvm.sh && \
+    echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> /etc/profile.d/nvm.sh && \
+    echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> /etc/profile.d/nvm.sh && \
+    chmod +x /etc/profile.d/nvm.sh
+
+# Asegura que el script de inicialización se ejecute al iniciar el contenedor
+# Utiliza el comando `exec` para asegurar que el proceso iniciado por CMD sea el PID 1, mejorando la señalización del proceso
+ENTRYPOINT ["/bin/sh", "-c", ". /etc/profile.d/nvm.sh && exec \"$@\"", "--"]
+CMD ["tail", "-f", "/dev/null"]

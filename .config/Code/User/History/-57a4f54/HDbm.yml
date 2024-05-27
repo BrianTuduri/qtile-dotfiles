@@ -1,0 +1,16 @@
+connector:
+  name: meli-mongo-source-arg
+  config:
+    connector.class: com.mongodb.kafka.connect.MongoSourceConnector
+    tasks.max: '10'
+    connection.uri: mongodb://userApp:Xpr.ARGQA.PassRoot@srv-qa-sp-xpress-arg-mongo1:27017,srv-qa-sp-xpress-arg-mongo2:27017,srv-qa-sp-xpress-arg-mongo3:27017/admin?authSource=admin
+    topics: mongo-source-topic
+    errors.tolerance: all
+    pipeline: '[{"$match": { "ns.coll": "meliOrder" }}]'
+    flush.size: 100
+    rotate.interval.ms: 1000
+    topic.namespace.map: '{"*": "QA-meli-mongo-changes"}'
+    change.stream.full.document: updateLookup
+    output.format.key: json
+    output.format.value: json
+    output.schema.infer.value: true

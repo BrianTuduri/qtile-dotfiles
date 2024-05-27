@@ -1,0 +1,6 @@
+topic:
+  name: ARG-offline-cashier-amounts
+  partitions: 2
+  replicas: 3
+  config:
+    retention.ms: 300000

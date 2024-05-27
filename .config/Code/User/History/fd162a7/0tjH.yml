@@ -1,0 +1,43 @@
+---
+- name: Leer archivo YAML
+  include_vars:
+    file: "{{ repo_home }}/Environments/{{ ambiente }}/Kafka/Topics/{{ item }}"
+    name: topic_var
+  
+
+- name: Crear Kafka Topic {{topic_var.topic.topicName}}
+  command:
+    argv:
+      - sh 
+      - "{{ kafka_bin_directory }}/kafka-topics.sh"
+      - --bootstrap-server
+      - "{{ bootstrap_servers }}"
+      - --topic
+      - "{{ topic_var.topic.name }}"
+      - --create
+      - --partitions 
+      - "{{ topic_var.topic.partitions }}"
+      - --replication-factor 
+      - "1"
+      - --config
+      - retention.ms=300000
+  ignore_errors: true
+  failed_when: False
+     
+      
+  
+  
+  
+  
+  
+  
+  
+  
+  # kafka_topics:
+  #   bootstrap_servers: "localhost:9092"
+  #   name: "{{ topic_var.topic.topicName }}"
+  #   partitions: "{{ topic_var.topic.partitions }}" 
+  #   replicas: "{{ topic_var.topic.replicas }}"
+  #   config: 
+  #     retention.ms: "{{ topic_var.topic.config.retention.ms }}" 
+  #   state: present

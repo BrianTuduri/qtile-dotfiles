@@ -1,0 +1,40 @@
+# Usar una imagen base que incluya Jenkins Agent.
+FROM jenkins/inbound-agent:latest as jenkins-agent
+
+USER root
+
+# Instalar las dependencias necesarias para Docker y rootless Docker.
+RUN apt-get update && apt-get install -y \
+    uidmap \
+    curl \
+    git \
+    dbus-user-session \
+    && apt-get clean
+
+# Instalar Docker Engine usando el script de conveniencia.
+RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
+
+# Cambiar al usuario jenkins para las configuraciones posteriores
+USER jenkins
+
+# Descargar e instalar Docker Compose.
+RUN DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker} \
+    && mkdir -p $DOCKER_CONFIG/cli-plugins \
+    && curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose \
+    && chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
+
+# Descargar e instalar Docker Rootless.
+RUN curl -fsSL https://get.docker.com/rootless -o get-docker-rootless.sh && sh get-docker-rootless.sh
+
+# Ajustar el PATH para incluir docker y docker-compose
+ENV PATH=/usr/bin:${PATH}:${HOME}/bin:${DOCKER_CONFIG}/cli-plugins
+
+# Configurar el daemon de Docker para que se ejecute en modo sin privilegios.
+# Aquí puedes añadir cualquier configuración adicional que necesites.
+#COPY docker-daemon.json ${HOME}/.docker/daemon.json
+
+# Usar un script de entrada personalizado para iniciar el daemon de Docker en modo sin privilegios
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["entrypoint.sh"]

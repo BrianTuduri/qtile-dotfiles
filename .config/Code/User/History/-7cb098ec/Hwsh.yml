@@ -1,0 +1,77 @@
+---
+- name: Making setup of the kafka environment
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: root
+  remote_user: root
+  tasks:
+    - name: Incluir tareas para configuración de Kafka
+      include_tasks: kafka/setup.yml
+  tags: 
+    - always
+
+- name: Create Connectors properties
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false 
+  become: yes
+  become_user: root   
+  remote_user: root
+  roles:
+    - add_connectors
+  tags: 
+    - add-connectors
+
+- name: Crear topicos
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: root
+  remote_user: root
+  roles:
+    - geocom.geoscm.kafka_add_topic
+  vars:
+    - topic_files_path: "{{ kafka_topics_dir }}"
+  tags: 
+    - "apply-topic"
+
+      
+- name: Aplicando connect
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false
+  become: yes
+  become_user: root
+  remote_user: root
+  roles:
+    - apply_connect
+  tags: 
+    - apply-connect
+
+
+# - name: Nuke Topicos & Connectors
+#   hosts: all
+#   gather_facts: true
+#   any_errors_fatal: false
+#   become: yes
+#   become_user: root
+#   remote_user: root
+#   roles:
+#     - delete_topics
+# #    - delete_connectors
+#   tags: 
+#     - delete
+
+- name: Delete topics
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: root
+  remote_user: root
+  roles:
+    - geocom.geoscm.kafka_delete_topic
+  vars:
+    - topic_files_path: "{{ kafka_topics_dir }}"
+  tags: 
+    - "delete"

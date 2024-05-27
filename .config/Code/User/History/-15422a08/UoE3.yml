@@ -1,0 +1,321 @@
+---
+- import_playbook: "../../../roles/keepalived/playbooks/LinuxCluster.yml"
+- name: Deploying Nodes
+  gather_facts: false
+  hosts: all
+  tags: create
+  roles:
+    - rke_install
+    - rke_join
+  pre_tasks:
+    - ansible.builtin.copy:
+        dest: /etc/rancher/rke2/registries.yaml
+        mode: "0655"
+        content: |
+          mirrors:
+            docker.io:
+              endpoint:
+                - "https://nexus-mirror.geocom.com.uy"
+            registry.gitlab.geocom.com.uy:
+              endpoint:
+                - "https://nexus-mirror.geocom.com.uy"
+
+    - when: "{{ storage | default(false) | bool }}"
+      block:
+      - name:
+        ansible.builtin.file:
+          path: "{{ longhorn_mount_point }}"
+          mode: "0755"
+          state: directory
+      - name: Extend an existing partition to fill all available space
+        when: false
+        shell: |
+          sudo mkfs.{{ partition_fstype }} {{ longhorn_mount_source }}1
+          parted {{ longhorn_mount_source }} --script mklabel gpt mkpart primary {{ partition_fstype }} 0% 100%
+      - name: Add the mount to fstab
+        ansible.builtin.mount:
+          path: "{{ longhorn_mount_point }}" #
+          src: "{{ longhorn_mount_source }}1"
+          fstype: "{{ partition_fstype }}"
+          opts: defaults
+          state: present
+      - ansible.builtin.systemd:
+          daemon_reload: yes
+      - become: true
+        shell: mount -a
+
+- name: Configuring Cluster
+  hosts: "localhost," # Need to have access to {{ rancher_url }} 443 and backend address
+  connection: local
+  tags: configuration
+  vars:
+    terraform_project_path: ./configuration
+    terraform_vault_path: "{{ terraform_project_path }}/vault"
+    terraform_provisioning_vault_path: "{{ terraform_project_path }}/vault-provisioning"
+    address: "{{ backend_address }}/terraform/state/{{ cluster_name }}"
+  tasks:
+    - name: print
+      debug:
+        msg: "backend: {{ backend_address }} cluster_name: {{ cluster_name }} y address: {{ address }}"
+    - name: Block to use "always" feature :)
+      block:
+        # Cluster creation
+        - name: Create cluster
+          tags: create
+          register: cluster_creation
+          ansible.builtin.uri:
+            url: "{{ rancher_url }}/v3/clusters"
+            method: POST
+            body_format: json
+            body:
+              # Important ones
+              name: "{{ cluster_name }}"
+              rancherKubernetesEngineConfig: null
+              agentEnvVars: []
+              # Defaults
+              aksConfig: null
+              amazonElasticContainerServiceConfig: null
+              answers: null
+              azureKubernetesServiceConfig: null
+              clusterAgentDeploymentCustomization: null
+              clusterTemplateRevisionId: ""
+              defaultClusterRoleForProjectMembers: ""
+              defaultPodSecurityPolicyTemplateId: ""
+              dockerRootDir: "/var/lib/docker"
+              eksConfig: null
+              enableClusterAlerting: false
+              enableClusterMonitoring: false
+              fleetAgentDeploymentCustomization: null
+              gkeConfig: null
+              googleKubernetesEngineConfig: null
+              k3sConfig: null
+              localClusterAuthEndpoint: null
+              rke2Config: null
+              windowsPreferedCluster: false
+            headers:
+              Content-Type: "application/json"
+              Authorization: "Bearer {{ rancher_token_key }}"
+            status_code:
+              - 200
+              - 422
+        - name: Get cluster
+          register: cluster_creation
+          ansible.builtin.uri:
+            url: "{{ rancher_url }}/v3/clusters?name={{ cluster_name }}"
+            headers:
+              Authorization: "Bearer {{ rancher_token_key }}"
+            status_code: 200
+        - name: Set cluster_id
+          set_fact:
+            cluster_id: "{{ cluster_creation.json.data[0].id }}"
+        - name: Get cluster registration manifest location
+          ansible.builtin.uri:
+            url: "{{ rancher_url }}/v3/clusterregistrationtokens?clusterId={{ cluster_id }}"
+            headers:
+              Authorization: "Bearer {{ rancher_token_key }}"
+          register: manifest_location
+        - name: Apply registration manifest on master 1
+          tags: create
+          delegate_to: "{{ groups['masters'][0] }}"
+          block:
+            - name: Download cluster registration manifest to join the cluster.
+              ansible.builtin.get_url:
+                url: "{{ manifest_location.json.data[0].command | split(' ') | last }}"
+                dest: "/tmp/join.yml"
+                mode: "0664"
+              register: join_cluster_manifest
+            - name: Apply cluster registration manifest to the cluster.
+              when: false
+              delegate_to: "{{ groups['masters'][0] }}"
+              shell: |
+                /var/lib/rancher/rke2/bin/kubectl \
+                  apply \
+                  -f {{ join_cluster_manifest.dest }} \
+                  --kubeconfig "/etc/rancher/rke2/rke2.yaml"
+            - name: "Remove manifest"
+              ansible.builtin.file:
+                path: "{{ join_cluster_manifest.dest }}"
+                state: absent
+            - name: Wait for cluster to go ready
+              ansible.builtin.uri:
+                url: "{{ rancher_url }}/v3/clusters?name={{ cluster_name }}"
+                headers:
+                  Authorization: "Bearer {{ rancher_token_key }}"
+                status_code: 200
+              register: cluster_info
+              until: cluster_info.json.data[0].state == 'active'
+              retries: 30
+              delay: 10
+
+        # Apply configuration
+        - name: "Instance Variables"
+          ansible.builtin.copy:
+            dest: ./{{terraform_project_path}}/variables.tfvars
+            mode: "0655"
+            content: |
+              global_registry="{{ global_registry }}"
+              metallb_default_ip="{{ metallb_default_ip }}"
+              rancher_service_account="{{ service_account_name }}"
+              cluster_name="{{cluster_name}}"
+          register: terraform_variables
+        - name: "Generate Backend config"
+          ansible.builtin.copy:
+            dest: "./{{ terraform_project_path }}/backend_config.tf"
+            mode: "0655"
+            content: |
+              terraform {
+                backend "http" {
+                  address        = "{{ address }}"
+                  lock_address   = "{{ address }}/lock"
+                  unlock_address = "{{ address }}/lock"
+                  username       = "{{ backend_username }}"
+                  password       = "{{ backend_password }}"
+                  lock_method    = "POST"
+                  unlock_method  = "DELETE"
+                  retry_wait_min = 1
+                }
+              }
+          register: backend_config
+        - name: "Retrieve KUBECONFIG from Rancher"
+          vars:
+            retrieved_kubeconfig_path: "./{{ terraform_project_path }}/.kubeconfig.yml"
+          ansible.builtin.include_role:
+            name: retrieve_kubeconfig_from_rancher
+
+        - name: "Run cluster"
+          environment:
+            KUBECONFIG: "{{ retrieved_kubeconfig_path.dest | basename }}"
+            KUBE_CONFIG_PATH: "{{ retrieved_kubeconfig_path.dest | basename }}"
+            RANCHER_URL: "{{ rancher_url }}"
+            RANCHER_TOKEN_KEY: "{{ rancher_token_key }}"
+          community.general.terraform:
+            project_path: "{{ terraform_project_path }}"
+            variables_files: ["{{ terraform_variables.dest | basename }}"]
+            init_reconfigure: true
+            force_init: true
+          register: cluster_creation
+          
+        # - name: Create kubernetes resources for lookup output
+        #   environment:
+        #     KUBECONFIG: "{{ retrieved_kubeconfig_path.dest | basename }}"
+        #   k8s:
+        #     namespace: "kustomization"
+        #     definition: "{{ lookup('kubernetes.core.kustomize', dir='./kustomization') }}"
+        
+        - name: "[ Vault deploy ] | Vault Block . . ."
+          tags: "vault"
+          block:
+            - name: "[ Vault deploy ] | Retrieve KUBECONFIG from Rancher"
+              vars:
+                retrieved_kubeconfig_path: "./{{ terraform_vault_path }}/.kubeconfig.yml"
+              ansible.builtin.include_role:
+                name: retrieve_kubeconfig_from_rancher
+
+            - name: "[ Vault deploy ] | Generate Backend config for vault server . . ."
+              vars:
+                address_b: "{{ backend_address }}/terraform/state/vault-{{ cluster_name }}"
+                backend_username: "{{ backend_username  }}"
+                backend_password: "{{ backend_password  }}"
+                dest_backend_path: "./{{ terraform_vault_path }}/backend_vault_config.tf"
+              ansible.builtin.import_role:
+                name: gen-backend
+
+            - name: "[ Vault deploy ] | Instance Vault Variables"
+              ansible.builtin.copy:
+                dest: "{{terraform_vault_path}}/variables.tfvars"
+                mode: "0655"
+                content: |
+                  global_registry="{{ global_registry }}"
+                  metallb_default_ip="{{ metallb_default_ip }}"
+                  rancher_service_account="{{ service_account_name }}"
+                  cluster_name="{{cluster_name}}"
+                  ldapUser="{{ ldapUser }}"
+                  ldapPass="{{ ldapPass }}"
+              register: terraform_vault_variables
+
+            - name: "[ Vault deploy ] | Create vault . . ."
+              environment:
+                KUBECONFIG: "{{ retrieved_kubeconfig_path.dest | basename }}"
+                KUBE_CONFIG_PATH: "{{ retrieved_kubeconfig_path.dest | basename }}"
+                RANCHER_URL: "{{ rancher_url }}"
+                RANCHER_TOKEN_KEY: "{{ rancher_token_key }}"
+                VAULT_ADDR: "{{ vault_addr }}"
+                VAULT_TOKEN: "{{ vault_token }}"
+
+              community.general.terraform:
+                project_path: "{{ terraform_vault_path }}"
+                variables_files: ["variables.tfvars"]
+                init_reconfigure: true
+                force_init: true
+              register: vault_creation
+        
+        ### VAULT PROVISIONING ###
+
+        - name: "Check vault.geocom.com.uy availability"
+          uri:
+            url: https://vault.geocom.com.uy
+            method: GET
+            return_content: false
+          register: vault_page
+          until: vault_page.status == 200
+          retries: 5
+          delay: 10
+          ignore_errors: yes
+
+        - name: "[ Vault provisioning ] |  Deploy Vault Block provisioning"
+          when: vault_page.status == 200
+          tags: "vault-provisioning"
+          block:
+            - name: "[ Vault provisioning ] | Retrieve KUBECONFIG from Rancher"
+              vars:
+                retrieved_kubeconfig_path: "./{{ terraform_provisioning_vault_path }}/.kubeconfig.yml"
+              ansible.builtin.include_role:
+                name: retrieve_kubeconfig_from_rancher
+
+            - name: "[ Vault provisioning ] | Generate Backend config for vault server . . ."
+              vars:
+                address_b: "{{ backend_address }}/terraform/state/vault-{{ cluster_name }}-provisioning"
+                backend_username: "{{ backend_username  }}"
+                backend_password: "{{ backend_password  }}"
+                dest_backend_path: "./{{ terraform_provisioning_vault_path }}/backend_vault_config.tf"
+              ansible.builtin.import_role:
+                name: gen-backend
+
+            - name: "[ Vault provisioning ] | Instance Vault Variables . . ."
+              ansible.builtin.copy:
+                dest: "{{  terraform_provisioning_vault_path }}/variables.tfvars"
+                mode: "0655"
+                content: |
+                  ldapUser="{{ ldapUser }}"
+                  ldapPass="{{ ldapPass }}"
+              register: terraform_provisioning_vault_variables
+
+            - name: "[ Vault provisioning ] | Apply vault configs . . ."
+              environment:
+                KUBECONFIG: "{{ retrieved_kubeconfig_path.dest | basename }}"
+                KUBE_CONFIG_PATH: "{{ retrieved_kubeconfig_path.dest | basename }}"
+                RANCHER_URL: "{{ rancher_url }}"
+                RANCHER_TOKEN_KEY: "{{ rancher_token_key }}"
+                VAULT_ADDR: "{{ vault_addr }}"
+                VAULT_TOKEN: "{{ vault_token }}"
+
+              community.general.terraform:
+                project_path: "{{ terraform_provisioning_vault_path }}"
+                variables_files: ["variables.tfvars"]
+                init_reconfigure: true
+                force_init: true
+              register: vault_provisioning_creation
+      always:
+        - name: "Remove all sensitive and autogenerated files"
+          ansible.builtin.file:
+            path: "{{ item }}"
+            state: absent
+          loop:
+            - "{{ retrieved_kubeconfig_path.dest }}"
+            - "{{ terraform_variables.dest }}"
+            - "{{ backend_config.dest }}"
+            - "{{ backend_vault_config.dest }}" # [ Vault deploy ]
+            - "{{ terraform_vault_path }}/.kubeconfig.yml" # [ Vault deploy ]
+            - "{{ terraform_vault_variables.dest }}" # [ Vault deploy ]
+            - "{{ dest_backend_path }}" # [ Vault provisioning ]
+            - "{{ terraform_provisioning_vault_variables.dest }}" # [ Vault provisioning ]

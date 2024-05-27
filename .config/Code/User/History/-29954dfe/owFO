@@ -1,0 +1,47 @@
+# Usamos la imagen base especificada
+FROM jenkins/agent:jdk21
+
+USER root
+
+# Definimos las URLs de descarga de las JDKs
+ARG JDK6_URL="https://nexus.geocom.com.uy/repository/Ghiggia/tools/swbase/64bits/java/jdk-6.tar.gz"
+ARG JDK8_URL="https://nexus.geocom.com.uy/repository/Ghiggia/tools/swbase/64bits/java/jdk-8.tar.gz"
+ARG JDK11_URL="https://nexus.geocom.com.uy/repository/Ghiggia/tools/swbase/64bits/java/jdk-11.tar.gz"
+ARG JDK17_URL="https://nexus.geocom.com.uy/repository/Ghiggia/tools/swbase/64bits/java/jdk-17.tar.gz"
+ARG JDK21_URL="https://nexus.geocom.com.uy/repository/Ghiggia/tools/swbase/64bits/java/jdk-21.tar.gz"
+
+# # Instalamos herramientas necesarias, incluyendo wget que necesitaremos para descargar los JDKs
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    zip \
+    wget \
+    software-properties-common \
+    java-common
+
+# Instalamos las JDKs utilizando curl
+RUN mkdir /usr/lib/jvm && \
+    wget -O - ${JDK6_URL} | tar -xz -C /usr/lib/jvm && \
+    wget -O - ${JDK8_URL} | tar -xz -C /usr/lib/jvm && \
+    wget -O - ${JDK11_URL} | tar -xz -C /usr/lib/jvm && \
+    wget -O - ${JDK17_URL} | tar -xz -C /usr/lib/jvm && \
+    wget -O - ${JDK21_URL} | tar -xz -C /usr/lib/jvm
+
+# Configuramos las alternativas para las versiones de JDK
+# Asegúrate de ajustar los nombres de los directorios si son diferentes
+RUN update-java-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.6.0_45/bin/java && \
+    update-java-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_191/bin/java && \
+    update-java-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-11.0.14/bin/java && \
+    update-java-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-17/bin/java && \
+    update-java-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-21.0.2/bin/java && \
+    update-java-alternatives --set java /usr/lib/jvm/jdk-21.0.2/bin/java
+#   update-java-alternatives --set java-1.17.0-openjdk-amd64
+
+# Limpieza de archivos de paquetes innecesarios para reducir el tamaño de la imagen
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+USER jenkins
+
+# Comando para mantener el contenedor en ejecución
+CMD ["sleep", "infinity"]

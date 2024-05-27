@@ -1,0 +1,5 @@
+2024/05/15-20:37:02.967 3430 Creating DB /home/brian/.config/chromium/Default/IndexedDB/https_app.diagrams.net_0.indexeddb.leveldb since it was missing.
+2024/05/15-20:37:02.983 3430 Reusing MANIFEST /home/brian/.config/chromium/Default/IndexedDB/https_app.diagrams.net_0.indexeddb.leveldb/MANIFEST-000001
+2024/05/15-20:43:54.087 3431 Level-0 table #5: started
+2024/05/15-20:43:54.125 3431 Level-0 table #5: 4298801 bytes OK
+2024/05/15-20:43:54.128 3431 Delete type=0 #3

@@ -1,0 +1,4 @@
+docker:
+  args:
+    - hostname:
+      name:  # required. Name of the host

@@ -1,0 +1,124 @@
+2024-05-24 11:51:30.708 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:51:30.709 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:51:30.709 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml
+2024-05-24 11:51:30.709 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml"
+2024-05-24 11:51:43.463 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:51:43.492 [info] git rev-parse --absolute-git-dir
+2024-05-24 11:51:43.530 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/runPlaybook.bash
+2024-05-24 11:51:43.534 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/runPlaybook.bash"
+2024-05-24 12:10:30.423 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:10:30.448 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/runPlaybook.bash
+2024-05-24 12:10:30.450 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/runPlaybook.bash"
+2024-05-24 12:12:09.313 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:12:09.346 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml
+2024-05-24 12:12:09.351 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml"
+2024-05-24 12:16:51.096 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:16:51.122 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:16:51.149 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/inventory.ini
+2024-05-24 12:16:51.153 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/inventory.ini"
+2024-05-24 12:17:57.043 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:17:57.080 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml
+2024-05-24 12:17:57.083 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml"
+2024-05-24 12:17:58.361 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:17:58.391 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:17:58.417 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/requirements.yml
+2024-05-24 12:17:58.421 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/requirements.yml"
+2024-05-24 12:18:02.967 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:18:02.998 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml
+2024-05-24 12:18:03.003 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml"
+2024-05-24 12:18:08.829 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:18:08.854 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/inventory.ini
+2024-05-24 12:18:08.858 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/inventory.ini"
+2024-05-24 12:18:23.581 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:18:23.615 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml
+2024-05-24 12:18:23.620 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml"
+2024-05-24 12:19:09.507 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:19:09.532 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/requirements.yml
+2024-05-24 12:19:09.536 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/requirements.yml"
+2024-05-24 12:19:32.346 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:19:32.371 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:19:32.386 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/.envrc
+2024-05-24 12:19:32.389 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/.envrc"
+2024-05-24 12:19:43.212 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:19:43.245 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml
+2024-05-24 12:19:43.249 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml"
+2024-05-24 12:19:44.108 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:19:44.132 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/runPlaybook.bash
+2024-05-24 12:19:44.135 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/runPlaybook.bash"
+2024-05-24 12:20:15.040 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:20:15.069 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/inventory.ini
+2024-05-24 12:20:15.072 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/inventory.ini"
+2024-05-24 12:20:15.544 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:20:15.570 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml
+2024-05-24 12:20:15.574 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml"
+2024-05-24 12:25:17.397 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:25:17.420 [info] git rev-parse --absolute-git-dir
+2024-05-24 12:25:17.513 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile
+2024-05-24 12:25:17.662 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile"
+2024-05-24 13:13:48.230 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:13:48.267 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile
+2024-05-24 13:13:48.279 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile"
+2024-05-24 13:13:49.365 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:13:49.408 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile
+2024-05-24 13:13:49.428 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile"
+2024-05-24 13:15:07.067 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:15:07.103 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile
+2024-05-24 13:15:07.115 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile"
+2024-05-24 13:15:47.011 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:15:47.048 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile
+2024-05-24 13:15:47.060 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile"
+2024-05-24 13:15:51.544 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:15:51.582 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile
+2024-05-24 13:15:51.594 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile"
+2024-05-24 13:16:34.988 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:16:35.027 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile
+2024-05-24 13:16:35.040 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile"
+2024-05-24 13:25:43.282 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:25:43.318 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile
+2024-05-24 13:25:43.327 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile"
+2024-05-24 13:28:53.564 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:28:53.604 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile
+2024-05-24 13:28:53.616 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile"
+2024-05-24 13:28:59.132 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:28:59.159 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/inventory.ini
+2024-05-24 13:28:59.163 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/inventory.ini"
+2024-05-24 13:29:44.814 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:29:44.855 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/inventory.ini
+2024-05-24 13:29:44.869 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/inventory.ini"
+2024-05-24 13:30:11.937 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:30:12.006 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/inventory.ini
+2024-05-24 13:30:12.011 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/inventory.ini"
+2024-05-24 13:30:20.783 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:30:20.818 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml
+2024-05-24 13:30:20.822 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml"
+2024-05-24 13:30:38.170 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:30:38.194 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml
+2024-05-24 13:30:38.197 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/ansible/playbook.yml"
+2024-05-24 13:30:54.738 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:30:54.753 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/.envrc
+2024-05-24 13:30:54.756 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/.envrc"
+2024-05-24 13:30:55.135 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:30:55.161 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:30:55.193 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/.gitignore
+2024-05-24 13:30:55.197 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/.gitignore"
+2024-05-24 13:30:57.753 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:30:57.790 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/.gitignore
+2024-05-24 13:30:57.802 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/.gitignore"
+2024-05-24 13:31:19.959 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:31:19.984 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/.gitignore
+2024-05-24 13:31:19.986 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/.gitignore"
+2024-05-24 13:31:42.295 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:31:42.313 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/.envrc
+2024-05-24 13:31:42.315 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/.envrc"
+2024-05-24 13:33:53.790 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:33:53.821 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile
+2024-05-24 13:33:53.830 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile"
+2024-05-24 13:38:28.948 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:38:28.972 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile
+2024-05-24 13:38:28.976 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile"
+2024-05-24 13:45:02.039 [info] git rev-parse --absolute-git-dir
+2024-05-24 13:45:02.080 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile
+2024-05-24 13:45:02.092 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile"
+2024-05-24 15:29:11.730 [info] git rev-parse --absolute-git-dir
+2024-05-24 15:29:11.770 [info] git blame -C --incremental -- /home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile
+2024-05-24 15:29:11.784 [info] Blamed "/home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile"

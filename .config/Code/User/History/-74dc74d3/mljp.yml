@@ -1,0 +1,41 @@
+- name: Incluir variables específicas del ambiente
+  include_vars:
+    file: "{{ playbook_dir }}/vars/{{ ambiente }}.yml"
+
+- name: "Creando directorio {{ kafka_config_directory }}/{{ ambiente }}"
+  file:
+    path: "{{ kafka_config_directory }}/{{ ambiente }}"
+    state: directory
+
+- name: "Creando directorio {{ kafka_topics_dir }}"
+  file:
+    path: "{{ kafka_topics_dir }}"
+    state: directory
+
+- name: "Creando directorio {{ kafka_connectors_dir }}"
+  file:
+    path: "{{ kafka_connectors_dir }}"
+    state: directory
+
+- name: Copy propiedades generales
+  template:
+    src: "{{ repo_home }}/Ansible/templates/connect-distributed.properties.j2"
+    dest: "{{ kafka_config_directory }}/{{ ambiente }}/connect-distributed.properties"
+
+- name: Copy plugin
+  copy:
+    src: "{{ repo_home }}/utils/"
+    dest: "{{ kafka_plugin_directory }}"
+    mode: 775
+
+- name: "Copy connectors to {{ kafka_connectors_dir }}"
+  copy:
+    src: "{{ kafka_local_connectors_dir }}"
+    dest: "{{ kafka_connectors_dir }}"
+    mode: 775
+
+- name: "Copy topics to {{ kafka_topics_dir }}"
+  copy:
+    src: "{{ kafka_local_topics_dir }}" 
+    dest: "{{ kafka_topics_dir }}"
+    mode: 775

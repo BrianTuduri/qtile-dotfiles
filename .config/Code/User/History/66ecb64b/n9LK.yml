@@ -1,0 +1,16 @@
+auth:
+  type: LDAP
+spring:
+  ldap:
+    urls: ldap://172.24.18.180:389
+    base: "ou=Uruguay,ou=Geocom,dc=geocom,dc=com,dc=uy"
+    user-filter-search-filter: "(&(uid={0})(objectClass=person))"
+oauth2:
+  ldap:
+    activeDirectory: false
+      domain: 172.24.18.180
+
+kafka:
+  clusters:
+    - name: express-qa
+      bootstrapServers: 172.24.26.158:9092

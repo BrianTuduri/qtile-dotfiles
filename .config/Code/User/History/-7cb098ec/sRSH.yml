@@ -1,0 +1,48 @@
+---
+- name: Configurar ambiente Kafka
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Incluir tareas para configuración de Kafka
+      include_tasks: kafka/setup.yml
+  tags: 
+    - always
+
+- name: Create Connectors properties
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false    
+  roles:
+    - add_connectors
+  tags: 
+    - add-connectors
+
+- name: Crear topicos
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Incluir tareas para crear topicos de Kafka
+      include_tasks: kafka/add_topics.yml
+  tags: 
+    - "apply-topic"
+
+- name: Aplicando connect
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false
+  roles:
+    - apply_connect
+  tags: 
+    - apply-connect
+
+
+- name: Nuke Topicos & Connectors
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: false
+  roles:
+    - delete_topics
+#    - delete_connectors
+  tags: 
+    - delete
+

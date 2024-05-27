@@ -1,0 +1,40 @@
+---
+# tasks file for kafka_delete_topic
+- name: "Buscar archivos de configuración de topics"
+  become: yes
+  find:
+    paths: "{{ topic_files_path }}"
+    patterns: "*.yml"
+  register: topic_files
+
+- name: "Debug topics config"
+  debug:
+    msg: "Topics files es {{ topic_files }}"
+
+- name: "Consolidar configuraciones de topics"
+  become: yes
+  set_fact:
+    topics_config: "{{ topics_config | default([]) + [lookup('file', item.path) | from_yaml] }}"
+  loop: "{{ topic_files.files }}"
+  loop_control:
+    loop_var: item
+
+# - name: "Debug topics config"
+#   debug:
+#     msg: "Topics config {{ item }}"
+
+- name: "Delete topics"
+  command:
+    argv:
+      - sh 
+      - "{{ kafka_bin_directory }}/kafka-topics.sh"
+      - --bootstrap-server
+      - "{{ bootstrap_servers }}"
+      - --delete
+      - --topic
+      - "{{ item.topic.name }}"
+  loop: "{{ topics_config }}"
+  loop_control:
+    loop_var: item
+  ignore_errors: true
+  failed_when: false

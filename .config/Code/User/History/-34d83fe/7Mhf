@@ -1,0 +1,35 @@
+FROM jenkins/agent:jdk21 as jenkins-agent
+
+USER root
+
+RUN apt-get update && apt-get install -y \
+    uidmap \
+    curl \
+    git \
+    dbus-user-session \
+    && apt-get clean
+
+RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
+
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+
+RUN chmod 777 /usr/local/bin/entrypoint.sh
+
+USER jenkins
+
+RUN DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker} \
+    && mkdir -p $DOCKER_CONFIG/cli-plugins \
+    && curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose \
+    && chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
+
+RUN export SKIP_IPTABLES=1 && \
+    curl -fsSL https://get.docker.com/rootless -o /usr/local/bin/get-docker-rootless.sh && \
+    sh /usr/local/bin/get-docker-rootless.sh
+
+ENV PATH=/usr/bin:${PATH}:${HOME}/bin:${DOCKER_CONFIG}/cli-plugins
+
+#COPY docker-daemon.json ${HOME}/.docker/daemon.json
+
+
+
+ENTRYPOINT ["entrypoint.sh"]

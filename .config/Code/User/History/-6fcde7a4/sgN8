@@ -1,0 +1,9 @@
+GIT_USERNAME=geocloudvandamme
+GIT_PASSWORD=G30.KL4uD./
+TZ=America/Asuncion                           # Timezone
+CONFIGURATOR_URL=http://172.24.54.74:8888  
+CONFIGURATOR_LABEL=farmacenter                        # Rama en el repo
+PROFILE_ACTIVE=compose                    # Perfil en el archivo "oms_$perfil.yml"
+ENCRYPT_KEY=g30c0m1
+SPRING_SECURITY_USER_NAME=admin
+SPRING_SECURITY_USER_PASSWORD=s3cr3t

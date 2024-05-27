@@ -1,0 +1,38 @@
+docker:
+  image: "nexus.geocom.com.uy/scm-docker-images/openjdk:mvn2.2.1-jdk8"
+  workdir: "/project"  # Define an anchor named 'workdir'
+  # toDO: AGREGAR 2 BOOLEANOS DE FORCE PARA PISAR LA LISTA DE VOLUMES
+  volumes:
+    - "/slave/m2/:/root/.m2/"
+    - "/slave/.tmp_builds/tmp/:/project"  # Reuse the value using an alias
+  args:
+    - "--add-host 'gitlab.geocom.com.uy:172.24.18.194'"
+
+jenkins:
+  credentials:
+    # docker
+    docker_ip_credential: 'docker_slave_ip_port'
+    docker_server_credential: 'Docker_Certs'
+    # nexus
+    nexus_ip_credential: 'nexus_slave_ip_port'
+    # gitlab
+    git_credential_id: "15940393-32ad-416e-ad80-b8ea71536641"
+
+nexus:
+  credentials:
+    nexus_repository: "Ghiggia-60-dias"
+    nexus_group_id: "uy.com.geocom.alkosto"
+    nexus_credential_id: "nexus-deploy"
+
+git:
+  - LABEL: "jdk21"
+################################################################
+###  PARAMETEROS QUE CAMBIAN ####
+
+# / URL_REPO
+# / BRANCHES
+# / ARGS (MAVEN O GRADLE)
+# / JAVA (6 o 8)
+# / IMAGEN DOCKER
+
+################################################################

@@ -1,0 +1,15 @@
+RABBIT_USER=oms
+RABBIT_PASS=farmacenter
+CONFIGURATOR_USERNAME=admin
+CONFIGURATOR_PASSWORD=s3cr3t
+TZ=America/Asuncion                           # Timezone
+CONFIGURATOR_URL=http://172.24.54.74:8888  
+CONFIGURATOR_LABEL=farmacenter                        # Rama en el repo
+PROFILE_ACTIVE=compose                      # Perfil en el archivo "oms_$perfil.yml"
+
+# order tracker
+MONGO_URL='mongodb://localhost:27017/monitor'
+INDICATORS_CRON='*/1 * * * *'
+CONCENTRATOR_USER='monitor'
+CONCENTRATOR_PASSWORD='1234'
+CONCENTRATOR_URL='http://gateway-service:8443' 

@@ -1,0 +1,295 @@
+def fileName
+def scanNameReplaced
+def fileNamePattern	= params.fileNamePattern
+def uploadIncludesPattern = params.uploadIncludesPattern
+def uploadExcludesPattern = params.uploadExcludesPattern
+def artifactUrl = params.artifactUrl
+def scanName = params.scanName
+def jsonFile
+def scanExcludesPattern
+def isExcludeScan = false
+def artifactFolder="artifactFolderToUpload"
+def ANSI_RESET = "\033[0m"
+def ANSI_GREEN = "\033[32m"
+def printVeraParams = true
+
+pipeline {
+    agent { label "veracode-agent" }
+    options {
+        ansiColor('xterm')
+        quietPeriod(5) // seconds
+    }
+    parameters {
+        string(name: 'applicationName', defaultValue: 'application', description: 'Nombre de la aplicación en Veracode | Ejemplo: (GEOIntegrator, TicketUpdater, GEOIntegrator, GEOPos, GEOPricer, GEOInventory, Backoffice3, GEOPromotions, GEOMunicipal, GeoSwitchYZA)')
+        booleanParam(name: 'canFailJob', defaultValue: true, description: 'Indica si el trabajo falla cuando falla Veracode')
+        booleanParam(name: 'createProfile', defaultValue: true, description: 'Crear perfil de aplicación si no existe')
+        choice(name: 'criticality', choices: ['VeryHigh', 'High', 'Medium', 'Low', 'VeryLow'], description: 'Nivel de criticidad del escaneo')
+        choice(name: 'deleteIncompleteScanLevel', choices: ['0', '1', '2'], description: 'Manejo de escaneos incompletos')
+        string(name: 'fileNamePattern', defaultValue: '', description: 'Patrón de nombre de archivo para la carga. Lista separada por comas')
+        string(name: 'replacementPattern', defaultValue: '', description: 'Patrón de reemplazo para nombres de archivo')
+        string(name: 'sandboxName', defaultValue: '', description: 'Nombre del sandbox para el análisis')
+        string(name: 'scanExcludesPattern', defaultValue: '', description: 'Patrones para excluir del escaneo. Lista separada por comas')
+        string(name: 'scanIncludesPattern', defaultValue: '', description: 'Patrones para incluir en el escaneo. Lista separada por comas')
+        string(name: 'scanName', defaultValue: '', description: 'Nombre del escaneo')
+        string(name: 'teams', defaultValue: 'Default Team', description: 'Equipos asociados con la aplicación')
+        booleanParam(name: 'unstableBuild', defaultValue: false, description: 'Marca el build como inestable si el escaneo falla')
+        booleanParam(name: 'waitForScan', defaultValue: false, description: 'Esperar a que finalice el escaneo')
+        string(name: 'timeout', defaultValue: '1200', description: 'Tiempo de espera para el escaneo en minutos')
+        string(name: 'uploadIncludesPattern', defaultValue: '', description: 'Patrones de archivo para cargar y escanear. Lista separada por comas')
+        string(name: 'uploadExcludesPattern', defaultValue: '**/*.war', description: 'Patrones de archivo para excluir en la carga. Lista separada por comas')
+        string(name: 'artifactUrl', defaultValue: '', description: 'URL de descarga a el artefacto compilado')
+        string(name: 'gitUrl', defaultValue: '', description: 'URL de el repositorio GITLAB (Opcional)')
+        string(name: 'gitBranch', defaultValue: '', description: 'URL de el repositorio GITLAB (Opcional, obligatorio si utiliza [gitUrl])')
+        extendedChoice(name: 'isMavenProject',type: 'PT_HIDDEN',defaultValue: '',description: 'True o cualquier texto en caso de que sea maven project')
+    }
+    stages {
+        stage('Validating parameters . . .') {
+            steps {
+                script {
+                    println("Validando parametros . . .")
+                    def validateParams = {
+                        if (params.applicationName == null || params.applicationName.trim().isEmpty()) {
+                            error("El nombre de la aplicación no puede estar vacío.")
+                        }
+                        if (params.artifactUrl != null || !params.artifactUrl.trim().isEmpty()) {
+                            fileName=params.artifactUrl.split("/").last()
+                        } else {error("La URL de el artefacto no puede estar vacío.")}
+
+                        if (params.scanName != null || !params.scanName.trim().isEmpty()) {
+                            scanNameReplaced = params.scanName.replace("[NUMBER]", env.BUILD_NUMBER )
+                        }
+
+                        if (params.isMavenProject != null && !params.isMavenProject.trim().isEmpty()) {
+                            fileNamePattern	= params.fileNamePattern.replace("-SNAPSHOT", "")
+                            artifactUrl	= params.artifactUrl.replace("-SNAPSHOT", "")
+                            scanNameReplaced = scanNameReplaced.replace("-SNAPSHOT", "")
+                        }
+                        uploadExcludesPattern = params.uploadExcludesPattern
+                        uploadExcludesPattern += [
+                            "**/*.war",
+                            "**/*.git",
+                            "**/*.sh",
+                            "**/*.bat",
+                            "**/*.xml",
+                            "**/*.jsp",
+                            "**/*.properties",
+                            "**/*.txt",
+                            "**/*.java",
+                            "**/*.html",
+                            "**/*.xls",
+                            "**/*.dtd",
+                            "**/*.xsd",
+                            "**/*.gif",
+                            "**/*.jpg",
+                            "**/*.JPG",
+                            "**/*.PNG",
+                            "**/*.png",
+                            "**/*.css",
+                            "**/*.bmp",
+                            "**/*.class"
+                        ].join(',')
+                    }
+                    validateParams()
+                }
+            }
+        }
+        stage('Checkout . . .') {
+            when {
+                expression {
+                    return params.gitUrl
+                }
+            }
+            steps {
+                script {
+                    println("Realizando checkout . . .")
+                    checkout changelog: false, poll: false, scm: [
+                        $class: 'GitSCM',
+                        branches: [[name: params.gitBranch]],
+                        doGenerateSubmoduleConfigurations: false,
+                        extensions: [
+                            [$class: 'SparseCheckoutPaths',sparseCheckoutPaths: [[path: 'scanVeracode.json']]],
+                            [$class: 'RelativeTargetDirectory', relativeTargetDir: "repository"],
+                        ],
+                        gitTool: 'GIT Runner',
+                        submoduleCfg: [],
+                        userRemoteConfigs: [[credentialsId: '15940393-32ad-416e-ad80-b8ea71536641',
+                        url: params.gitUrl]]]
+                    isExcludeScan = true
+                }
+            }
+        }
+        stage('Preparing. . .') {
+            steps {
+                script {
+                    println("Creando el directorio [${artifactFolder}] . . .")
+                    sh(script: "mkdir -p ${artifactFolder}")
+
+                    def nameFolder = getExtensionWithoutZip(fileName)
+                    scanExcludesPattern = params.scanExcludesPattern ? params.scanExcludesPattern.split(',') : []
+                }
+            }
+        }
+        stage('Get artifact. . .') {
+            steps {
+                script {
+                    try {
+                        dir(artifactFolder) {
+                            println("Obteniendo el artefacto . . .")
+                            sh(script: "wget ${artifactUrl} > /dev/null 2>&1", returnStdout: false)
+                        }
+                    } catch(Exception e) { 
+                        error("Fallo al obtener el artefacto: ${e}") 
+                    }
+                }
+            }
+        }
+        stage('Preparing Zip File. . .') {
+            // zip file
+            when {
+                expression {
+                    return "${artifactUrl}".contains(".zip") && sh(script: "ls ${artifactFolder}", returnStdout: true).contains(".zip") 
+                }
+            }
+            steps {
+                script {
+                    try {
+                        dir(artifactFolder) {
+                            unzip zipFile: fileName, dir: ".", quiet: true
+                            sh(script: "rm -f ${fileName}")
+                        }
+                    } catch(Exception e) { 
+                        error("Fallo al obtener el artefacto: ${e}") 
+                    }
+                }
+            }
+        }
+        stage('Reading exclusion JSON file for scanning') {
+            when {
+                expression {
+                    return isExcludeScan
+                }
+            }
+            steps {
+                script {
+                    dir('repository'){
+                        try {
+                            jsonFile = readJSON file: 'scanVeracode.json'
+                            List<String> scanExcludesList = scanExcludesPattern.toList()
+
+                            println("scanExcludesPattern antes de agregar el json file ${scanExcludesList}")
+
+                            List<String> jsonExcludes = jsonFile['scanExcludesPattern'].collect { it.toString() }
+
+                            scanExcludesList.addAll(jsonExcludes)
+                            scanExcludesPattern = scanExcludesList
+
+                        } catch(Exception e) {
+                            error("Ocurrio un error leyendo el archivo JSON. \n Error: ${e}")
+                        }
+                        println("scanExcludesPattern despues de agregar el json file ${scanExcludesPattern}")
+                    }
+                }
+            }
+        }
+        stage('Veracode scanning . . . ') {
+            steps {
+                script {
+                    println("Comenzando el escaneo de veracode . . .")
+                    dir(artifactFolder) {
+                        withCredentials([usernamePassword(credentialsId: 'veracode-api-bt', passwordVariable: 'VERA_KEY', usernameVariable: 'VERA_ID')]) {
+                            def fileNameFolder = getExtensionWithoutZip(fileName)
+                            def fileContentFolder = sh(script: "ls -la ${fileNameFolder}", returnStdout: true).trim()
+                            def startTime = System.currentTimeMillis()
+
+                            if(printVeraParams) {
+                                println("\033[31m > Parametros: \n------------------ \033[0m")
+                                printParam('applicationName', params.applicationName)
+                                printParam('canFailJob', params.canFailJob, true)
+                                printParam('createProfile', params.createProfile, false)
+                                printParam('criticality', params.criticality, 'VeryHigh')
+                                printParam('deleteIncompleteScanLevel', params.deleteIncompleteScanLevel, '2')
+                                printParam('fileNamePattern', fileNamePattern, '')
+                                printParam('replacementPattern', params.replacementPattern, '')
+                                printParam('sandboxName', params.sandboxName, '')
+                                printParam('scanExcludesPattern', scanExcludesPattern ? scanExcludesPattern.join(',') : '', '')
+                                printParam('scanIncludesPattern', params.scanIncludesPattern, '')
+                                printParam('scanName', scanNameReplaced, "Build: ${env.BUILD_NUMBER} / ${fileNameFolder}")
+                                printParam('teams', params.teams, 'Default Team')
+                                printParam('unstableBuild', params.unstableBuild, false)
+                                printParam('waitForScan', params.waitForScan, false)
+                                printParam('timeout', params.timeout, '1200')
+                                printParam('uploadIncludesPattern', uploadIncludesPattern)
+                                printParam('uploadExcludesPattern', uploadExcludesPattern)
+                                printParam('vid', "*****")
+                                printParam('vkey', "***** \n \033[31m------------------")
+                            }
+
+                            try {
+                                veracode \
+                                    applicationName: params.applicationName, // requerido
+                                    canFailJob: params.canFailJob ?: true,
+                                    createProfile: params.createProfile ?: false,
+                                    criticality: params.criticality ?: "VeryHigh",
+                                    deleteIncompleteScanLevel: params.deleteIncompleteScanLevel ? params.deleteIncompleteScanLevel : "2",
+                                    fileNamePattern: fileNamePattern ?: "",
+                                    replacementPattern: params.replacementPattern ?: "",
+                                    sandboxName: params.sandboxName ?: "",
+                                    scanExcludesPattern: scanExcludesPattern ? scanExcludesPattern.join(',') : "",
+                                    scanIncludesPattern: params.scanIncludesPattern ?: "",
+                                    scanName: scanNameReplaced ?: "Build: $BUILD_NUMBER / ${fileNameFolder}", // requerido
+                                    teams: params.teams ?: "Default Team",
+                                    unstableBuild: params.unstableBuild ?: false,
+                                    waitForScan: params.waitForScan ?: false,
+                                    timeout: params.timeout ?: "1200",
+                                    uploadIncludesPattern: uploadIncludesPattern, // requerido
+                                    uploadExcludesPattern: uploadExcludesPattern,
+                                    vid: "${env.VERA_ID}",
+                                    vkey: "${env.VERA_KEY}"
+                            } catch(Exception e) {
+                                def message = e.message
+                                println(message)
+                                
+                            }
+                            // print scan duration
+                            def endTime = System.currentTimeMillis()
+                            def duration = (endTime - startTime) / (1000 * 60)
+                            println("\033[31mDuración: ${duration} minutos")
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+def getExtensionWithoutZip(fileName) {
+    return fileName.lastIndexOf('.') > 0 ? fileName[0..fileName.lastIndexOf('.')-1] : fileName
+}
+def printParam(String name, value, defaultValue = '') {
+    println("\033[31m > ${name}: \033[32m${value ?: defaultValue}\033[0m")
+}
+def validateError(String message) {
+    // actulamente veracode plugin no retorna el error, esto es lo ideal a futuro
+    def exitCode = message =~ /.*from wrapper:(\d+).*/
+    exitCode = exitCode ? exitCode[0][1] as Integer : null
+    if (exitCode != null) {
+        switch (exitCode) {
+            case 1:
+                error("Invalid input")
+                break
+            case 2:
+                error("API internal error")
+                break
+            case 3:
+                error("Incorrect file format")
+                break
+            case 4:
+                error("Scan did not pass policy compliance")
+                break
+            default:
+                error("Error desconocido: ${message}")
+        }
+    } else {
+        // Manejo de otros errores no capturados por los casos anteriores
+        error("Error no clasificado: ${message}")
+    }
+}

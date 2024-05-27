@@ -1,0 +1,17 @@
+{
+  "name": "sale-tickets-sink-qa",
+  "config": {
+    "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+    "tasks.max": "2",
+"connection.uri": "mongodb://userApp:Xpr.QA.PassRoot@srv-qa-sp-xpress-uych-mongo1:27017,srv-qa-sp-xpress-uych-mongo2:27017,srv-qa-sp-xpress-uych-mongo3:27017/admin?authSource=admin",
+    "errors.tolerance": "all",
+    "topics": "QA-mongo.geopos3-ticket.saleTickets",
+    "database": "geopos3-ticket",
+    "collection": "saleTicketsMirror",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": false,
+    "value.converter.schemas.enable": false,
+    "document.id.strategy.overwrite.existing": true
+  }
+}

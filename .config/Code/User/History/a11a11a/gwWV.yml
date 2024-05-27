@@ -1,0 +1,45 @@
+- name: "Deploying keepalived"
+  hosts: kafka
+  become: true
+  gather_facts: true
+  tags: keepalived
+  tasks:
+    - vars:
+        keepalived_instances:
+          kafka:
+            virtual_router_id: "27"
+            advert_int: "1"
+            group_name: "kafka"
+            authentication_password: "1d3c5s7!"
+            state: "{{ (groups[group_name].index(inventory_hostname) == 0) | ternary('MASTER','BACKUP') }}"
+            priority: "{{ (inventory_hostname == groups[group_name][0]) | ternary('250', '100') }}"
+            interface: "{{ keepalived_interface | default(ansible_facts['default_ipv4']['interface'], true) }}"
+            unicast_src_ip: "{{ ansible_facts['default_ipv4']['address'] }}"
+            vips:
+              - "{{ keepalived_ip }}/{{ keepalived_cni }}"
+        keepalived_scripts:
+          kafka_status:
+            check_script: "/kafka/status.sh"
+            interval: "1"
+            weight: "\"-200\""
+            weight: "{{ (inventory_hostname == groups[group_name][0]) | ternary('\"-200\"', '\"-50\"') }}"
+            fall: "1"
+            rise: "3"
+            user: root            
+
+      ansible.builtin.include_role:
+        name: geocom.kubernetes_ansible_collection.keepalived
+        apply:
+          tags:
+            - "!install"
+      tags: always 
+      
+    - name: "Ensure Keepalive is running"
+      ansible.builtin.shell: "pgrep -f keepalived"
+      register: keepalive_process
+      changed_when: false
+
+    - name: "Display Status"
+      ansible.builtin.debug:
+        msg: |
+          Keepalive is {{ 'running' if keepalive_process.rc == 0 else 'not running' }}  

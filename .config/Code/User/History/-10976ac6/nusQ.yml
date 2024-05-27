@@ -1,0 +1,220 @@
+---
+### Locales
+
+- name: Copy package # Lee la version del yml y asi saber que aplicacion esta ejecutando la tarea
+  hosts: server_{{ store }}
+  gather_facts: false
+  tags:
+    - full_install_server
+  vars:
+    APPS_LOOP: "{{ APPS_VERSION | dict2items }}"
+  tasks:
+    - loop: "{{APPS_LOOP}}"
+      vars:
+        PACKAGES_HOME: "{{ home_app }}/{{ item.key }}"
+        INSTALLED_LINK: "{{ home_app }}/{{ item.key }}"
+        APPLICATION_PACKAGE: "{{ item.key }}-{{ item.value }}.tar"
+        Path_version: "{{ home_app }}/{{ item.key }}"
+        type: "server"
+      include_role:
+        name: copy_package
+    - loop: "{{APPS_LOOP}}"
+      when:  cliente  == 'gama'
+      vars:
+        repo_config: "{{ item.key }}"
+        PACKAGES_HOME: "{{ home_app }}/{{ item.key }}"
+        APPLICATION_PACKAGE: "{{ item.key }}-{{ item.value }}.tar"
+        Path_version: "{{ home_app }}/{{ item.key }}"
+        type: "server"
+      include_role:
+        name: copy_files_dockers
+      ## Esto es solo para los geoapi
+      ## Integracion de voyager
+
+    - loop: "{{APPS_LOOP}}"
+      vars:
+        PACKAGES_HOME: "{{ home_app }}/{{ item.key }}"
+        APPLICATION_PACKAGE: "{{ item.key }}-{{ item.value }}.tar"
+        Path_version: "{{ home_app }}/{{ item.key }}"
+        type: "server"
+      include_role:
+        name: docker_install
+
+- name: Run Docker
+  hosts: server_{{ store }}
+  gather_facts: false
+  tags:
+    - full_install_server
+  tasks:
+    - name: Vars using for GAMA
+      set_fact:
+        type: "server"
+        service_name: "geocom.service"
+        DOCKER_COMPOSE_HOME: "{{home_app}}/compose-integracion"
+      when: cliente == 'gama'
+
+    - name: Generic vars
+      loop: "{{ APPS_LOOP }}" # en este caso de uso que se solicita siempre se pasa un valor en la lista
+      set_fact:
+        type: "server"
+        service_name: "{{ item.value }}.service"
+        DOCKER_COMPOSE_HOME: "{{ home_app }}/{{ item.value }}"
+      when: cliente != 'gama'
+
+    - shell: which docker-compose
+      register: dkc_path
+    - file: # Crea carpeta
+        path: "{{ DOCKER_COMPOSE_HOME }}"
+        state: directory
+    - template: # Copia compose
+        src: "{{ REPO_HOME }}/repo-inventory/properties/gama/docker-compose.yml.j2"
+        dest: "{{ DOCKER_COMPOSE_HOME }}/docker-compose.yml"
+    - template: # Copia .env
+        src: "{{ REPO_HOME }}/repo-inventory/properties/{{ cliente }}/.env"
+        dest: "{{ DOCKER_COMPOSE_HOME }}/.env"
+
+    # Copia y corre servicio
+    - become: true
+      block:
+      - template:
+          src: "{{ REPO_HOME }}/playbooks/files/docker_compose_service.j2"
+          dest: "/etc/systemd/system/{{service_name}}"
+          mode: "0755"
+          owner: "{{ owner | default('geocom') }}"
+          group: "{{ group | default('users') }}"
+      - systemd:
+          name: "{{service_name}}"
+          state: restarted
+          enabled: true
+          daemon_reload: true
+          force: true
+
+### Central
+- name: Copy package
+  hosts: central_{{ store }} 
+  gather_facts: false
+  tasks:
+    - include_role:
+        name: copy_package
+      vars:
+        PACKAGES_HOME: "{{ home_app }}/{{ item.key }}"
+        INSTALLED_LINK: "{{ home_app }}/{{ item.key }}"
+        APPLICATION_PACKAGE: "{{ item.key }}-{{ item.value }}.tar"
+        Path_version: "{{ home_app }}/{{ item.key }}"
+        type: "server"
+      loop: "{{ APPS_VERSION | dict2items}}"
+    - include_role:
+        name: copy_files_dockers
+      vars:
+        repo_config: "{{ item.key }}"
+        PACKAGES_HOME: "{{ home_app }}/{{ item.key }}"
+        APPLICATION_PACKAGE: "{{ item.key }}-{{ item.value }}.tar"
+        Path_version: "{{ home_app }}/{{ item.key }}"
+        type: "server"
+      loop: "{{ APPS_VERSION | dict2items}}"
+      when:  cliente  == 'gama'
+       ##Integracion de voyager
+    - include_role:
+        name: docker_install
+      vars:
+        PACKAGES_HOME: "{{ home_app }}/{{ item.key }}"
+        APPLICATION_PACKAGE: "{{ item.key }}-{{ item.value }}.tar"
+        Path_version: "{{ home_app }}/{{ item.key }}"
+        type: "server"
+      loop: "{{ APPS_VERSION | dict2items}}"
+  tags:
+    - full_install_central
+
+- name: Run Docker
+  hosts: central_{{ store }}
+  gather_facts: false
+  vars:
+    APPS_LOOP: "{{ APPS_VERSION | dict2items }}"
+  tasks:
+    - name: Vars using for GAMA
+      set_fact:
+        type: "server"
+        service_name: "geocom.service"
+        DOCKER_COMPOSE_HOME: "{{home_app}}/compose-integracion"
+      when: cliente == 'gama'
+
+    - name: Generic vars
+      loop: "{{ APPS_LOOP }}" # en este caso de uso que se solicita siempre se pasa un valor en la lista
+      set_fact:
+        type: "server"
+        service_name: "{{ item.value }}.service"
+        DOCKER_COMPOSE_HOME: "{{ home_app }}/{{ item.value }}"
+      when: cliente != 'gama'
+
+    - file: # Crea carpeta
+        path: "{{ DOCKER_COMPOSE_HOME }}"
+        state: directory
+      become: yes
+
+    - template: # Copia compose
+        src: "{{ REPO_HOME }}/repo-inventory/properties/{{ cliente }}/{{ ambiente }}/docker-compose.yml.j2"
+        dest: "{{ DOCKER_COMPOSE_HOME }}/docker-compose.yml"
+      become: yes
+
+    - template: # Copia .env
+        src: "{{ REPO_HOME }}/repo-inventory/properties/{{ cliente }}/{{ ambiente }}/.env"
+        dest: "{{ DOCKER_COMPOSE_HOME }}/.env"
+      become: yes
+
+    # Copia y corre servicio
+    - shell: which docker-compose
+      register: dkc_path
+      become: yes
+
+    - set_fact:
+        dkc_path: dkc_path.stdout
+
+    - template:
+        src: "{{ REPO_HOME }}/playbooks/files/docker_compose_service.j2"
+        dest: "/etc/systemd/system/{{service_name}}"
+        mode: "0755"
+        owner: "{{ owner | default('geocom') }}"
+        group: "{{ group | default('users') }}"
+      become: yes
+
+    - systemd:
+        name: "{{service_name}}"
+        state: restarted
+        enabled: true
+        daemon_reload: true
+        force: true
+      become: yes
+  tags:
+    - full_install_central
+
+
+- name: Download Lazydocker for Linux
+  hosts: server_{{ store }}
+  gather_facts: false
+  vars:
+    lazydocker_version: "0.23.1" #https://formulae.brew.sh/api/formula/lazydocker.json
+  tasks:
+    - unarchive:
+        dest: /usr/bin
+        mode: "0755"
+        src: "{{  urlnexus }}/repository/Ghiggia/tools/lazydocker/lazydocker_{{lazydocker_version}}_Linux_x86.tar.gz"
+        remote_src: true
+      when: hosts=='server'
+  tags:
+    - install_lazydocker
+
+- name: Download Lazydocker for Linux
+  hosts: central_{{ store }}
+  gather_facts: false
+  vars:
+    lazydocker_version: "0.23.1" #https://formulae.brew.sh/api/formula/lazydocker.json
+  tasks:
+    - unarchive:
+        dest: /usr/bin
+        mode: "0755"
+        src: "{{  urlnexus }}/repository/Ghiggia/tools/lazydocker/lazydocker_{{lazydocker_version}}_Linux_x86.tar.gz"
+        remote_src: true
+      become: yes
+      when: hosts=='central'
+  tags:
+    - install_lazydocker

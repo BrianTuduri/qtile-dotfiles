@@ -1,0 +1,4 @@
+REPO_PATH = "/home/brian/repos-geocom"
+SELECTOR = "rofi"
+EDITOR = "code"
+QTILE_PATH_SCRIPTS="/home/brian/.config/qtile/scripts/i3lock-solarized-dark.sh"

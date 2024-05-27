@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  vault-agent-{{ app_name }}:
+    image: "{{ vault_agent_image }}:{{ vault_agent_tag }}"
+    restart: always
+    ports:
+      - "{{ vault_agent_ports }}"
+    volumes:
+      - "{{ vault_agent_volumes }}"
+    environment:
+      {{ vault_agent_environment | to_nice_yaml(indent=6) }}
+    container_name: vault-agent-{{ app_name }}
+    entrypoint: "{{ vault_agent_entrypoint }}"

@@ -1,0 +1,30 @@
+FROM nexus.geocom.com.uy/openjdk:8-jdk
+
+WORKDIR /project
+
+RUN apt-get update && \
+    apt-get install -y wget tar git
+
+RUN mkdir -p /usr/local && wget http://archive.apache.org/dist/maven/maven-2/2.2.1/binaries/apache-maven-2.2.1-bin.tar.gz && \
+    tar xvf apache-maven-2.2.1-bin.tar.gz -C /usr/local && \
+    #ln -s /usr/local/apache-maven-2.2.1 /usr/local/maven && \
+    rm apache-maven-2.2.1-bin.tar.gz
+
+ARG user=jenkins
+ARG group=jenkins
+ARG uid=1000
+ARG gid=1000
+
+RUN groupadd -g ${gid} ${group} && \
+    useradd -d /home/${user} -u ${uid} -g ${group} -m ${user}
+
+ENV M2_HOME=/usr/local/maven
+ENV MAVEN_HOME=/usr/local/maven
+ENV PATH=${M2_HOME}/bin:${PATH}
+
+RUN chown -R ${uid}:${gid} /bin /usr/local/ /usr/bin/ /usr/local \ 
+    && chmod -R 777 /bin /usr/local/ /usr/bin/
+
+WORKDIR /project
+
+USER ${user}

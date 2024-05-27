@@ -1,0 +1,39 @@
+pipeline {
+    agent { label 'release_it' }
+    environment {
+        // 
+    }
+    options {
+        // 
+    }
+    stages {
+        stage('Release') {
+            steps {
+                script {
+                    // Checkout del código y configuraciones previas
+                    dir('proy') {
+                        // Preparación para construir y usar el Dockerfile
+                        def mavenCommands = "clean install" // Comandos Maven por defecto
+                        if (params.tarea == 'release') {
+                            mavenCommands = "-Dresume=false release:prepare release:perform"
+                        } else if (params.tarea == 'regenerate_version') {
+                            mavenCommands = "clean package"
+                        } else {
+                            mavenCommands = "clean deploy"
+                        }
+
+                        // Construir y ejecutar en Docker
+                        docker.build("mi-imagen-maven").inside("-v /home/jenkins/.m2:/root/.m2") {
+                            // Ejecutar los comandos de Maven especificados
+                            sh "mvn ${mavenCommands}"
+                        }
+
+                        // Copiar los archivos de construcción al path específico del agente
+                        def buildPath = "/path/especifico/de/construccion"
+                        sh "cp -R * ${buildPath}"
+                    }
+                }
+            }
+        }
+    }
+}

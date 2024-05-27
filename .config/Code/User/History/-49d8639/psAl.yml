@@ -1,0 +1,2 @@
+docker:
+  image: "nexus.geocom.com.uy/scm-docker-images/openjdk:gradle-4.10.3-all-jdk8"

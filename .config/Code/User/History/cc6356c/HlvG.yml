@@ -1,0 +1,22 @@
+- name: Encontrar archivos JSON de configuración de connectors
+  find:
+    paths:
+    - "{{ kafka_config_directory }}/{{ ambiente }}/json"
+    file_type: file
+    recurse: yes
+  register: json_files
+
+- name: Verificar si la variable json_files está vacía
+  debug:
+    msg: "{{ 'La variable files no está vacía' if json_files.matched > 1 else 'Está vacía' }}"
+
+- name: json files
+  debug:
+    msg: "Json files is: {{ json_files.files }}"
+
+- name: Leer y cargar cada archivo JSON
+  include_tasks: load_and_post_connector.yml
+  loop: "{{ json_files.files }}"
+  loop_control:
+    loop_var: file
+  ignore_errors: true

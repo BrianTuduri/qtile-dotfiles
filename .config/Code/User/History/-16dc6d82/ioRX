@@ -1,0 +1,50 @@
+FROM nexus.geocom.com.uy/openjdk:8-jdk
+
+WORKDIR /project
+
+ENV GRADLE_VERSION=4.10.3 \
+    GRADLE_HOME=/opt/gradle/gradle-4.10.3 \
+    NVM_DIR=/usr/local/nvm \
+    NODE_VERSION=6.3.0 \
+    NODE_PATH=/usr/local/lib/node_modules
+
+RUN apt-get update && \
+    apt-get install -y wget curl git ca-certificates tar unzip && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN wget https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-all.zip && \
+    mkdir -p /opt/gradle && \
+    unzip -d /opt/gradle gradle-$GRADLE_VERSION-all.zip && \
+    rm gradle-$GRADLE_VERSION-all.zip
+    
+ENV PATH=${GRADLE_HOME}/bin:${PATH}
+
+RUN mkdir -p ${NVM_DIR} && \
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | NVM_DIR=${NVM_DIR} bash && \
+    chmod -R +x ${NVM_DIR} && \
+    . "$NVM_DIR/nvm.sh" && \
+    nvm install $NODE_VERSION 8.11.3 && nvm install 8.11.3 && \
+    nvm alias default $NODE_VERSION && \
+    nvm use default
+
+RUN cp -r ${NVM_DIR}/versions/node/v${NODE_VERSION} /usr/local/node && \
+    ln -s /usr/local/node/bin/node /usr/local/bin/node && \
+    ln -s /usr/local/node/bin/npm /usr/local/bin/npm
+
+ARG user=jenkins
+ARG group=jenkins
+ARG uid=1000
+ARG gid=1000
+
+RUN groupadd -g ${gid} ${group} && \
+    useradd -d /home/${user} -u ${uid} -g ${group} -m ${user} && \
+    chown -R ${uid}:${gid} /project ${NVM_DIR} /home/${user} /usr/local/node && \
+    chmod -R 755 /project /usr/local/node
+
+ENV PATH=/usr/local/node/bin:${PATH}
+
+RUN echo 'export NVM_DIR="/usr/local/nvm"' >> /home/${user}/.bashrc && \
+    echo '[ -s "/usr/local/nvm/nvm.sh" ] && \. "/usr/local/nvm/nvm.sh"' >> /home/${user}/.bashrc && \
+    echo '[ -s "/usr/local/nvm/bash_completion" ] && \. "/usr/local/nvm/bash_completion"' >> /home/${user}/.bashrc
+
+USER ${user}

@@ -1,0 +1,6 @@
+---
+# tasks file for kafka_add_topic
+- name: Create topics
+  vars:
+  include_tasks: topics.yml
+  loop: "{{ TOPIC_LIST }}"

@@ -1,0 +1,4 @@
+---
+# defaults file for kafka_add_topic
+repo_home: "/path/to/default/repo"
+ambiente: "default_env"

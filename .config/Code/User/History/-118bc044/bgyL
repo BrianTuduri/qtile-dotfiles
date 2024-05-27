@@ -1,0 +1,12 @@
+# NIXPKGS_ALLOW_UNFREE=1 \
+#    nix-shell -p terraform -p cowsay \
+#        --command \
+#        "/home/rdifede/Repositorios/kubernetes_ansible_collection/Infrastructure/Clusters/QA/runPlaybook.bash"
+REPO_HOME="/home/brian/repos-geocom/kubernetes-ansible-collection"
+RANCHER_TOKEN="token-s52h9:n2hl47x5mg5jxwtfdz8f6rbzcbqjprdmhtl2vd8sqq59qf7bx2bpx9"
+BACKEND_USERNAME="btuduri"
+BACKEND_TOKEN="glpat-XP8Pa8FawxhCxskhLnEw" # Gitlab Access Token
+ANSIBLE_COW_SELECTION=small
+VAULT_TOKEN="hvs.Rsx0t31P7WAghYucOAFwwY9a"
+LDAP_USER="gitlabsp@geocom.com.uy"
+LDAP_PASS="3[6}L'&z^B%sg?&#)W"

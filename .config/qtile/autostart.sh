@@ -13,3 +13,10 @@ picom &
 
 # nm-applet
 nm-applet &
+
+# clipman
+xfce4-clipman &
+
+# flameshot
+flatpak run org.flameshot.Flameshot &
+

@@ -1,0 +1,12 @@
+kafka_hosts_group: kafka
+
+# user, pass and group
+kafka_user: kafka
+kafka_password: "geocom"
+kafka_group: kafka
+
+# kafka opts
+kafka_opts: ""
+
+# bootstrap server
+bootstrap_servers: "172.24.26.158:9092"

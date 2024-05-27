@@ -1,0 +1,369 @@
+<project version="4">
+  <component name="BookmarksManager">
+    <option name="groups">
+      <GroupState>
+        <option name="name" value="vault-agent-geoswitch" />
+      </GroupState>
+    </option>
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myColumnSize">
+      <list>
+        <option value="58" />
+        <option value="75" />
+        <option value="75" />
+        <option value="74" />
+        <option value="167" />
+      </list>
+    </option>
+  </component>
+  <component name="FileEditorManager">
+    <leaf ideFingerprint="1kkufwnhnz039" SIDE_TABS_SIZE_LIMIT_KEY="-1">
+      <file current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vault-demo/src/main/resources/application.properties">
+          <provider editor-type-id="text-editor" selected="true">
+            <state relative-caret-position="176">
+              <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file>
+        <entry file="file://$PROJECT_DIR$/vault-demo/src/main/java/com/example/vaultdemo/VaultDemoApplication.java">
+          <provider editor-type-id="text-editor" selected="true">
+            <state relative-caret-position="484">
+              <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#516#517#0" expanded="true" />
+                <element signature="e#578#579#0" expanded="true" />
+                <element signature="e#632#633#0" expanded="true" />
+                <element signature="e#660#661#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vault-demo/pom.xml">
+          <provider editor-type-id="text-editor" selected="true">
+            <state relative-caret-position="418">
+              <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTypeUsageLocalSummary"><![CDATA[{
+  "data": {
+    "CLASS": {
+      "usageCount": 6,
+      "lastUsed": 1716232781591
+    },
+    "JAVA": {
+      "usageCount": 10,
+      "lastUsed": 1716296767178
+    },
+    "YAML": {
+      "usageCount": 2,
+      "lastUsed": 1716296784022
+    },
+    "Properties": {
+      "usageCount": 5,
+      "lastUsed": 1716296765059
+    },
+    "XML": {
+      "usageCount": 5,
+      "lastUsed": 1716296767937
+    }
+  }
+}]]></component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>22</find>
+      <find>spring-boot-starter-web</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
+  </component>
+  <component name="FindInProjectScope">
+    <option name="isProjectScope" value="true" />
+  </component>
+  <component name="GitSEFilterConfiguration">{}</component>
+  <component name="IdeDocumentHistory">
+    <changedPaths>
+      <option value="$PROJECT_DIR$/vault-demo/vault-demo/src/main/java/com/example/vaultdemo/VaultDemoApplication.java" />
+      <option value="$PROJECT_DIR$/vault-demo/src/main/resources/bootstrap.yml" />
+      <option value="$PROJECT_DIR$/vault-demo/src/main/java/com/example/vaultdemo/VaultDemoApplication.java" />
+      <option value="$PROJECT_DIR$/vault-demo/src/main/resources/application.properties" />
+    </changedPaths>
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="LanguageUsageStatistics">
+    <language id="JAVA">
+      <summary usageCount="10" lastUsage="1716296767178" />
+    </language>
+    <language id="Properties">
+      <summary usageCount="5" lastUsage="1716296765064" />
+    </language>
+    <language id="XML">
+      <summary usageCount="5" lastUsage="1716296767937" />
+    </language>
+    <language id="yaml">
+      <summary usageCount="2" lastUsage="1716296784022" />
+    </language>
+  </component>
+  <component name="MavenProjectNavigator">
+    <option name="groupStructurally" value="true" />
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" />
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="vault-agent-geoswitch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch}" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vault-agent-geoswitch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo}" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vault-agent-geoswitch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo/src}" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vault-agent-geoswitch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo/src}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo/src/main}" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vault-agent-geoswitch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo/src}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo/src/main}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo/src/main/java}" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vault-agent-geoswitch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo/src}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo/src/main}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo/src/main/java}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo/src/main/java/com/example/vaultdemo}" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vault-agent-geoswitch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo/src}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo/src/main}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo/src/main/resources}" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="vault-agent-geoswitch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo}" type="462c0819:PsiDirectoryNode" />
+              <item name="dir{file:///home/brian/repos-geocom/vault-agent-geoswitch/vault-demo/target}" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="RunConfigurationStartHistory">
+    <history>
+      <element setting="Application.VaultDemoApplication (3)" />
+      <element setting="Application.VaultDemoApplication" />
+      <element setting="Application.VaultDemoApplication (2)" />
+      <element setting="Application.VaultDemoApplication (1)" />
+    </history>
+  </component>
+  <component name="TerminalArrangementManager">
+    <option name="myTabStates">
+      <TerminalTabState tabName="Local" currentWorkingDirectory="$PROJECT_DIR$/vault-demo">
+        <shellCommand>
+          <arg value="/usr/bin/zsh" />
+          <arg value="-i" />
+        </shellCommand>
+      </TerminalTabState>
+    </option>
+  </component>
+  <component name="ToolWindowManager">
+    <layoutV2>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32994792" />
+      <window_info id="Commit" order="1" weight="0.25" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Problems" order="1" />
+      <window_info anchor="bottom" id="Problems View" order="2" weight="0.5047043" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.18418561" />
+      <window_info anchor="bottom" id="Python Packages" order="4" />
+      <window_info anchor="bottom" id="Run" order="5" show_stripe_button="false" weight="0.5047043" />
+      <window_info anchor="bottom" id="Services" order="6" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.5047043" />
+      <window_info anchor="right" id="Notifications" order="0" weight="0.3301047" />
+      <window_info anchor="right" id="AIAssistant" order="1" weight="0.32979503" />
+      <window_info anchor="right" id="Database" order="2" weight="0.25" />
+      <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.32979503" />
+      <window_info anchor="right" id="Python Console" order="5" />
+      <window_info anchor="right" id="Coverage" order="6" side_tool="true" weight="0.32979503" />
+      <unified_weights bottom="0.18418561" left="0.32994792" right="0.32979503" />
+    </layoutV2>
+    <recentWindows>
+      <value>Project</value>
+      <value>Terminal</value>
+      <value>Problems View</value>
+      <value>Build</value>
+      <value>Run</value>
+      <value>Maven</value>
+      <value>Coverage</value>
+      <value>AIAssistant</value>
+      <value>Notifications</value>
+    </recentWindows>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="446" y="140" width="1026" height="821" key="#Project_Structure" timestamp="1716232637559">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="446" y="140" width="1026" height="821" key="#Project_Structure/1920.156.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1716232637559" />
+    <state x="282" y="69" width="802" height="653" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1716267683474">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="282" y="69" width="802" height="653" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.768@0.0.1366.768" timestamp="1716267683474" />
+    <state x="526" y="262" width="527" height="409" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1716267680338">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="526" y="262" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.768@0.0.1366.768" timestamp="1716267680338" />
+    <state x="741" y="370" width="527" height="409" key="#com.intellij.ide.util.TreeClassChooserDialog/1920.156.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1716232489938" />
+    <state x="469" y="164" width="426" height="460" key="FileChooserDialogImpl" timestamp="1716268205363">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="469" y="164" width="426" height="460" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1716268205363" />
+    <state width="1284" height="333" key="GridCell.Tab.0.bottom" timestamp="1716268542809">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1284" height="333" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1716268542809" />
+    <state width="1828" height="485" key="GridCell.Tab.0.bottom/1920.156.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1716235201672" />
+    <state width="1284" height="333" key="GridCell.Tab.0.center" timestamp="1716268542809">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1284" height="333" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1716268542809" />
+    <state width="1828" height="485" key="GridCell.Tab.0.center/1920.156.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1716235201672" />
+    <state width="1284" height="333" key="GridCell.Tab.0.left" timestamp="1716268542809">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1284" height="333" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1716268542809" />
+    <state width="1828" height="485" key="GridCell.Tab.0.left/1920.156.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1716235201672" />
+    <state width="1284" height="333" key="GridCell.Tab.0.right" timestamp="1716268542809">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1284" height="333" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1716268542809" />
+    <state width="1828" height="485" key="GridCell.Tab.0.right/1920.156.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1716235201672" />
+    <state x="-1" y="21" width="1366" height="746" key="SettingsEditor" timestamp="1716268580379">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="-1" y="21" width="1366" height="746" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1716268580379" />
+    <state x="340" y="-1" width="1026" height="821" key="SettingsEditor/1920.156.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1716232961633" />
+    <state x="447" y="0" width="649" height="768" key="find.popup" timestamp="1716268612011">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="447" y="0" width="649" height="768" key="find.popup/0.0.1366.768@0.0.1366.768" timestamp="1716268612011" />
+    <state x="347" y="176" width="672" height="712" key="run.anything.popup" timestamp="1716267341293">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="347" y="176" width="672" height="712" key="run.anything.popup/0.0.1366.768@0.0.1366.768" timestamp="1716267341293" />
+    <state x="443" y="176" width="680" height="508" key="search.everywhere.popup" timestamp="1716269684925">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="443" y="176" width="680" height="508" key="search.everywhere.popup/0.0.1366.768@0.0.1366.768" timestamp="1716269684925" />
+    <state x="622" y="247" width="680" height="713" key="search.everywhere.popup/1920.156.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1716232431602" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/vault-demo/vault-demo/target/classes/com/example/vaultdemo/VaultDemoApplication.class" />
+    <entry file="file://$PROJECT_DIR$/vault-demo/vault-demo/target/classes/com/example/vaultdemo/MessageController.class" />
+    <entry file="file://$PROJECT_DIR$/vault-demo/vault-demo/src/main/java/com/example/vaultdemo/VaultDemoApplication.java" />
+    <entry file="file://$PROJECT_DIR$/vault-demo/src/main/resources/bootstrap.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vault-demo/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vault-demo/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vault-demo/src/main/java/com/example/vaultdemo/VaultDemoApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#516#517#0" expanded="true" />
+            <element signature="e#578#579#0" expanded="true" />
+            <element signature="e#632#633#0" expanded="true" />
+            <element signature="e#660#661#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI" />
+      <state key="GlobalLibrariesConfigurable.UI" />
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>21</last-edited>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>vault-agent-geoswitch</last-edited>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI" />
+    </states>
+  </component>
+</project>

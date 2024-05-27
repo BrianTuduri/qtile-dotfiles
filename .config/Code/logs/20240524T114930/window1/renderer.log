@@ -1,0 +1,5 @@
+2024-05-24 11:49:32.407 [info] Started local extension host with pid 32492.
+2024-05-24 11:49:32.604 [warning] [redhat.vscode-yaml]: Cannot register 'redhat.telemetry.enabled'. This property is already registered.
+2024-05-24 11:49:35.485 [error] [Extension Host] (node:32492) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+(Use `exe --trace-deprecation ...` to show where the warning was created)
+2024-05-24 11:49:42.564 [info] [perf] Render performance baseline is 53ms

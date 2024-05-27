@@ -1,0 +1,17 @@
+[Unit]
+Description=Docker Compose SCM service to deploy Vault-Agent
+After=docker.service network-online.target
+Requires=docker.service network-online.target
+
+[Service]
+WorkingDirectory={{ vault_agent_dir }}
+Type=oneshot
+User=root
+
+ExecStart=/bin/docker-compose up -d
+ExecStop=/bin/docker-compose stop
+ExecReload=/bin/docker-compose up -d
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

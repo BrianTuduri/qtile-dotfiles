@@ -1,0 +1,24 @@
+FROM jenkins/agent:jdk8
+
+USER root
+
+# Cambiar a bash para las operaciones de shell
+SHELL ["/bin/bash", "-c"]
+
+# Instalar dependencias necesarias
+RUN apt-get update && apt-get install -y curl git zip
+
+# Instalar NVM
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# Configurar el entorno NVM para todos los tipos de shells
+ENV NVM_DIR="/root/.nvm"
+RUN echo 'export NVM_DIR="$HOME/.nvm"' >> $HOME/.bashrc
+RUN echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $HOME/.bashrc
+RUN echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> $HOME/.bashrc
+
+# Instalar Node.js usando NVM. Reemplace 'node' con cualquier versión específica si es necesario.
+RUN . $HOME/.nvm/nvm.sh && nvm install node
+
+# Mantener el contenedor en ejecución
+CMD ["tail", "-f", "/dev/null"]

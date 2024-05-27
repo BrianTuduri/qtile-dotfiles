@@ -1,0 +1,28 @@
+# Usar una imagen base oficial de JDK 8
+FROM openjdk:8-jdk
+
+# Establecer el directorio de trabajo en el contenedor
+WORKDIR /app
+
+# Instalar Maven 2.2.1
+# Primero, instalar las dependencias necesarias
+RUN apt-get update && \
+    apt-get install -y wget tar && \
+    wget http://archive.apache.org/dist/maven/maven-2/2.2.1/binaries/apache-maven-2.2.1-bin.tar.gz && \
+    tar xvf apache-maven-2.2.1-bin.tar.gz -C /usr/local && \
+    ln -s /usr/local/apache-maven-2.2.1 /usr/local/maven && \
+    rm apache-maven-2.2.1-bin.tar.gz
+
+# Establecer variables de entorno para Maven
+ENV M2_HOME=/usr/local/maven
+ENV MAVEN_HOME=/usr/local/maven
+ENV PATH=${M2_HOME}/bin:${PATH}
+
+# Copiar los archivos de tu proyecto al directorio de trabajo del contenedor
+COPY . .
+
+# Construir tu aplicación usando Maven
+RUN mvn clean package
+
+# Especificar el comando para ejecutar tu aplicación
+CMD ["java", "-jar", "target/mi-aplicacion.jar"]

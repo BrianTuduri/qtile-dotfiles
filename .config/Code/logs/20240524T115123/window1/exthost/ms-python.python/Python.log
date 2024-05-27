@@ -1,0 +1,10 @@
+2024-05-24 11:51:27.903 [info] Experiment 'pythonCreateEnvOnPipInstall' is active
+2024-05-24 11:51:27.903 [info] Experiment 'pythonRecommendTensorboardExt' is active
+2024-05-24 11:51:27.903 [info] Experiment 'pythonSurveyNotificationcf' is active
+2024-05-24 11:51:27.903 [info] Experiment 'pythonTerminalEnvVarActivation' is active
+2024-05-24 11:51:27.903 [info] Experiment 'pythonTestAdapter' is active
+2024-05-24 11:51:27.903 [info] Default formatter is set to null for workspace /home/brian/repos-geocom/vault-agent-geoswitch
+2024-05-24 11:51:27.903 [info] Python interpreter path: /bin/python3
+2024-05-24 11:51:28.152 [info] > pyenv which python
+2024-05-24 11:51:28.152 [info] cwd: .
+2024-05-24 11:51:32.080 [info] Starting Pylance language server.

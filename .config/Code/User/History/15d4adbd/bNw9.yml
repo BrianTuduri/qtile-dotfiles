@@ -1,0 +1,91 @@
+logging:
+  level:
+    root: debug
+    com.provectus: debug
+    org.springframework.security: debug
+kafka:
+  clusters:
+    - name: "oxxo-qa"
+      bootstrapServers: "10.145.189.73:9090"
+rbac:
+  roles:
+    - name: "user"
+      clusters:
+        - oxxo-qa
+      subjects:
+        - provider: ldap
+          type: group
+          value: "Todos Geocom"
+      permissions:
+        - resource: applicationconfig
+          # value not applicable for applicationconfig
+          actions: [ "view"] # can be with or without quotes / "edit"
+      
+        - resource: clusterconfig
+          # value not applicable for clusterconfig
+          actions: [ "view"] # "edit"
+
+        - resource: topic
+          value: ".*"
+          actions:
+            - all 
+          # can be a multiline list
+          #  - VIEW # can be upper or lowercase
+          #  - CREATE
+          #  - EDIT
+          #  - DELETE
+          #  - MESSAGES_READ
+          #  - MESSAGES_PRODUCE
+          #  - MESSAGES_DELETE
+
+        - resource: consumer
+          value: ".*"
+          actions: all #[ VIEW, DELETE, RESET_OFFSETS ]
+
+        - resource: schema
+          value: ".*"
+          actions: all #[ VIEW, CREATE, DELETE, EDIT, MODIFY_GLOBAL_COMPATIBILITY ]
+
+        - resource: connect
+          value: ".*"
+          actions: all #[ view, edit, create ]
+
+        - resource: acl
+          value: ".*"
+          actions: [view] # QUITAR
+    - name: "admins"
+      clusters:
+        - "oxxo-qa"
+      subjects:
+        - provider: ldap
+          type: group
+          value: "geoscm"
+      permissions:
+        - resource: applicationconfig
+          actions: all
+      
+        - resource: clusterconfig
+          actions: all
+
+        - resource: topic
+          value: ".*"
+          actions: all
+
+        - resource: consumer
+          value: ".*"
+          actions: all
+
+        - resource: schema
+          value: ".*"
+          actions: all
+
+        - resource: connect
+          value: ".*"
+          actions: all
+
+        - resource: ksql
+          actions: all
+          
+        - resource: acl
+          value: ".*"
+          actions: all

@@ -1,0 +1,6 @@
+---
+# defaults file for kafka_run_connect
+kafka_bin_directory: "/path/to/kafka/bin"
+bootstrap_servers: "localhost:9092"
+topic_files_path: "/path/to/topic/ymls/"
+topics_config: []

@@ -1,0 +1,3 @@
+REPO_PATH = "/home/brian/repos-geocom"
+SELECTOR = "rofi"
+EDITOR = "code"

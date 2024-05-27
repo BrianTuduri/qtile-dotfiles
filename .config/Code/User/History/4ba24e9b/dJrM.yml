@@ -1,0 +1,6 @@
+topic:
+  name: ARG-mongo-changes-errors
+  partitions: 4
+  replicas: 3
+  config:
+    retention.ms: 172800000

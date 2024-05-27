@@ -1,0 +1,4 @@
+---
+# defaults file for kafkas_setup_provisioning
+kafka_extras_directories: []
+kafka_plugin_directory: []

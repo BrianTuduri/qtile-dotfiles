@@ -1,0 +1,6 @@
+---
+# defaults file for kafka_delete_topic
+kafka_bin_directory: "/kafka/kafka/bin"
+bootstrap_servers: "localhost:9092"
+topic_files_path: "/path/to/topic/ymls/"
+topics_config: []

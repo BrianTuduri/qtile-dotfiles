@@ -1,0 +1,9 @@
+app:
+  message: "Hello from Vault"
+logging:
+  level:
+    org.springframework.cloud.vault: DEBUG
+spring:
+  datasource:
+    url: ${spring.datasource.url}
+    username: ${spring.datasource.username}

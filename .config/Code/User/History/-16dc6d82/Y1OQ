@@ -1,0 +1,53 @@
+FROM nexus.geocom.com.uy/openjdk:8-jdk
+
+# Establece el directorio de trabajo
+WORKDIR /project
+
+# Instala dependencias necesarias
+RUN apt-get update && \
+    apt-get install -y wget curl git ca-certificates tar unzip && \
+    rm -rf /var/lib/apt/lists/*
+
+# Define variables de entorno para Gradle
+ENV GRADLE_VERSION=4.10.3
+ENV GRADLE_HOME=/opt/gradle/gradle-$GRADLE_VERSION
+
+# Define variables de entorno para Node.js y nvm
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 6.3.0
+
+# Instala Gradle
+RUN wget https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-all.zip && \
+    mkdir -p /opt/gradle /usr/local/nvm && \
+    unzip -d /opt/gradle gradle-$GRADLE_VERSION-all.zip && \
+    rm gradle-$GRADLE_VERSION-all.zip
+
+# Agrega Gradle al PATH
+ENV PATH=${GRADLE_HOME}/bin:${PATH}
+
+# Instala nvm, Node.js
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash && \
+    . "$NVM_DIR/nvm.sh" && \
+    nvm install $NODE_VERSION && \
+    nvm alias default $NODE_VERSION && \
+    nvm use default
+
+# Agrega nvm, Node.js al PATH (se realiza después de la instalación para asegurar que las rutas sean correctas)
+ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+# Configuración del usuario no-root para buenas prácticas de seguridad
+ARG user=jenkins
+ARG group=jenkins
+ARG uid=1000
+ARG gid=1000
+
+# Crea grupo y usuario
+RUN groupadd -g ${gid} ${group} && \
+    useradd -d /home/${user} -u ${uid} -g ${group} -m ${user}
+
+# Permisos necesarios sobre directorios comunes (ajustar según necesidad, puede que no sea necesario dar permiso 777)
+RUN chown -R ${uid}:${gid} /project && \
+    chmod -R 755 /project
+
+# Cambia al usuario creado
+USER ${user}

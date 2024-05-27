@@ -1,0 +1,45 @@
+---
+# tasks file for kafka_add_topic
+- name: "Searching for topics configuration files"
+  find:
+    paths: "{{ topic_files_path }}"
+    patterns: "*.yml"
+  register: topic_files
+
+# - name: "Debug topics config"
+#   debug:
+#     msg: "Topics files es {{ topic_files }}"
+
+- name: Creating the list of files to removing
+  slurp:
+    src: "{{ item.path }}"
+  register: slurpfile
+  loop: "{{ topic_files.files }}"
+
+# - name: "Debug slurp"
+#   debug:
+#     var: slurpfile
+
+- name: "Creating list of topics to removing"
+  become: yes
+  set_fact:
+    topics_config: "{{ topics_config + [(item.content | b64decode | from_yaml)]}}"
+  loop: "{{ slurpfile.results }}"
+
+- name: "List of topics to removing"
+  debug:
+    var: topics_config
+
+- name: "Eliminating the topics"
+  command:
+    argv:
+      - sh 
+      - "{{ kafka_bin_directory }}/kafka-topics.sh"
+      - --bootstrap-server
+      - "{{ bootstrap_servers }}"
+      - --delete
+      - --topic
+      - "{{ item.topic.name }}"
+  loop: "{{ topics_config }}"
+  ignore_errors: true
+  failed_when: false

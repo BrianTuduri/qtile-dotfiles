@@ -1,0 +1,15 @@
+---
+- name: Encontrar y listar archivos .yml para Topics
+  hosts: kafka
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Add topics
+      roles:
+        - geocom.geoscm.kafka_add_topic
+      vars:
+        - topic_files_path: "Environments/{{ ambiente }}/Kafka/Topics"
+        - bootstrap_servers: "172.24.26.158:9092"
+        - kafka_bin_directory: "/kafka/kafka/bin"
+      tags:
+        - apply-topic

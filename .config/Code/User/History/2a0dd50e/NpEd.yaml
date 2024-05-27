@@ -1,0 +1,6 @@
+topic:
+  topicName: QA-mongo.geopos3-ticket.saleTickets
+  partitions: 2
+  replicas: 3
+  config:
+    retention.ms: 300000

@@ -1,0 +1,90 @@
+pipeline {
+    agent { label 'ansible-2024' }
+    options {
+        ansiColor('xterm')
+        disableConcurrentBuilds()
+        quietPeriod(10)
+    }
+    environment {
+        VAULT_TOKEN = ""
+        VAULT_ADDR = ""
+        SSH_AGENT_ID = "cy5ymCych3DLs29tpAnCC2qF0ze5RdPT"
+        GITLAB_SSH_CLONE_ID = "15940393-32ad-416e-ad80-b8ea71536641"
+    }
+    parameters {
+        string(name: 'HOST_GROUP', defaultValue: 'geoswitch_oxxo_qa', description: 'Host group to run the playbook on')
+        string(name: 'VAULT_AGENT_DIR', defaultValue: '/home/geocom/vault-agent-docker', description: 'Vault agent directory')
+        string(name: 'VAULT_AGENT_IMAGE', defaultValue: 'nexus.geocom.com.uy/hashicorp/vault-enterprise', description: 'Vault agent image')
+        string(name: 'AUTH_METHOD', defaultValue: 'approle', description: 'Authentication method')
+        string(name: 'APP_NAME', defaultValue: 'geoswitch-yza', description: 'Application name')
+        string(name: 'TCP_LISTENER_ADDRESS', defaultValue: '0.0.0.0:8200', description: 'TCP listener address')
+        string(name: 'POLICIES', defaultValue: 'geoswitch-policy-qa', description: 'Policies')
+        string(name: 'TOKEN_TYPE', defaultValue: 'service', description: 'Token type')
+        string(name: 'SECRET_ID_TTL', defaultValue: '24h', description: 'Secret ID TTL')
+        string(name: 'TOKEN_NUM_USES', defaultValue: '0', description: 'Token number of uses')
+        string(name: 'TOKEN_TTL', defaultValue: '1h', description: 'Token TTL')
+        string(name: 'TOKEN_MAX_TTL', defaultValue: '24h', description: 'Token max TTL')
+        string(name: 'SECRET_ID_NUM_USES', defaultValue: '0', description: 'Secret ID number of uses')
+        string(name: 'VAULT_AGENT_USER', defaultValue: 'vault-agent', description: 'Vault agent user')
+        string(name: 'VAULT_AGENT_GROUP', defaultValue: 'vault-agent', description: 'Vault agent group')
+    }
+    stages {
+        stage('Prepare Environment') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'vault-token-id-for-jobs', usernameVariable: 'TOKEN_ADDR', passwordVariable: 'TOKEN_VAULT')]) {
+                        env.VAULT_TOKEN = env.TOKEN_VAULT
+                        env.VAULT_ADDR = env.TOKEN_ADDR
+                    }
+                }
+            }
+        }
+        stage('Install Ansible Roles') {
+            steps {
+                dir('ansible') {
+                    sshagent([env.GITLAB_SSH_CLONE_ID]) {
+                        sh 'ansible-galaxy install -r requirements.yml'
+                    }
+                }
+            }
+        }
+        stage('Write Variables to YAML') {
+            steps {
+                script {
+                    def vars = [
+                        vault_token: env.VAULT_TOKEN,
+                        vault_addr: env.VAULT_ADDR,
+                        vault_agent_dir: params.VAULT_AGENT_DIR,
+                        vault_agent_image: params.VAULT_AGENT_IMAGE,
+                        auth_method: params.AUTH_METHOD,
+                        app_name: params.APP_NAME,
+                        tcp_listener_address: params.TCP_LISTENER_ADDRESS,
+                        policies: params.POLICIES,
+                        token_type: params.TOKEN_TYPE,
+                        secret_id_ttl: params.SECRET_ID_TTL,
+                        token_num_uses: params.TOKEN_NUM_USES,
+                        token_ttl: params.TOKEN_TTL,
+                        token_max_ttl: params.TOKEN_MAX_TTL,
+                        secret_id_num_uses: params.SECRET_ID_NUM_USES,
+                        vault_agent_user: params.VAULT_AGENT_USER,
+                        vault_agent_group: params.VAULT_AGENT_GROUP
+                    ]
+                    writeYaml file: 'ansible/vars.yml', data: vars
+                }
+            }
+        }
+        stage('Run Ansible Playbook') {
+            steps {
+                sshagent([SSH_AGENT_ID]) {
+                    ansiblePlaybook(
+                        colorized: true,
+                        playbook: 'ansible/playbook.yml',
+                        inventory: 'ansible/inventory.ini',
+                        limit: params.HOST_GROUP,
+                        extras: '-e @ansible/vars.yml'
+                    )
+                }
+            }
+        }
+    }
+}

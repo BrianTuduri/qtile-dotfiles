@@ -1,0 +1,82 @@
+[
+    {
+        "_id": "1d692233-d8d6-41ee-aeac-6761234bce7e",
+        "colId": "history",
+        "containerId": "",
+        "name": "POST http://172.24.26.158:8083/connectors",
+        "url": "POST http://172.24.26.158:8083/connectors",
+        "method": "POST",
+        "sortNum": 0,
+        "created": "2024-02-27T20:25:52.166Z",
+        "modified": "2024-02-27T20:25:52.166Z",
+        "headers": [],
+        "params": [],
+        "tests": []
+    },
+    {
+        "_id": "5a76b10d-11c3-4da9-bbe1-ba47cba42ba5",
+        "colId": "history",
+        "containerId": "",
+        "name": "http://172.24.26.158:8083/connectors",
+        "url": "http://172.24.26.158:8083/connectors",
+        "method": "POST",
+        "sortNum": 0,
+        "created": "2024-02-27T20:25:57.228Z",
+        "modified": "2024-02-27T20:25:57.228Z",
+        "headers": [],
+        "params": [],
+        "tests": []
+    },
+    {
+        "_id": "7312f242-d1fd-4f38-99dd-b561d0abfcf0",
+        "colId": "history",
+        "containerId": "",
+        "name": "http://localhost:8083/connectors",
+        "url": "http://localhost:8083/connectors",
+        "method": "POST",
+        "sortNum": 0,
+        "created": "2024-02-27T20:27:21.448Z",
+        "modified": "2024-02-27T20:28:34.366Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n  \"name\": \"peya-mongo-source-qa\",\n  \"config\": {\n    \"connector.class\": \"com.mongodb.kafka.connect.MongoSourceConnector\",\n    \"tasks.max\": \"10\",\n    \"connection.uri\": \"mongodb://userApp:Xpr.QA.PassRoot@srv-qa-sp-xpress-uych-mongo1:27017,srv-qa-sp-xpress-uych-mongo2:27017,srv-qa-sp-xpress-uych-mongo3:27017/admin?authSource=admin\",\n    \"topics\": \"mongo-source-topic\",\n    \"errors.tolerance\": \"all\",\n    \"pipeline\": \"[{\\\"$match\\\": {\\\"ns.coll\\\": \\\"peyaOrder\\\"}}]\",\n    \"flush.size\": \"100\",\n    \"rotate.interval.ms\": \"1000\",\n    \"topic.namespace.map\": \"{\\\"*\\\": \\\"QA-peya-mongo-changes\\\"}\",\n    \"change.stream.full.document\": \"updateLookup\",\n    \"output.format.key\": \"json\",\n    \"output.format.value\": \"json\",\n    \"output.schema.infer.value\": true\n  }\n}",
+            "form": []
+        },
+        "tests": []
+    },
+    {
+        "_id": "7753bcb2-c783-462b-be42-2249327816e2",
+        "colId": "history",
+        "containerId": "",
+        "name": "http://localhost:8083/connectors",
+        "url": "http://localhost:8083/connectors",
+        "method": "POST",
+        "sortNum": 0,
+        "created": "2024-02-27T20:27:48.000Z",
+        "modified": "2024-02-28T14:45:16.016Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n  \"name\": \"sale-tickets-source-qa\",\n  \"config\": {\n    \"connector.class\": \"com.mongodb.kafka.connect.MongoSourceConnector\",\n    \"tasks.max\": \"2\",\n    \"database\": \"geopos3-ticket\",\n    \"collection\": \"saleTickets\",\n    \"errors.tolerance\": \"all\",\n    \"connection.uri\": \"mongodb://userApp:Xpr.QA.PassRoot@srv-qa-sp-xpress-uych-mongo1:27017,srv-qa-sp-xpress-uych-mongo2:27017,srv-qa-sp-xpress-uych-mongo3:27017/admin?authSource=admin\",\n    \"topic.prefix\": \"QA-mongo\",\n    \"copy.existing\": \"True\",\n    \"key.converter\": \"org.apache.kafka.connect.json.JsonConverter\",\n    \"key.converter.schemas.enable\": \"False\",\n    \"value.converter\": \"org.apache.kafka.connect.json.JsonConverter\",\n    \"value.converter.schemas.enable\": \"False\",\n    \"flush.size\": \"100\",\n    \"rotate.interval.ms\": \"1000\",\n    \"publish.full.document.only\": \"True\"\n  }\n}\n",
+            "form": []
+        },
+        "tests": []
+    },
+    {
+        "_id": "0cf7622b-21c8-414d-9ec1-8b82fa898c7e",
+        "colId": "history",
+        "containerId": "",
+        "name": "http://localhost:8083/connectors",
+        "url": "http://localhost:8080/connectors/soy-delivery-mongo-source-qa/tasks",
+        "method": "GET",
+        "sortNum": 0,
+        "created": "2024-03-19T15:10:35.101Z",
+        "modified": "2024-03-19T16:15:26.983Z",
+        "headers": [],
+        "params": [],
+        "tests": []
+    }
+]

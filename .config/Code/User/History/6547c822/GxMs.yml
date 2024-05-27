@@ -1,0 +1,10 @@
+---
+- name: "Load docker files . . ."
+  shell: "docker load -i {{ PACKAGES_HOME }}/{{ APPLICATION_PACKAGE }}"
+  become: yes
+
+- name: "Remove load docker files . . ."
+  file:
+    path: "{{ PACKAGES_HOME }}/{{ APPLICATION_PACKAGE }}"
+    state: absent
+  become: yes

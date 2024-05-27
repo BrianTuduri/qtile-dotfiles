@@ -1,0 +1,23 @@
+FROM jenkins/agent:jdk8
+
+USER root
+
+# Establece el shell por defecto a bash para las operaciones RUN siguientes
+SHELL ["/bin/bash", "-c"]
+
+# Instala dependencias necesarias
+RUN apt-get update && apt-get install -y curl git zip
+
+# Instala nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# Configura nvm para que esté disponible en cualquier shell
+# Añade las líneas de configuración de nvm a .profile para asegurar la carga en bash y sh
+RUN echo 'export NVM_DIR="$HOME/.nvm"' >> $HOME/.profile && \
+    echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $HOME/.profile && \
+    echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> $HOME/.profile
+
+# Restaura el SHELL por defecto si es necesario
+SHELL ["/bin/sh", "-c"]
+
+CMD ["tail", "-f", "/dev/null"]

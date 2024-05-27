@@ -1,0 +1,12 @@
+- name: Deploy Vault Agent
+  hosts: all
+  become: yes
+  tasks:
+    include_role:
+      name: vault-agent-docker
+  vars:
+    - vault_addr: "https://vault.geocom.com.uy"
+    - vault_agent_dir: "/home/btuduri/vault-agent-docker"
+    - auth_method: "approle"
+    - app_name: "geoswitch-test"
+    - tcp_listener_address: "127.0.0.1:8100"

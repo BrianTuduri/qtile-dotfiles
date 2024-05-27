@@ -1,0 +1,55 @@
+logging:
+  level:
+    root: debug
+    com.provectus: debug
+    org.springframework.security: debug
+kafka:
+  clusters:
+    - name: "express-qa"
+      bootstrapServers: "172.24.26.158:9092"
+
+rbac:
+  roles:
+    - name: "test"
+      clusters:
+        - express-qa
+      subjects:
+        - provider: ldap
+          type: group
+          value: "geoscm"
+
+      permissions:
+        - resource: applicationconfig
+          # value not applicable for applicationconfig
+          actions: [ "view", "edit" ] # can be with or without quotes
+      
+        - resource: clusterconfig
+          # value not applicable for clusterconfig
+          actions: [ "view", "edit" ] 
+
+        - resource: topic
+          value: ".*"
+          actions: # can be a multiline list
+            - VIEW # can be upper or lowercase
+            - CREATE
+            - EDIT
+            - DELETE
+            - MESSAGES_READ
+            - MESSAGES_PRODUCE
+            - MESSAGES_DELETE
+
+        - resource: consumer
+          value: "\_confluent-ksql.*"
+          actions: [ VIEW, DELETE, RESET_OFFSETS ]
+
+        - resource: schema
+          value: "blah.*"
+          actions: [ VIEW, CREATE, DELETE, EDIT, MODIFY_GLOBAL_COMPATIBILITY ]
+
+        - resource: connect
+          value: "local"
+          actions: [ view, edit, create ]
+
+        - resource: acl
+          value: ".*"
+          actions: all

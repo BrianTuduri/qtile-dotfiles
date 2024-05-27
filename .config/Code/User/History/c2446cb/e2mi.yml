@@ -1,0 +1,162 @@
+---
+# tasks file for vault-agent-docker
+# Ansible Playbook to deploy Vault Agent automatically on servers
+
+# - name: Get home user path
+#   command: echo $HOME
+#   register: user_home
+# 
+# - name: Set var vault_agent_dir
+#   set_fact:
+#     vault_agent_dir: "{{ user_home.stdout }}/vault-agent"
+# 
+# - name: Show war vault_agent_dir
+#   debug:
+#     msg: "vault_agent_dir es {{ vault_agent_dir }}"
+
+- name: Ensure the vault agent user exists
+  ansible.builtin.user:
+    name: "{{ vault_agent_user }}"
+    state: present
+
+- name: Ensure the vault agent group exists
+  ansible.builtin.group:
+    name: "{{ vault_agent_group }}"
+    state: present
+
+- name: Check if Docker is installed
+  stat:
+    path: /usr/bin/docker
+  register: docker_installed
+
+- name: Install required packages
+  package:
+    name:
+      - docker.io
+      - jq
+    state: present
+  when: not docker_installed.stat.exists
+
+- name: Start Docker service
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Create Vault Agent directory
+  file:
+    path: "{{ vault_agent_dir }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ vault_agent_user }}"
+    group: "{{ vault_agent_group }}"
+
+- name: Write {{ app_name }}-vault-agent.hcl configuration file
+  template:
+    src: "templates/vault-agent-config.hcl.j2"
+    dest: "{{ vault_agent_dir }}/{{ app_name }}-agent-config.hcl"
+    mode: "0755"
+    owner: "{{ vault_agent_user }}"
+    group: "{{ vault_agent_group }}"
+
+- name: Enable {{ auth_method }} authentication
+  command: "vault auth enable {{ auth_method }}"
+  environment:
+    VAULT_ADDR: "{{ vault_addr }}"
+    VAULT_TOKEN: "{{ vault_token }}"
+  ignore_errors: true
+  when: false
+
+- name: Create {{ auth_method }} role
+  command: >
+    vault write auth/{{ auth_method }}/role/{{ app_name }}
+    token_policies={{ policies | join(',') }}
+    token_type={{ token_type }}
+    token_ttl={{ token_ttl }}
+    token_max_ttl={{ token_max_ttl }}
+#secret_id_num_uses={{ secret_id_num_uses }}
+  environment:
+    VAULT_ADDR: "{{ vault_addr }}"
+    VAULT_TOKEN: "{{ vault_token }}"
+  when: auth_method == "approle"
+
+- name: Read Role ID
+  shell: "vault read -format=json auth/{{ auth_method }}/role/{{ app_name }}/role-id | jq -r '.data.role_id' > {{ vault_agent_dir }}/{{ app_name }}-role_id"
+  environment:
+    VAULT_ADDR: "{{ vault_addr }}"
+    VAULT_TOKEN: "{{ vault_token }}"
+  args:
+    creates: "{{ vault_agent_dir }}/{{ app_name }}-role_id"
+  when: auth_method == "approle"
+
+- name: Debug Role ID
+  debug:
+    msg: "Role ID content: {{ lookup('file', vault_agent_dir + '/' + app_name + '-role_id') }}"
+  when: false
+
+- name: Change ownership of Role ID file
+  file:
+    path: "{{ vault_agent_dir }}/{{ app_name }}-role_id"
+    owner: brian
+    group: brian
+  when: auth_method == "approle"
+
+- name: Write Secret ID
+  shell: "vault write -format=json -f auth/{{ auth_method }}/role/{{ app_name }}/secret-id | jq -r '.data.secret_id' > {{ vault_agent_dir }}/{{ app_name }}-secret_id"
+  environment:
+    VAULT_ADDR: "{{ vault_addr }}"
+    VAULT_TOKEN: "{{ vault_token }}"
+  args:
+    creates: "{{ vault_agent_dir }}/{{ app_name }}-secret_id"
+  when: auth_method == "approle"
+
+- name: Verify Secret ID file creation
+  stat:
+    path: "{{ vault_agent_dir }}/{{ app_name }}-secret_id"
+  register: secret_id_file
+  when: auth_method == "approle"
+
+- name: Debug Secret ID file status
+  debug:
+    var: secret_id_file
+
+- name: Change ownership of Secret ID file
+  file:
+    path: "{{ vault_agent_dir }}/{{ app_name }}-secret_id"
+    owner: brian
+    group: brian
+    state: file
+  when: auth_method == "approle" and secret_id_file.stat.exists
+
+
+- name: Deploy Docker Compose for Vault Agent
+  template:
+    src: "templates/docker-compose.yml.j2"
+    dest: "{{ vault_agent_dir }}/docker-compose.yml"
+    mode: "0755"
+    owner: "{{ vault_agent_user }}"
+    group: "{{ vault_agent_group }}"
+
+# Copy and run service vault agent
+- name: Deploy and run Vault Agent service
+  become: true
+  vars:
+    service_name: "{{ app_name }}-vault-agent"
+  block:
+    - name: Template Docker Compose service file
+      template:
+        src: "templates/docker_compose_service.j2"
+        dest: "/etc/systemd/system/{{ service_name }}.service"
+        mode: "0755"
+        owner: "{{ vault_agent_user | default('geocom') }}"
+        group: "{{ vault_agent_group | default('users') }}"
+
+    - name: Reload systemd daemon
+      systemd:
+        daemon_reload: true
+
+    - name: Enable and restart Vault Agent service
+      systemd:
+        name: "{{ service_name }}"
+        state: restarted
+        enabled: true

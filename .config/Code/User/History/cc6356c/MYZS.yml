@@ -1,0 +1,53 @@
+- name: "Creando directorio config/{{ ambiente }}"
+  file:
+    path: "{{ kafka_config_directory }}/{{ ambiente }}"
+    state: directory
+
+- name: Copy propiedades generales
+  template:
+    src: "{{ repo_home }}/Ansible/files/connect-distributed.properties.j2"
+    dest: "{{ kafka_config_directory }}/connect-distributed.properties"
+
+- name: Copy plugin
+  copy:
+    src: "{{ repo_home }}/utils/"
+    dest: "{{ kafka_plugin_directory }}"
+    mode: 775
+
+- name: Copy configs
+  copy:
+    src: "{{ kafka_connectors_dir }}"
+    dest: "{{ kafka_config_directory }}/{{ ambiente }}"
+    mode: 775
+
+- name: Encontrar archivos JSON de configuración de connectors
+  find:
+    paths: "{{ kafka_config_directory }}/{{ ambiente }}"
+    patterns: "*.json"
+  register: json_files
+
+- name: Verificar si la variable json_files está definida
+  ansible.builtin.debug:
+    msg: "La variable está definida y su valor es {{ json_files }}"
+  when: json_files is defined
+
+- name: Verificar si la variable json_files está vacía
+  ansible.builtin.debug:
+    msg: "La variable está definida pero está vacía"
+  when: json_files is defined and json_files | length == 0
+
+- name: Mensaje si la variable json_files no está definida
+  ansible.builtin.debug:
+    msg: "La variable json_files no está definida"
+  when: json_files is not defined
+
+
+# - name: json files
+#   ansible.builtin.debug:
+#     msg: "Connector config is: {{ json_files }}"
+
+- name: Leer y cargar cada archivo JSON
+  include_tasks: load_and_post_connector.yml
+  loop: "{{ json_files.files }}"
+  loop_control:
+    loop_var: file

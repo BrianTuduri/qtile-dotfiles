@@ -1,0 +1,6 @@
+---
+# vars file for gen-backend
+address: ""
+backend_username: ""
+backend_password: ""
+dest_backend_path: ""

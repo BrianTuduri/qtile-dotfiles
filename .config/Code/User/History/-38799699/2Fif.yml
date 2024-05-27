@@ -1,0 +1,52 @@
+---
+- name: Leer contenido del archivo YAML
+  ansible.builtin.slurp:
+    src: "{{ file.path }}"
+  register: file_content
+
+- name: Archivo actual
+  debug:
+    msg: "File content is: {{ file.path }}"
+  when: connector_debug
+
+- name: Convertir contenido a YAML
+  set_fact:
+    connector_config_yml: "{{ file_content['content'] | b64decode | from_yaml }}"
+
+- name: Recolectar informacion de el connector
+  set_fact:
+    connector_name: "{{ connector_config_yml.connector.name }}"
+
+- name: Connector config output
+  debug:
+    msg: "Connector config is: {{ connector_config }}"
+  when: connector_debug
+
+- name: "Ejecutando solicitud para eliminar el conector '{{ connector_name }}' a Kafka Connect"
+  uri:
+    url: "{{ kafka_connect_api_url }}/{{ connector_name }}"
+    method: DELETE
+    body: "{}"
+    body_format: json
+    status_code: [204, 409]
+    return_content: yes
+  register: response
+  ignore_errors: true
+
+# status code 204
+- name: Operación sin contenido
+  debug: 
+    msg: "La operación se ha completado con éxito."
+  when: response.status == 204
+
+# status code 404
+- name: Recurso no encontrado
+  debug: 
+    msg: "Es posible que el conector especificado no se encuentre. Esto puede suceder si el nombre del conector es incorrecto o si el conector ya ha sido eliminado previamente."
+  when: response.status == 404
+
+# status code 409
+- name: Conector existente
+  debug: 
+    msg: "Existe un conflicto, puede haber un rebalanceo de grupo de workers en proceso en el clúster de Kafka Connect. Esto puede suceder si se intenta eliminar el conector mientras el clúster está en medio de un rebalanceo."
+  when: response.status == 409

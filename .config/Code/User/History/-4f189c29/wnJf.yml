@@ -1,0 +1,28 @@
+---
+- name: Validar que las variables no están vacías
+  assert:
+    that:
+      - address | length > 0
+      - backend_username | length > 0
+      - backend_password | length > 0
+    fail_msg: "Error: Al menos una de las variables requeridas está vacía."
+    success_msg: "Validación completada: Todas las variables tienen valores."
+
+# tasks file for gen-backend
+- name: "Generate Backend config for vault server . . ."
+  ansible.builtin.copy:
+    dest: "{{ dest_backend_path }}"
+    mode: "0655"
+    content: |
+      terraform {
+        backend "http" {
+          address        = "{{ gen_backend_address }}"
+          lock_address   = "{{ gen_backend_address }}/lock"
+          unlock_address = "{{ gen_backend_address }}/lock"
+          username       = "{{ gen_backend_username }}"
+          password       = "{{ gen_backend_password }}"
+          lock_method    = "POST"
+          unlock_method  = "DELETE"
+          retry_wait_min = 1
+        }
+      }

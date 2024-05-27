@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: vault-demo
+
+  cloud:
+    vault:
+      uri: http://127.0.0.1:18200
+      authentication: NONE
+      kv:
+        enabled: true
+        backend: secrets/GEOSwitch
+        default-context: qa/puntored-service

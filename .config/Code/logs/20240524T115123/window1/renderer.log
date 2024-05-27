@@ -1,0 +1,6 @@
+2024-05-24 11:51:24.470 [info] Started local extension host with pid 33518.
+2024-05-24 11:51:25.090 [warning] [redhat.vscode-yaml]: Cannot register 'redhat.telemetry.enabled'. This property is already registered.
+2024-05-24 11:51:26.780 [error] [Extension Host] (node:33518) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+(Use `exe --trace-deprecation ...` to show where the warning was created)
+2024-05-24 11:51:27.980 [info] [perf] Render performance baseline is 76ms
+2024-05-24 15:29:11.702 [warning] [backup tracker] suspended, ignoring dirty change event file:///home/brian/repos-geocom/vault-agent-geoswitch/Jenkins/Jenkinsfile 

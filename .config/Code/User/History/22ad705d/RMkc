@@ -1,0 +1,14 @@
+FROM nexus.geocom.com.uy/openjdk:8-jdk
+
+RUN apt-get update && \
+    apt-get install -y wget tar git && \
+    wget http://archive.apache.org/dist/maven/maven-2/2.2.1/binaries/apache-maven-2.2.1-bin.tar.gz && \
+    tar xvf apache-maven-2.2.1-bin.tar.gz -C /usr/local && \
+    ln -s /usr/local/apache-maven-2.2.1 /usr/local/maven && \
+    rm apache-maven-2.2.1-bin.tar.gz && mkdir -p /project
+
+ENV M2_HOME=/usr/local/maven
+ENV MAVEN_HOME=/usr/local/maven
+ENV PATH=${M2_HOME}/bin:${PATH}
+
+WORKDIR /project

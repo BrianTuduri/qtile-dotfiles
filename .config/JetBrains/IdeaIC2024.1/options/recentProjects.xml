@@ -1,0 +1,124 @@
+<application>
+  <component name="RecentProjectsManager">
+    <option name="additionalInfo">
+      <map>
+        <entry key="$USER_HOME$/repos-geocom/kafka-deploy-express">
+          <value>
+            <RecentProjectMetaInfo displayName="kafka-deploy-express">
+              <option name="buildTimestamp" value="1711569341538" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="8" />
+              </option>
+              <option name="projectOpenTimestamp" value="1711569341538" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/repos-geocom/kafka-deploy-metas">
+          <value>
+            <RecentProjectMetaInfo displayName="kafka-deploy-metas">
+              <option name="buildTimestamp" value="1712677223621" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="7" />
+              </option>
+              <option name="projectOpenTimestamp" value="1712677223621" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/repos-geocom/scm-pipelines">
+          <value>
+            <RecentProjectMetaInfo displayName="scm-pipelines">
+              <option name="buildTimestamp" value="1715011271174" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="6" />
+              </option>
+              <option name="projectOpenTimestamp" value="1715011271174" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/repos-geocom/kubernetes-ansible-collection">
+          <value>
+            <RecentProjectMetaInfo displayName="kubernetes-ansible-collection">
+              <option name="buildTimestamp" value="1715280616466" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="5" />
+              </option>
+              <option name="projectOpenTimestamp" value="1715280616466" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/repos-geocom/geopos-price-checker">
+          <value>
+            <RecentProjectMetaInfo displayName="geopos-price-checker">
+              <option name="buildTimestamp" value="1715355034755" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="4" />
+              </option>
+              <option name="projectOpenTimestamp" value="1715355034755" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/repos-geocom/chewbacca-install">
+          <value>
+            <RecentProjectMetaInfo displayName="chewbacca-install">
+              <option name="buildTimestamp" value="1715783152824" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="3" />
+              </option>
+              <option name="projectOpenTimestamp" value="1715783152824" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/.config/qtile">
+          <value>
+            <RecentProjectMetaInfo displayName="qtile">
+              <option name="buildTimestamp" value="1715890100489" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="2" />
+              </option>
+              <option name="projectOpenTimestamp" value="1715890100489" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/repos-geocom/gspayment-suite">
+          <value>
+            <RecentProjectMetaInfo displayName="gspayment-suite">
+              <option name="buildTimestamp" value="1715951854925" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="1" />
+              </option>
+              <option name="projectOpenTimestamp" value="1715951854925" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/repos-geocom/geoscm-ansible-collection">
+          <value>
+            <RecentProjectMetaInfo displayName="geoscm-ansible-collection">
+              <option name="buildTimestamp" value="1716219689824" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="0" />
+              </option>
+              <option name="projectOpenTimestamp" value="1716219689824" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/repos-geocom/vault-agent-geoswitch">
+          <value>
+            <RecentProjectMetaInfo frameTitle="vault-agent-geoswitch – VaultDemoApplication.java [vault-agent-geoswitch]" opened="true" projectWorkspaceId="2gkCaIa8zcNq8bW7HsSPrBOugFj">
+              <option name="activationTimestamp" value="1716296858255" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="build" value="IC-241.15989.150" />
+              <option name="buildTimestamp" value="1714390920000" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="8" />
+              </option>
+              <frame x="0" y="24" width="1920" height="1056" />
+              <option name="productionCode" value="IC" />
+              <option name="projectOpenTimestamp" value="1716232251662" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="lastOpenedProject" value="$USER_HOME$/repos-geocom/vault-agent-geoswitch" />
+  </component>
+</application>

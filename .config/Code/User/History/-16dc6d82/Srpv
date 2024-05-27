@@ -1,0 +1,57 @@
+FROM nexus.geocom.com.uy/openjdk:8-jdk
+
+# Establece el directorio de trabajo
+WORKDIR /project
+
+# Instala dependencias necesarias
+RUN apt-get update && \
+    apt-get install -y wget curl git ca-certificates tar unzip && \
+    rm -rf /var/lib/apt/lists/*
+
+# Define variables de entorno para Gradle y Node.js
+ENV GRADLE_VERSION=4.10.3 \
+    GRADLE_HOME=/opt/gradle/gradle-$GRADLE_VERSION \
+    NVM_DIR=/usr/local/nvm \
+    NODE_VERSION=6.3.0
+
+# Instala Gradle
+RUN wget https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-all.zip && \
+    mkdir -p /opt/gradle && \
+    unzip -d /opt/gradle gradle-$GRADLE_VERSION-all.zip && \
+    rm gradle-$GRADLE_VERSION-all.zip && \
+    mkdir -p ${NVM_DIR}
+
+# Agrega Gradle al PATH
+ENV PATH=${GRADLE_HOME}/bin:${PATH}
+
+# Instala nvm y Node.js como root, y configura el entorno para todos los usuarios
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | NVM_DIR=${NVM_DIR} bash && \
+    . "$NVM_DIR/nvm.sh" && \
+    nvm install $NODE_VERSION && \
+    nvm alias default $NODE_VERSION && \
+    nvm use default && \
+    chmod -R +x ${NVM_DIR}
+
+# Configura el entorno de nvm para el usuario no-root
+RUN echo 'export NVM_DIR="$NVM_DIR"' >> /etc/profile.d/nvm.sh && \
+    echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> /etc/profile.d/nvm.sh && \
+    echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> /etc/profile.d/nvm.sh && \
+    chmod +x /etc/profile.d/nvm.sh
+
+# Configuración del usuario no-root para buenas prácticas de seguridad
+ARG user=jenkins
+ARG group=jenkins
+ARG uid=1000
+ARG gid=1000
+
+# Crea grupo y usuario
+RUN groupadd -g ${gid} ${group} && \
+    useradd -d /home/${user} -u ${uid} -g ${group} -m ${user} && \
+    chown -R ${uid}:${gid} /project ${NVM_DIR} /home/${user} && \
+    chmod -R 755 /project
+
+# Cambia al usuario creado
+USER ${user}
+
+# Configura el PATH para incluir Node.js y nvm
+ENV PATH=${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:${PATH}

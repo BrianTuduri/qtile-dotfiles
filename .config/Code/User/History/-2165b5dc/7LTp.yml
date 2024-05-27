@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: vault-demo
+
+  cloud:
+    vault:
+      uri: http://127.0.0.1:8200
+      authentication: NONE
+      kv:
+        enabled: true
+        backend: secret
+        default-context: application
+        profile-separator: "-"

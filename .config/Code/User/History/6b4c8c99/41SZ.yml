@@ -1,0 +1,45 @@
+---
+# defaults file for vault-agent-docker
+vault_agent_dir: "/path/to/agent"
+vault_addr: "https://vault-fqdn:8200"
+retry_num_retries: 5
+
+auth_method: "approle"  # Puede ser "approle", "aws" o "userpass"
+app_name: "your_app_name"
+
+# Configuración para approle
+role_id_file: "{{ your_app_name }}-role_id"
+secret_id_file: "{{ your_app_name }}-secret_id"
+remove_secret_id_file_after_reading: false
+
+# Configuración para aws
+aws_mount_path: "auth/aws-subaccount"
+aws_role: "foobar"
+
+# Configuración para userpass
+userpass_username: "your_username"
+userpass_password: "your_password"
+
+token_file: "token"
+use_auto_auth_token: true
+
+unix_listener_address: "/path/to/socket"
+tcp_listener_address: "127.0.0.1:8100"
+tls_disable: true
+enable_quit: true
+
+additional_sinks: []
+  # - type: "file"
+  #   path: "/tmp/file-foo"
+  # - type: "file"
+  #   wrap_ttl: "5m"
+  #   aad_env_var: "TEST_AAD_ENV"
+  #   dh_type: "curve25519"
+  #   dh_path: "/tmp/file-foo-dhpath2"
+  #   path: "/tmp/file-bar"
+
+templates: []
+  # - source: "/etc/vault/server.key.ctmpl"
+  #   destination: "/etc/vault/server.key"
+  # - source: "/etc/vault/server.crt.ctmpl"
+  #   destination: "/etc/vault/server.crt"

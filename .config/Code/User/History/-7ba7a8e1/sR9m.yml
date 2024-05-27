@@ -1,0 +1,32 @@
+---
+- name: Test
+  hosts: geoswtich_oxxo_qa
+  tasks:
+    - name: Verificar conectividad
+      ping:
+
+- name: Deploy Vault Agent
+  hosts: geoswtich_oxxo_qa
+  become: yes
+  tasks:
+    - include_role:
+        name: vault-agent-docker
+  vars:
+    vault_addr: "https://vault.geocom.com.uy"
+    vault_token: "hvs.XvjJ4w92UZiqGUEUFYsBizo5"
+    vault_agent_dir: "/home/geocom/vault-agent-docker"
+    vault_agent_image: nexus.geocom.com.uy/hashicorp/vault-enterprise
+    auth_method: "approle"
+    app_name: "geoswitch"
+    tcp_listener_address: "127.0.0.1:8100"
+    policies: 
+      - alkosto-policy-qa
+    token_type: "service"
+    secret_id_ttl: "24h"
+    token_num_uses: 0
+    token_ttl: "1h"
+    token_max_ttl: "24h"
+    secret_id_num_uses: 0
+    vault_agent_user: vault-agent
+    vault_agent_group: vault-agent
+    

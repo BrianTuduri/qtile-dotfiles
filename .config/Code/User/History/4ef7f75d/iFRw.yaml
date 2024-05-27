@@ -1,0 +1,20 @@
+---
+- name: Kafka | Install OpenJDK
+  hosts: all
+  tasks:
+    - name: Set Java package name based on OS family
+      set_fact:
+        java_package: "{{ lookup('vars', ansible_facts['os_family'] | lower + '_java_package') }}"
+      when: kafka_openjdk_version is defined
+
+    - name: Install OpenJDK
+      ansible.builtin.package:
+        name: "{{ java_package }}"
+        state: present
+        update_cache: yes
+        allow_downgrade: yes
+      when: java_package is defined
+      vars:
+        debian_java_package: "openjdk-{{ kafka_openjdk_version }}-jdk"
+        redhat_java_package: "java-{{ kafka_openjdk_version }}-openjdk"
+        suse_java_package: "java-{{ kafka_openjdk_version }}-openjdk"

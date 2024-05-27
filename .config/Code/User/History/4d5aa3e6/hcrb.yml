@@ -1,0 +1,8 @@
+---
+- name: Encontrar y listar archivos .yml para Topics
+  tasks:
+    - name: Add topics
+      roles:
+        - geocom.geoscm.kafka_add_topic
+      vars:
+        - topic_files_path: "Environments/{{ ambiente }}/Kafka/Topics"

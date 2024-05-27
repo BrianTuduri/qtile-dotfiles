@@ -1,0 +1,4 @@
+collections:
+  - name: git@gitlab.geocom.com.uy:scm/geoscm-ansible-collection.git
+    type: git
+    version: master
